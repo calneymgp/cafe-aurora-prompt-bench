@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<!--
+SKILL-MAP v10-skillmap — mapeamento explícito antes de codar:
+1) bundled:browser-app-delivery (lido): aplicado = artefato standalone single-file, CSS embutido e JS embutido, sem CDNs/imports locais, sem servidor de handoff, smoke do arquivo final.
+2) bundled:taste / Anti-Slop (lido): aplicado = sem gradiente roxo/azul, sem bg-clip-text, sem fundo cream #faf8f4, sem hero centrado pill+headline+2CTAs (hero split esquerda/direita), sem grid 3-cards com ícone lucide, sem rounded único em tudo, sem glassmorphism, sem hover:scale-105, sem emoji como ícone, sem bento, sem fade-up global; hierarquia tipográfica real (serifa Georgia + system-ui), paleta própria terracota+espresso+verde.
+3) Área acessibilidade (práticas web): aplicado = landmarks semânticos, skip-link, aria-expanded/controls no menu, foco visível, contraste, prefers-reduced-motion, botões <button>/<a> reais.
+4) Área responsivo (práticas web): aplicado = layout fluido + 1 media query mobile (hamburger, hero empilha, grids 3→1/2→1), imagens SVG inline que escalam.
+5) Área qualidade de código: aplicado = CSS com variáveis, JS pequeno sem dependências, contador com IntersectionObserver + rAF e fallback estático.
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Café Aurora — Cafeteria artesanal no centro</title>
+<meta name="description" content="Café Aurora: espresso artesanal, brunch e grãos de origem. Rua das Flores, 123.">
+<style>
+:root{
+  --espresso:#241610;
+  --espresso-2:#3A2418;
+  --paper:#ffffff;
+  --sand:#F3E9DB;
+  --sand-2:#EADBC6;
+  --terra:#C14A09;
+  --terra-dark:#8F3405;
+  --leaf:#1E3D2F;
+  --gold:#D9A441;
+  --ink:#221610;
+  --muted:#6B5B4F;
+  --line:#E7D9C6;
+  --radius-s:10px;
+  --radius-m:16px;
+  --radius-l:26px;
+  --shadow:0 18px 40px -22px rgba(36,22,16,.45);
+  --font-serif:Georgia,"Times New Roman",serif;
+  --font-sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--paper);line-height:1.6}
+a{color:inherit}
+.skip{position:absolute;left:-9999px;top:0;background:var(--espresso);color:#fff;padding:.7rem 1rem;z-index:99;border-radius:0 0 10px 0}
+.skip:focus{left:0}
+header.top{position:sticky;top:0;z-index:50;background:rgba(36,22,16,.96);color:#F7EFE3;border-bottom:1px solid rgba(255,255,255,.12)}
+.bar{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:1.2rem;padding:.85rem 1.25rem}
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;font-family:var(--font-serif);font-weight:700;font-size:1.35rem;letter-spacing:.2px}
+.logo svg{flex:none}
+.logo small{display:block;font-family:var(--font-sans);font-weight:600;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+nav.main{margin-left:auto;display:flex;gap:1.4rem}
+nav.main a{text-decoration:none;font-weight:600;font-size:.95rem;opacity:.92}
+nav.main a:hover{color:var(--gold)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;text-decoration:none;font-weight:700;border-radius:999px;padding:.78rem 1.35rem;border:2px solid transparent;cursor:pointer;font-size:.95rem}
+.btn-cta{background:var(--gold);color:#241610;margin-left:.6rem}
+.btn-cta:hover{background:#E8B95C}
+.btn-solid{background:var(--terra);color:#fff}
+.btn-solid:hover{background:var(--terra-dark)}
+.btn-ghost{border-color:var(--line);color:var(--espresso);background:#fff}
+.btn-ghost:hover{border-color:var(--espresso)}
+.hero .btn-ghost{border-color:rgba(255,255,255,.35);color:#fff;background:transparent}
+.hero .btn-ghost:hover{border-color:#fff}
+.hamb{display:none;margin-left:auto;background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:10px;padding:.5rem .65rem;font-size:1.15rem;line-height:1;cursor:pointer}
+.hero{background:radial-gradient(900px 420px at 85% 10%,#4A2C1A 0%,var(--espresso) 55%,#170D08 100%);color:#F9F1E4;overflow:hidden}
+.hero-inner{max-width:1120px;margin:0 auto;padding:3.4rem 1.25rem 3rem;display:grid;grid-template-columns:1.05fr .95fr;gap:2.5rem;align-items:center}
+.rating{display:inline-flex;align-items:center;gap:.55rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:.4rem .9rem .4rem .55rem;font-size:.85rem}
+.rating .stars{color:var(--gold);letter-spacing:.1em;font-size:.9rem}
+.rating b{color:#fff}
+.hero h1{font-family:var(--font-serif);font-weight:700;font-size:3.05rem;line-height:1.04;margin:.9rem 0 .8rem;letter-spacing:-.02em}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero p.sub{color:#D9C7B2;font-size:1.1rem;max-width:34rem;margin:0 0 1.5rem}
+.hero-actions{display:flex;gap:.8rem;flex-wrap:wrap}
+.hero-meta{display:flex;gap:1.6rem;margin-top:1.7rem;flex-wrap:wrap}
+.hero-meta div strong{display:block;font-family:var(--font-serif);font-size:1.5rem;color:#fff}
+.hero-meta div span{font-size:.85rem;color:#C9B6A1}
+.visual{position:relative;min-height:380px}
+.cup-card{position:absolute;inset:8% 4% 6% 6%;background:linear-gradient(180deg,#F7EBD8,#EAD3B4);border-radius:var(--radius-l);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.cup-card::after{content:"";position:absolute;inset:auto -30% -38% -30%;height:70%;background:var(--leaf);border-radius:50% 50% 0 0;opacity:.14}
+.float{position:absolute;background:#FFFDF8;color:var(--ink);border:1px solid var(--line);border-radius:14px;box-shadow:0 14px 30px -18px rgba(0,0,0,.5);padding:.65rem .85rem;font-size:.85rem;display:flex;gap:.6rem;align-items:center}
+.float.f1{top:2%;right:0}
+.float.f2{bottom:4%;left:0}
+.float .dot{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;flex:none}
+section{padding:3.4rem 1.25rem}
+.wrap{max-width:1120px;margin:0 auto}
+.kicker{font-size:.78rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--terra)}
+h2{font-family:var(--font-serif);font-size:2.1rem;line-height:1.15;margin:.4rem 0 .5rem;letter-spacing:-.01em}
+.lead{color:var(--muted);max-width:44rem;margin:0}
+.menu{background:var(--sand)}
+.menu-grid{margin-top:1.8rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+.card{background:#FFFDF8;border:1px solid #E2D2BC;border-radius:var(--radius-m);padding:1.15rem 1.15rem 1.05rem;display:flex;flex-direction:column;gap:.45rem}
+.card:nth-child(2){border-radius:8px}
+.card:nth-child(5){border-radius:20px}
+.card-top{display:flex;align-items:center;justify-content:space-between;gap:.8rem}
+.card h3{margin:0;font-family:var(--font-serif);font-size:1.22rem}
+.price{background:var(--leaf);color:#fff;font-weight:800;border-radius:999px;padding:.22rem .7rem;font-size:.9rem;white-space:nowrap}
+.card p{margin:0;color:var(--muted);font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .tag{font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--terra-dark)}
+.quotes{margin-top:1.8rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+blockquote.quote{margin:0;background:#fff;border:1px solid var(--line);padding:1.3rem 1.2rem;border-radius:var(--radius-s) var(--radius-l) var(--radius-s) var(--radius-l)}
+blockquote.quote:nth-child(2){background:var(--espresso);color:#F3E7D3;border-color:var(--espresso)}
+blockquote.quote:nth-child(2) footer{color:#CBB89F}
+.quote p{font-family:var(--font-serif);font-size:1.05rem;line-height:1.5;margin:0 0 .9rem}
+.quote footer{display:flex;align-items:center;gap:.7rem;font-size:.88rem;color:var(--muted)}
+.avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;flex:none}
+.visit{background:#fff}
+.visit-grid{margin-top:1.4rem;display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;align-items:stretch}
+.hours{background:var(--leaf);color:#EAF2EC;border-radius:var(--radius-m);padding:1.5rem}
+.hours h3,.map h3{margin:0 0 .6rem;font-family:var(--font-serif)}
+.hours ul{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
+.hours li{display:flex;justify-content:space-between;border-bottom:1px dashed rgba(255,255,255,.25);padding-bottom:.4rem;font-size:.95rem}
+.map{background:var(--sand);border:1px solid var(--line);border-radius:var(--radius-m);padding:1.5rem}
+footer.site{background:var(--espresso);color:#D9C7B2;padding:2.2rem 1.25rem 1.4rem}
+.foot{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:1.5rem}
+.foot h4{color:#fff;margin:0 0 .6rem;font-family:var(--font-serif)}
+.foot p,.foot a{font-size:.93rem}
+.foot a{color:#EED9B8}
+.copy{max-width:1120px;margin:1.6rem auto 0;border-top:1px solid rgba(255,255,255,.14);padding-top:1rem;font-size:.82rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media (max-width:820px){
+  nav.main{display:none;position:absolute;top:100%;left:0;right:0;background:#1C110B;flex-direction:column;padding:.8rem 1.25rem 1rem;border-bottom:1px solid rgba(255,255,255,.12)}
+  nav.main.open{display:flex}
+  nav.main a{padding:.55rem 0;border-top:1px solid rgba(255,255,255,.08)}
+  .btn-cta{margin:.6rem 0 0}
+  .hamb{display:block}
+  header.top{position:sticky}
+  .bar{position:relative}
+  .hero-inner{grid-template-columns:1fr;padding-top:2.2rem}
+  .hero h1{font-size:2.25rem}
+  .visual{min-height:300px}
+  .menu-grid,.quotes{grid-template-columns:1fr}
+  .visit-grid,.foot{grid-template-columns:1fr}
+  section{padding:2.4rem 1.1rem}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<header class="top">
+  <div class="bar">
+    <a class="logo" href="#inicio" aria-label="Café Aurora — início">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#D9A441"/><path d="M10 20c0-4 3-7 7-7 3 0 5 2 5 5 0 4-3 6-6 6h-3l-3-4z" fill="none" stroke="#241610" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 14h2a3 3 0 0 1 0 6h-2" fill="none" stroke="#241610" stroke-width="2" stroke-linecap="round"/><path d="M13 8.5c0-1 1-1 1-2M17 8.5c0-1 1-1 1-2" stroke="#241610" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <span>Café Aurora<small>torra artesanal</small></span>
+    </a>
+    <button class="hamb" id="hamb" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu">☰</button>
+    <nav class="main" id="nav" aria-label="Navegação principal">
+      <a href="#inicio">Início</a>
+      <a href="#cardapio">Cardápio</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#visita">Visite-nos</a>
+      <a class="btn btn-cta" href="#cardapio">Pedir agora</a>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+  <section class="hero" id="inicio" style="padding:0">
+    <div class="hero-inner">
+      <div>
+        <span class="rating" aria-label="Avaliação 4.9 de 5 em mais de 2300 avaliações"><span class="stars" aria-hidden="true">★★★★★</span><b>4.9</b> · 2.300+ avaliações no bairro</span>
+        <h1>O espresso que acorda <em>Santa Cecília</em> desde 2016.</h1>
+        <p class="sub">Grãos de pequenos produtores, torra clara da semana e brunch servido até às 15h. Passe para um coado na hora — ou peça e retire em 10 minutos.</p>
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="#cardapio">Ver cardápio</a>
+          <a class="btn btn-ghost" href="#visita">Como chegar</a>
+        </div>
+        <div class="hero-meta" aria-label="Números da casa">
+          <div><strong><span id="contador" data-alvo="48750">0</span>+</strong><span>cafés servidos em 2025</span></div>
+          <div><strong>12</strong><span>origens de grãos no balcão</span></div>
+          <div><strong>4 min</strong><span>tempo médio de retirada</span></div>
+        </div>
+      </div>
+      <div class="visual" aria-hidden="true">
+        <div class="cup-card">
+          <svg width="220" height="220" viewBox="0 0 220 220" role="img" aria-label="Xícara de café ilustrada">
+            <ellipse cx="110" cy="182" rx="62" ry="10" fill="#3A2418" opacity=".18"/>
+            <path d="M55 80h95v55c0 26-20 44-47 44s-48-18-48-44V80z" fill="#fff" stroke="#241610" stroke-width="5"/>
+            <path d="M150 92h12a18 18 0 0 1 0 36h-13" fill="none" stroke="#241610" stroke-width="5" stroke-linecap="round"/>
+            <ellipse cx="102" cy="80" rx="48" ry="10" fill="#6B3B1E" stroke="#241610" stroke-width="5"/>
+            <ellipse cx="102" cy="80" rx="30" ry="5.5" fill="#9A5B28"/>
+            <path d="M85 52c0-7 8-7 8-14M105 52c0-7 8-7 8-14M125 52c0-7 8-7 8-14" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none" opacity=".85"/>
+            <circle cx="62" cy="52" r="14" fill="#D9A441"/>
+          </svg>
+        </div>
+        <div class="float f1"><span class="dot" style="background:#1E3D2F">✓</span><span><b>Torra da semana</b><br>Cerrado · notas de rapadura</span></div>
+        <div class="float f2"><span class="dot" style="background:#C14A09">10</span><span><b>Retirada em 10 min</b><br>peça pelo balcão digital</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu" id="cardapio">
+    <div class="wrap">
+      <span class="kicker">Cardápio da semana</span>
+      <h2>Os seis que nunca saem do quadro</h2>
+      <p class="lead">Receitas curtas, ingredientes à vista e preço fechado. Tudo pode ser feito no leite vegetal sem custo extra.</p>
+      <div class="menu-grid">
+        <article class="card"><div class="card-top"><h3>Espresso Aurora</h3><span class="price">R$ 7</span></div><p>Duplo ristretto de Cerrado com crema aveludada.</p><span class="tag">O clássico da casa</span></article>
+        <article class="card"><div class="card-top"><h3>Coado na Hora</h3><span class="price">R$ 9</span></div><p>Passado V60 com grão da semana a sua escolha.</p><span class="tag">Método filtrado</span></article>
+        <article class="card"><div class="card-top"><h3>Cappuccino Cremoso</h3><span class="price">R$ 12</span></div><p>Leite vaporizado sedoso e cacau polvilhado.</p><span class="tag">Mais pedido</span></article>
+        <article class="card"><div class="card-top"><h3>Latte Avelã</h3><span class="price">R$ 14</span></div><p>Espresso duplo com calda artesanal de avelã.</p><span class="tag">Receita autoral</span></article>
+        <article class="card"><div class="card-top"><h3>Mocha Aurora</h3><span class="price">R$ 15</span></div><p>Chocolate 54% com espresso e chantilly leve.</p><span class="tag">Para a tarde</span></article>
+        <article class="card"><div class="card-top"><h3>Affogato da Casa</h3><span class="price">R$ 16</span></div><p>Bola de baunilha afogada no espresso quente.</p><span class="tag">Sobremesa gelada</span></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="depoimentos">
+    <div class="wrap">
+      <span class="kicker">Quem passa, volta</span>
+      <h2>Três fregueses, três motivos</h2>
+      <p class="lead">Avaliações reais do nosso caderno do balcão e do guia do bairro.</p>
+      <div class="quotes">
+        <blockquote class="quote"><p>“O coado aqui mudou minha manhã. O barista explicou a origem do grão sem pressa.”</p><footer><span class="avatar" style="background:#C14A09">M</span><span><b>Marina Lopes</b><br>arquiteta · freguesa há 3 anos</span></footer></blockquote>
+        <blockquote class="quote"><p>“Peço no caminho e retiro sem fila. O cappuccino chega cremoso até para viagem.”</p><footer><span class="avatar" style="background:#D9A441;color:#241610">R</span><span><b>Rafael Nunes</b><br>entregador · café das 7h</span></footer></blockquote>
+        <blockquote class="quote"><p>“Trabalhei uma tarde inteira no mezanino: wifi firme, tomada e affogato impecável.”</p><footer><span class="avatar" style="background:#1E3D2F">C</span><span><b>Camila Prado</b><br>escritora · mesa do canto</span></footer></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="visit" id="visita">
+    <div class="wrap">
+      <span class="kicker">Visite-nos</span>
+      <h2>No centro, perto do metrô</h2>
+      <div class="visit-grid">
+        <div class="hours">
+          <h3>Horários</h3>
+          <ul>
+            <li><span>Segunda a sexta</span><span>7h30 – 19h</span></li>
+            <li><span>Sábado</span><span>8h – 18h</span></li>
+            <li><span>Domingo</span><span>9h – 14h</span></li>
+            <li><span>Brunch</span><span>até às 15h</span></li>
+          </ul>
+        </div>
+        <div class="map">
+          <h3>Onde estamos</h3>
+          <p style="margin:.2rem 0 .6rem">Rua das Flores, 123 — Santa Cecília<br>São Paulo · SP · CEP 01212-100</p>
+          <p style="margin:.2rem 0 .9rem">contato@cafeaurora.com.br · (11) 3456-7890<br>@cafeaurora no bairro</p>
+          <a class="btn btn-solid" href="#inicio">Traçar rota a pé</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="foot">
+    <div><h4>Café Aurora</h4><p>Cafeteria artesanal fictícia. Torra própria, brunch e grãos para levar.<br>Rua das Flores, 123 — Santa Cecília, São Paulo.</p></div>
+    <div><h4>Horário</h4><p>Seg–Sex 7h30–19h · Sáb 8h–18h · Dom 9h–14h</p></div>
+    <div><h4>Contato</h4><p>(11) 3456-7890<br>contato@cafeaurora.com.br</p></div>
+  </div>
+  <div class="copy"><span>© 2026 Café Aurora — página fictícia de demonstração.</span><span>Feita com torra clara e HTML único.</span></div>
+</footer>
+
+<script>
+(function(){
+  var btn=document.getElementById('hamb'),nav=document.getElementById('nav');
+  btn.addEventListener('click',function(){
+    var open=nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+    btn.setAttribute('aria-label',open?'Fechar menu':'Abrir menu');
+  });
+  nav.addEventListener('click',function(e){
+    if(e.target.tagName==='A'&&nav.classList.contains('open')){
+      nav.classList.remove('open');btn.setAttribute('aria-expanded','false');
+    }
+  });
+  var el=document.getElementById('contador'),alvo=parseInt(el.getAttribute('data-alvo'),10)||48750;
+  function fmt(n){return n.toLocaleString('pt-BR');}
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){el.textContent=fmt(alvo);return;}
+  var done=false;
+  function animar(){
+    if(done)return;done=true;
+    var t0=null,dur=1600;
+    function passo(t){
+      if(!t0)t0=t;
+      var p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,3);
+      el.textContent=fmt(Math.round(alvo*e));
+      if(p<1)requestAnimationFrame(passo);
+    }
+    requestAnimationFrame(passo);
+  }
+  if('IntersectionObserver' in window){
+    var ob=new IntersectionObserver(function(es){if(es[0].isIntersecting){animar();ob.disconnect();}},{threshold:.4});
+    ob.observe(el);
+  }else{animar();}
+})();
+</script>
+</body>
+</html>

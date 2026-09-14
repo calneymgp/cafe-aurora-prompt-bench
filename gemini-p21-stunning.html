@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Café Aurora — Cafeteria artesanal de micro-lotes selecionados, torra fresca e experiências sensoriais inesquecíveis.">
+  <title>Café Aurora — Cafeteria Artesanal & Micro-lotes</title>
+  <style>
+    /* --------------------------------------------------
+       TOKENS & RESET
+    -------------------------------------------------- */
+    :root {
+      --bg-canvas: #120e0b;
+      --bg-surface: #1a1511;
+      --bg-surface-elevated: #241d17;
+      --bg-surface-soft: #2b231c;
+      --border-subtle: rgba(224, 185, 143, 0.12);
+      --border-focus: rgba(224, 185, 143, 0.4);
+      --text-main: #f5eee6;
+      --text-muted: #c4b5a5;
+      --text-dim: #918171;
+      --brand-amber: #dca567;
+      --brand-amber-light: #f3c792;
+      --brand-amber-glow: rgba(220, 165, 103, 0.22);
+      --brand-copper: #bf7341;
+      --font-display: "Playfair Display", "Didot", "Bodoni MT", Georgia, "Times New Roman", serif;
+      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-pill: 9999px;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.35);
+      --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.45);
+      --shadow-glow: 0 0 40px rgba(220, 165, 103, 0.15);
+      --transition: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at 50% 0%, #201712 0%, #120e0b 60%);
+      color: var(--text-main);
+      overflow-x: hidden;
+      width: 100%;
+      position: relative;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    img, svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* --------------------------------------------------
+       HEADER & NAVIGATION
+    -------------------------------------------------- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(18, 14, 11, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background-color var(--transition);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+    }
+
+    .brand-logo svg {
+      width: 34px;
+      height: 34px;
+      color: var(--brand-amber);
+    }
+
+    .brand-logo span span {
+      color: var(--brand-amber);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .nav-desktop {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 32px;
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      position: relative;
+      padding: 6px 0;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--brand-amber);
+      transition: width var(--transition);
+      border-radius: 2px;
+    }
+
+    .nav-link:hover {
+      color: var(--text-main);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .header-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--brand-amber-light);
+      background: rgba(220, 165, 103, 0.08);
+      border: 1px solid rgba(220, 165, 103, 0.3);
+      border-radius: var(--radius-pill);
+      transition: all var(--transition);
+    }
+
+    .header-cta:hover {
+      background: rgba(220, 165, 103, 0.16);
+      border-color: var(--brand-amber);
+      transform: translateY(-1px);
+    }
+
+    .mobile-menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .mobile-menu-toggle svg {
+      width: 24px;
+      height: 24px;
+      transition: transform var(--transition);
+    }
+
+    .mobile-drawer {
+      display: none;
+      position: absolute;
+      top: 80px;
+      left: 0;
+      width: 100%;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .mobile-drawer.is-active {
+      display: flex;
+    }
+
+    .mobile-drawer .nav-links {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .mobile-drawer .nav-link {
+      font-size: 1.1rem;
+      width: 100%;
+      padding: 8px 0;
+    }
+
+    .mobile-drawer .header-cta {
+      text-align: center;
+      justify-content: center;
+      width: 100%;
+      padding: 14px 20px;
+    }
+
+    /* --------------------------------------------------
+       HERO SECTION
+    -------------------------------------------------- */
+    .hero {
+      padding: 80px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 56px;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 14px;
+      background: rgba(220, 165, 103, 0.08);
+      border: 1px solid rgba(220, 165, 103, 0.25);
+      border-radius: var(--radius-pill);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--brand-amber-light);
+      margin-bottom: 24px;
+    }
+
+    .hero-badge-dot {
+      width: 7px;
+      height: 7px;
+      background-color: var(--brand-amber);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--brand-amber);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 3.8rem);
+      line-height: 1.12;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      color: var(--text-main);
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--brand-amber);
+      font-weight: 400;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      max-width: 540px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 44px;
+      flex-wrap: wrap;
+    }
+
+    /* SINGLE PRIMARY CTA RULE: Only .btn-primary holds the vibrant solid accent */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, #dca567 0%, #bf7341 100%);
+      color: #120e0b;
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: var(--radius-pill);
+      box-shadow: 0 8px 24px rgba(191, 115, 65, 0.35);
+      transition: all var(--transition);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(191, 115, 65, 0.5);
+      color: #0d0a08;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 28px;
+      background: transparent;
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 1rem;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-pill);
+      transition: all var(--transition);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--border-focus);
+      color: var(--brand-amber-light);
+    }
+
+    .hero-rating-seal {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 20px;
+      background: rgba(26, 21, 17, 0.7);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(8px);
+    }
+
+    .stars-group {
+      display: flex;
+      gap: 3px;
+      color: #e5a93b;
+    }
+
+    .stars-group svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    .seal-text {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .seal-text strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    /* Hero Visual Artwork (Refined Inline Vector Illustration) */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-art-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      aspect-ratio: 1 / 1;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at center, #2e2319 0%, #17120e 70%);
+      border: 1px solid var(--border-subtle);
+      padding: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-md), var(--shadow-glow);
+    }
+
+    .hero-art-wrapper svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* --------------------------------------------------
+       STAT / METRICS STRIP (ANIMATED COUNTER)
+    -------------------------------------------------- */
+    .stats-strip {
+      padding: 36px 0;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(26, 21, 17, 0.5);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      text-align: center;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 2.75rem);
+      font-weight: 700;
+      color: var(--brand-amber);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* --------------------------------------------------
+       CARDÁPIO SECTION (EXACTLY 6 CARDS)
+    -------------------------------------------------- */
+    .section-menu {
+      padding: 110px 0;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 64px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      color: var(--brand-amber);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.8vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text-main);
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .menu-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+      position: relative;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(220, 165, 103, 0.35);
+      box-shadow: var(--shadow-sm), 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .menu-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .menu-card-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--brand-amber);
+    }
+
+    .menu-card-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .menu-card-badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(220, 165, 103, 0.1);
+      color: var(--brand-amber-light);
+      border: 1px solid rgba(220, 165, 103, 0.2);
+    }
+
+    .menu-card-body {
+      margin-bottom: 24px;
+    }
+
+    .menu-item-name {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .menu-item-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .menu-card-footer {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 1px solid rgba(224, 185, 143, 0.08);
+    }
+
+    .price-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      font-weight: 600;
+    }
+
+    .price-value {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--brand-amber);
+    }
+
+    /* --------------------------------------------------
+       DEPOIMENTOS SECTION (3 QUOTES)
+    -------------------------------------------------- */
+    .section-testimonials {
+      padding: 100px 0 120px;
+      background: radial-gradient(circle at 50% 100%, #1e1712 0%, #120e0b 80%);
+      border-top: 1px solid var(--border-subtle);
+      position: relative;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    /* Bloco de autor perfeitamente integrado ao card: mesmo raio, mesma superfície contínua */
+    .testimonial-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform var(--transition), border-color var(--transition);
+      position: relative;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(220, 165, 103, 0.3);
+    }
+
+    .testimonial-quote-icon {
+      color: var(--brand-amber);
+      opacity: 0.4;
+      margin-bottom: 20px;
+    }
+
+    .testimonial-quote-icon svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .testimonial-quote {
+      font-size: 1.02rem;
+      line-height: 1.65;
+      color: var(--text-main);
+      font-style: italic;
+      margin-bottom: 32px;
+      flex-grow: 1;
+    }
+
+    /* Autor integrado: fluxo limpo na mesma casca de card, sem caixas soltas */
+    .testimonial-author-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(224, 185, 143, 0.1);
+    }
+
+    .author-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--bg-surface-elevated);
+      border: 1px solid rgba(220, 165, 103, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--brand-amber);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .author-avatar svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .author-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .author-name {
+      font-weight: 600;
+      font-size: 0.98rem;
+      color: var(--text-main);
+    }
+
+    .author-role {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* --------------------------------------------------
+       FOOTER
+    -------------------------------------------------- */
+    .site-footer {
+      background: #0d0a08;
+      border-top: 1px solid var(--border-subtle);
+      padding: 80px 0 36px;
+      color: var(--text-muted);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 64px;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-brand-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .footer-brand-desc {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      max-width: 300px;
+      color: var(--text-muted);
+    }
+
+    .footer-heading {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-main);
+      margin-bottom: 20px;
+    }
+
+    .footer-item {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .footer-item strong {
+      color: var(--text-main);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .footer-links-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links-list a {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .footer-links-list a:hover {
+      color: var(--brand-amber);
+    }
+
+    .footer-bottom {
+      padding-top: 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    /* --------------------------------------------------
+       RESPONSIVE (MOBILE MEDIA QUERIES)
+    -------------------------------------------------- */
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .hero-content {
+        align-items: center;
+        text-align: center;
+      }
+
+      .hero-subtitle {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        max-width: 420px;
+        margin: 0 auto;
+      }
+
+      .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-desktop {
+        display: none;
+      }
+
+      .mobile-menu-toggle {
+        display: flex;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 18px;
+      }
+
+      .hero {
+        padding: 48px 0 64px;
+      }
+
+      .hero-title {
+        font-size: 2.15rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn-primary, .btn-secondary {
+        width: 100%;
+      }
+
+      .hero-rating-seal {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==============================================
+       HEADER
+  ============================================== -->
+  <header class="site-header" id="topo">
+    <div class="container">
+      <div class="header-inner">
+        <!-- Logo Textual + Ícone Vetorial Autoral -->
+        <a href="#topo" class="brand-logo" aria-label="Café Aurora — Início">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <!-- Sol nascente sobre xícara de café -->
+            <path d="M10 20C10 20 12 23 16 23C20 23 22 20 22 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M16 7V12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M11 9L13 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M21 9L19 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M8 17H24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Café <span>Aurora</span></span>
+        </a>
+
+        <!-- Desktop Navigation: 4 Links + Botão CTA -->
+        <nav class="nav-desktop" aria-label="Navegação principal">
+          <ul class="nav-links">
+            <li><a href="#origens" class="nav-link">Origens</a></li>
+            <li><a href="#cardapio" class="nav-link">Cardápio</a></li>
+            <li><a href="#depoimentos" class="nav-link">Depoimentos</a></li>
+            <li><a href="#contato" class="nav-link">Contato</a></li>
+          </ul>
+          <a href="#contato" class="header-cta">
+            <span>Visitar Espaço</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12l6-6-6-6"/>
+            </svg>
+          </a>
+        </nav>
+
+        <!-- Botão Toggle Menu Mobile -->
+        <button type="button" class="mobile-menu-toggle" id="menuToggle" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="mobileDrawer">
+          <svg id="menuIconBars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+          <svg id="menuIconClose" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Gaveta Mobile -->
+      <div class="mobile-drawer" id="mobileDrawer" role="region" aria-label="Menu móvel">
+        <ul class="nav-links">
+          <li><a href="#origens" class="nav-link mobile-link">Origens</a></li>
+          <li><a href="#cardapio" class="nav-link mobile-link">Cardápio</a></li>
+          <li><a href="#depoimentos" class="nav-link mobile-link">Depoimentos</a></li>
+          <li><a href="#contato" class="nav-link mobile-link">Contato</a></li>
+        </ul>
+        <a href="#contato" class="header-cta mobile-link">Visitar Espaço</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==============================================
+         HERO SECTION
+    ============================================== -->
+    <section class="hero" id="origens">
+      <div class="container">
+        <div class="hero-grid">
+          <!-- Coluna de Conteúdo -->
+          <div class="hero-content">
+            <div class="hero-badge">
+              <span class="hero-badge-dot"></span>
+              <span>Torrefação Artesanal Própria</span>
+            </div>
+            
+            <h1 class="hero-title">
+              O café que desperta cada manhã com <em>alma e raridade.</em>
+            </h1>
+
+            <p class="hero-subtitle">
+              Micro-lotes colhidos a mais de 1.200 metros nas serras mineiras, torrados semanalmente em pequenos lotes e extraídos por baristas apaixonados pela precisão sensorial.
+            </p>
+
+            <!-- 2 Botões: Único CTA Primário na tela, secundário subordinado -->
+            <div class="hero-actions">
+              <a href="#cardapio" class="btn-primary">
+                <span>Explorar Cardápio</span>
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 10h12M11 5l5 5-5 5"/>
+                </svg>
+              </a>
+              <a href="#contato" class="btn-secondary">
+                <span>Nossa Casa</span>
+              </a>
+            </div>
+
+            <!-- Selo de Avaliação -->
+            <div class="hero-rating-seal">
+              <div class="stars-group" aria-label="Classificação 5 de 5 estrelas">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+              <div class="seal-text">
+                <strong>4,9 de 5 estrelas</strong> no Guia dos Cafés Especiais &middot; Mais de 1.400 avaliações.
+              </div>
+            </div>
+          </div>
+
+          <!-- Coluna Visual / Ilustração SVG Refinada -->
+          <div class="hero-visual">
+            <div class="hero-art-wrapper">
+              <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustração de xícara de café cerâmica com vapor aromático e raios da aurora">
+                <defs>
+                  <radialGradient id="auroraGlow" cx="200" cy="220" r="160" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#dca567" stop-opacity="0.35"/>
+                    <stop offset="60%" stop-color="#bf7341" stop-opacity="0.12"/>
+                    <stop offset="100%" stop-color="#120e0b" stop-opacity="0"/>
+                  </radialGradient>
+                  <linearGradient id="cupGrad" x1="140" y1="180" x2="260" y2="300" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#3d2c20"/>
+                    <stop offset="100%" stop-color="#231912"/>
+                  </linearGradient>
+                  <linearGradient id="coffeeSurface" x1="150" y1="205" x2="250" y2="205" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#5a331c"/>
+                    <stop offset="50%" stop-color="#804928"/>
+                    <stop offset="100%" stop-color="#462412"/>
+                  </linearGradient>
+                  <linearGradient id="goldAccent" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#f3c792"/>
+                    <stop offset="100%" stop-color="#bf7341"/>
+                  </linearGradient>
+                </defs>
+
+                <!-- Brilho de Fundo Radiante -->
+                <circle cx="200" cy="210" r="150" fill="url(#auroraGlow)"/>
+
+                <!-- Raios Sutis da Aurora -->
+                <g stroke="#dca567" stroke-opacity="0.18" stroke-width="1.2" stroke-linecap="round">
+                  <line x1="200" y1="60" x2="200" y2="90" stroke-dasharray="4 4"/>
+                  <line x1="120" y1="90" x2="145" y2="115" stroke-dasharray="3 3"/>
+                  <line x1="280" y1="90" x2="255" y2="115" stroke-dasharray="3 3"/>
+                  <line x1="80" y1="160" x2="115" y2="170" stroke-dasharray="4 4"/>
+                  <line x1="320" y1="160" x2="285" y2="170" stroke-dasharray="4 4"/>
+                </g>
+
+                <!-- Ondas de Vapor Aromático Quente -->
+                <path d="M175 160C170 140 185 125 180 105C176 90 184 75 180 65" stroke="url(#goldAccent)" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+                <path d="M200 155C195 130 210 115 205 90C202 75 210 65 205 50" stroke="url(#goldAccent)" stroke-width="2.5" stroke-linecap="round" stroke-opacity="0.9"/>
+                <path d="M225 162C220 142 232 128 228 108C224 92 232 80 228 70" stroke="url(#goldAccent)" stroke-width="1.8" stroke-linecap="round" stroke-opacity="0.6"/>
+
+                <!-- Pires de Cerâmica -->
+                <ellipse cx="200" cy="295" rx="105" ry="18" fill="#1b140f" stroke="#dca567" stroke-width="1" stroke-opacity="0.3"/>
+                <ellipse cx="200" cy="292" rx="90" ry="12" fill="#251b14" stroke="#dca567" stroke-width="1.5" stroke-opacity="0.5"/>
+
+                <!-- Asa da Xícara -->
+                <path d="M250 210C278 210 292 235 282 258C274 274 252 272 244 268" stroke="url(#cupGrad)" stroke-width="13" stroke-linecap="round"/>
+                <path d="M250 210C278 210 292 235 282 258C274 274 252 272 244 268" stroke="#dca567" stroke-width="1.2" stroke-opacity="0.4" stroke-linecap="round"/>
+
+                <!-- Corpo da Xícara de Cerâmica -->
+                <path d="M142 205C146 265 168 288 200 288C232 288 254 265 258 205H142Z" fill="url(#cupGrad)"/>
+                <path d="M142 205C146 265 168 288 200 288C232 288 254 265 258 205H142Z" stroke="#dca567" stroke-width="1.5" stroke-opacity="0.4"/>
+
+                <!-- Borda Superior e Superfície do Café com Crema -->
+                <ellipse cx="200" cy="205" rx="58" ry="15" fill="#2c1e16" stroke="#dca567" stroke-width="2" stroke-opacity="0.8"/>
+                <ellipse cx="200" cy="205" rx="52" ry="12" fill="url(#coffeeSurface)"/>
+
+                <!-- Arte Latte Delicada no Centro -->
+                <path d="M185 204C190 198 210 198 215 204C210 209 190 209 185 204Z" fill="#dca567" fill-opacity="0.6"/>
+                <path d="M192 201C196 195 204 195 208 201C205 205 195 205 192 201Z" fill="#f3c792" fill-opacity="0.8"/>
+                <circle cx="200" cy="205" r="2" fill="#fff" fill-opacity="0.9"/>
+
+                <!-- Grãos de Café Artesanais Dispersos no Prato -->
+                <g fill="#422718" stroke="#dca567" stroke-width="0.8" stroke-opacity="0.4">
+                  <path d="M125 295C125 290 133 286 137 290C141 294 135 301 130 299C127 298 125 296 125 295ZM131 289C132 293 133 296 131 299" />
+                  <path d="M272 294C270 290 277 285 281 288C286 292 281 299 276 298C273 297 271 295 272 294Z" />
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         MÉTRICAS & CONTADOR DE CAFÉS (JS ANIMADO)
+    ============================================== -->
+    <section class="stats-strip" aria-label="Estatísticas da Cafeteria">
+      <div class="container">
+        <div class="stats-grid">
+          <!-- Item com o Contador Animado requerido em (7) -->
+          <div class="stat-item">
+            <div class="stat-value" id="coffeeCounter" data-target="18450">0</div>
+            <div class="stat-label">Xícaras de café servidas com perfeição</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">88,5+</div>
+            <div class="stat-label">Pontos SCA nos lotes safrados</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">100%</div>
+            <div class="stat-label">Grãos arábica de comércio justo e rastreado</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         CARDÁPIO (EXATAMENTE 6 CARDS)
+    ============================================== -->
+    <section class="section-menu" id="cardapio">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Nossas Criações</span>
+          <h2 class="section-title">O Cardápio da Casa</h2>
+          <p class="section-subtitle">
+            Cada receita foi elaborada para realçar a doçura natural, a acidez viva e as notas mais nobres de nossos micro-lotes de altitude.
+          </p>
+        </div>
+
+        <!-- Grid de EXATAMENTE 6 CARDS -->
+        <div class="menu-grid">
+          <!-- Card 1 -->
+          <article class="menu-card">
+            <div>
+              <div class="menu-card-top">
+                <div class="menu-card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                    <line x1="6" y1="1" x2="6" y2="4"></line>
+                    <line x1="10" y1="1" x2="10" y2="4"></line>
+                    <line x1="14" y1="1" x2="14" y2="4"></line>
+                  </svg>
+                </div>
+                <span class="menu-card-badge">Bourbon Amarelo</span>
+              </div>
+              <div class="menu-card-body">
+                <h3 class="menu-item-name">Espresso Aurora</h3>
+                <p class="menu-item-desc">Extração dupla curta com crema aveludada, notas intensas de cacau e final floral cítrico.</p>
+              </div>
+            </div>
+            <div class="menu-card-footer">
+              <span class="price-label">Preço</span>
+              <span class="price-value">R$ 14,00</span>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="menu-card">
+            <div>
+              <div class="menu-card-top">
+                <div class="menu-card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 8h1a4 4 0 0 1 0 8h-1"></path>
+                    <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"></path>
+                    <path d="M6 2v3"></path>
+                    <path d="M10 2v3"></path>
+                    <path d="M14 2v3"></path>
+                  </svg>
+                </div>
+                <span class="menu-card-badge">Microespuma</span>
+              </div>
+              <div class="menu-card-body">
+                <h3 class="menu-item-name">Flat White Sedoso</h3>
+                <p class="menu-item-desc">Dose dupla de ristretto equilibrada com leite vaporizado em temperatura e textura exatas.</p>
+              </div>
+            </div>
+            <div class="menu-card-footer">
+              <span class="price-label">Preço</span>
+              <span class="price-value">R$ 18,50</span>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="menu-card">
+            <div>
+              <div class="menu-card-top">
+                <div class="menu-card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                  </svg>
+                </div>
+                <span class="menu-card-badge">18h Infusão</span>
+              </div>
+              <div class="menu-card-body">
+                <h3 class="menu-item-name">Cold Brew Cítrico</h3>
+                <p class="menu-item-desc">Infusão lenta a frio por 18 horas, finalizada com twist de laranja bahia fresca e gelo cristal.</p>
+              </div>
+            </div>
+            <div class="menu-card-footer">
+              <span class="price-label">Preço</span>
+              <span class="price-value">R$ 21,00</span>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="menu-card">
+            <div>
+              <div class="menu-card-top">
+                <div class="menu-card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 4h14l-2 11a4 4 0 0 1-4 4h-2a4 4 0 0 1-4-4L5 4z"></path>
+                    <line x1="3" y1="4" x2="21" y2="4"></line>
+                  </svg>
+                </div>
+                <span class="menu-card-badge">Método V60</span>
+              </div>
+              <div class="menu-card-body">
+                <h3 class="menu-item-name">Filtrado Flor de Minas</h3>
+                <p class="menu-item-desc">Torra clara em extração manual de papel japonês, acidez brilhante e retrogosto puro de mel.</p>
+              </div>
+            </div>
+            <div class="menu-card-footer">
+              <span class="price-label">Preço</span>
+              <span class="price-value">R$ 19,00</span>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="menu-card">
+            <div>
+              <div class="menu-card-top">
+                <div class="menu-card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <path d="M8 12c1.5 2 4.5 2 6 0"></path>
+                    <path d="M9 9h.01"></path>
+                    <path d="M15 9h.01"></path>
+                  </svg>
+                </div>
+                <span class="menu-card-badge">Cacau 70%</span>
+              </div>
+              <div class="menu-card-body">
+                <h3 class="menu-item-name">Mocha com Cardamomo</h3>
+                <p class="menu-item-desc">Chocolate artesanal de origem baiana derretido no espresso, com toque sutil de especiarias.</p>
+              </div>
+            </div>
+            <div class="menu-card-footer">
+              <span class="price-label">Preço</span>
+              <span class="price-value">R$ 23,00</span>
+            </div>
+          </article>
+
+          <!-- Card 6 -->
+          <article class="menu-card">
+            <div>
+              <div class="menu-card-top">
+                <div class="menu-card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2a5 5 0 0 0-5 5c0 3 5 10 5 10s5-7 5-10a5 5 0 0 0-5-5z"></path>
+                    <circle cx="12" cy="7" r="1.5"></circle>
+                    <path d="M5 22h14"></path>
+                  </svg>
+                </div>
+                <span class="menu-card-badge">Fava de Baunilha</span>
+              </div>
+              <div class="menu-card-body">
+                <h3 class="menu-item-name">Affogato da Aurora</h3>
+                <p class="menu-item-desc">Gelato artesanal de baunilha em fava coberto por uma dose escaldante de espresso ristretto.</p>
+              </div>
+            </div>
+            <div class="menu-card-footer">
+              <span class="price-label">Preço</span>
+              <span class="price-value">R$ 22,50</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         DEPOIMENTOS (3 QUOTES)
+    ============================================== -->
+    <section class="section-testimonials" id="depoimentos">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Vozes da Nossa Mesa</span>
+          <h2 class="section-title">Palavras de Quem Valoriza o Raro</h2>
+          <p class="section-subtitle">
+            Relatos autênticos de quem fez do Café Aurora o ponto de partida das suas manhãs.
+          </p>
+        </div>
+
+        <div class="testimonials-grid">
+          <!-- Quote 1 -->
+          <div class="testimonial-card">
+            <div class="testimonial-quote-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+              </svg>
+            </div>
+            <p class="testimonial-quote">
+              “O nível de controle térmico e a delicadeza com que o Flor de Minas é extraído colocam o Aurora entre as cafeterias mais consistentes de São Paulo. Uma experiência sensorial sem paralelos.”
+            </p>
+            <!-- Bloco de autor integrado organicamente na mesma superfície do card -->
+            <div class="testimonial-author-row">
+              <div class="author-avatar" aria-hidden="true">
+                <span>LM</span>
+              </div>
+              <div class="author-info">
+                <div class="author-name">Letícia Mendonça</div>
+                <div class="author-role">Crítica de Gastronomia &bull; Revista Paladar</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quote 2 -->
+          <div class="testimonial-card">
+            <div class="testimonial-quote-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+              </svg>
+            </div>
+            <p class="testimonial-quote">
+              “O silêncio harmonioso, a luz natural da manhã e a música ambiente impecável transformaram o salão no meu refúgio favorito para pensar e criar. O Flat White é insuperável.”
+            </p>
+            <!-- Bloco de autor integrado -->
+            <div class="testimonial-author-row">
+              <div class="author-avatar" aria-hidden="true">
+                <span>RC</span>
+              </div>
+              <div class="author-info">
+                <div class="author-name">Rodrigo Castanho</div>
+                <div class="author-role">Arquiteto Urbanista</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quote 3 -->
+          <div class="testimonial-card">
+            <div class="testimonial-quote-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+              </svg>
+            </div>
+            <p class="testimonial-quote">
+              “Como barista avaliadora, admiro profundamente a transparência no relacionamento com as famílias produtoras e o respeito milimétrico pelo ponto de torra de cada grão.”
+            </p>
+            <!-- Bloco de autor integrado -->
+            <div class="testimonial-author-row">
+              <div class="author-avatar" aria-hidden="true">
+                <span>CS</span>
+              </div>
+              <div class="author-info">
+                <div class="author-name">Camila Silveira</div>
+                <div class="author-role">Q-Grader &amp; Consultora Sensorial</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==============================================
+       FOOTER COM ENDEREÇO / HORÁRIO / CONTATO FICTÍCIOS
+  ============================================== -->
+  <footer class="site-footer" id="contato">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Coluna 1: Marca & Manifesto -->
+        <div class="footer-brand">
+          <div class="footer-brand-title">Café Aurora</div>
+          <p class="footer-brand-desc">
+            Mais do que café, cultivamos momentos de pausa consciente e celebração das origens do terroir brasileiro.
+          </p>
+        </div>
+
+        <!-- Coluna 2: Endereço -->
+        <div>
+          <h4 class="footer-heading">Endereço</h4>
+          <div class="footer-item">
+            <strong>Nossa Casa</strong>
+            Alameda dos Jacarandás, 412<br>
+            Jardins — São Paulo, SP<br>
+            CEP 01423-010
+          </div>
+        </div>
+
+        <!-- Coluna 3: Horários -->
+        <div>
+          <h4 class="footer-heading">Horários</h4>
+          <div class="footer-item">
+            <strong>Segunda a Sexta</strong>
+            07h30 às 20h00
+          </div>
+          <div class="footer-item">
+            <strong>Sábados e Domingos</strong>
+            08h00 às 19h00
+          </div>
+        </div>
+
+        <!-- Coluna 4: Contato -->
+        <div>
+          <h4 class="footer-heading">Contato &bull; Reservas</h4>
+          <div class="footer-item">
+            <strong>Telefone</strong>
+            (11) 3892-4410
+          </div>
+          <div class="footer-item">
+            <strong>E-mail</strong>
+            contato@cafeaurora.com.br
+          </div>
+          <div class="footer-item">
+            <strong>Instagram</strong>
+            @cafeaurora.sp
+          </div>
+        </div>
+      </div>
+
+      <!-- Rodapé Inferior -->
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 Café Aurora Cafeteria Artesanal Ltda. Todos os direitos reservados.
+        </div>
+        <div>
+          Torrefação sob demanda &middot; Comércio ético e direto com pequenos produtores.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==============================================
+       JS EMBUTIDO: MENU MOBILE TOGGLE + CONTADOR ANIMADO
+  ============================================== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      /* --------------------------------------------------
+         1. MENU MOBILE TOGGLE
+      -------------------------------------------------- */
+      var menuToggle = document.getElementById("menuToggle");
+      var mobileDrawer = document.getElementById("mobileDrawer");
+      var menuIconBars = document.getElementById("menuIconBars");
+      var menuIconClose = document.getElementById("menuIconClose");
+      var mobileLinks = document.querySelectorAll(".mobile-link");
+
+      function toggleMenu(forceState) {
+        var isOpen = typeof forceState === "boolean" 
+          ? forceState 
+          : !mobileDrawer.classList.contains("is-active");
+
+        if (isOpen) {
+          mobileDrawer.classList.add("is-active");
+          menuToggle.setAttribute("aria-expanded", "true");
+          menuIconBars.style.display = "none";
+          menuIconClose.style.display = "block";
+        } else {
+          mobileDrawer.classList.remove("is-active");
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuIconBars.style.display = "block";
+          menuIconClose.style.display = "none";
+        }
+      }
+
+      if (menuToggle && mobileDrawer) {
+        menuToggle.addEventListener("click", function () {
+          toggleMenu();
+        });
+
+        mobileLinks.forEach(function (link) {
+          link.addEventListener("click", function () {
+            toggleMenu(false);
+          });
+        });
+      }
+
+      /* --------------------------------------------------
+         2. CONTADOR DE CAFÉS SERVIDOS ANIMADO
+      -------------------------------------------------- */
+      var counterEl = document.getElementById("coffeeCounter");
+      if (counterEl) {
+        var targetCount = parseInt(counterEl.getAttribute("data-target"), 10) || 18450;
+        var hasAnimated = false;
+        var duration = 2200; // ms
+
+        function formatNumber(num) {
+          // Formatação pt-BR: ex. 18.450
+          return num.toLocaleString("pt-BR");
+        }
+
+        function animateCounter() {
+          var startTime = null;
+
+          function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            var progress = Math.min((timestamp - startTime) / duration, 1);
+            // Curva easeOutCubic: 1 - pow(1 - progress, 3)
+            var easeProgress = 1 - Math.pow(1 - progress, 3);
+            var currentVal = Math.floor(easeProgress * targetCount);
+
+            counterEl.textContent = formatNumber(currentVal);
+
+            if (progress < 1) {
+              window.requestAnimationFrame(step);
+            } else {
+              counterEl.textContent = formatNumber(targetCount);
+            }
+          }
+
+          window.requestAnimationFrame(step);
+        }
+
+        // Ativação quando visível via IntersectionObserver
+        if ("IntersectionObserver" in window) {
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting && !hasAnimated) {
+                hasAnimated = true;
+                animateCounter();
+                observer.unobserve(counterEl);
+              }
+            });
+          }, { threshold: 0.3 });
+
+          observer.observe(counterEl);
+        } else {
+          // Fallback caso navegador antigo não suporte IntersectionObserver
+          animateCounter();
+        }
+      }
+    });
+  </script>
+</body>
+</html>

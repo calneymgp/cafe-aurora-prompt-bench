@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Café Aurora — Cafeteria Artesanal</title>
+<!--
+PLANO v12-plano (Pense antes de codar):
+Passo 1: Montar estrutura semantica (header/nav/hero/cardapio/depoimentos/footer).
+  Criterio de sucesso: pagina contem todos os 7 requisitos obrigatorios verificaveis no DOM.
+Passo 2: Aplicar visual acolhedor simples (paleta cafe + tipografia serifada, 1 breakpoint mobile).
+  Criterio de sucesso: layout em 2 colunas no desktop colapsa para 1 coluna abaixo de 768px sem rolagem horizontal.
+Passo 3: Adicionar JS minimo (toggle mobile + contador animado por IntersectionObserver).
+  Criterio de sucesso: menu abre/fecha no mobile e contador sobe de 0 ate o valor final ao rolar ate ele.
+Tradeoff de design: optei por paleta quente de alto contraste e cards uniformes em vez de um layout editorial variado — perco um pouco de originalidade visual, mas ganho legibilidade, manutencao simples e contagem exata de 6 cards sem ambiguidade.
+-->
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#fff8f0;--dark:#2b1a12;--accent:#c05621;--accent2:#7c3f16;--cream:#fdecd9;--muted:#7a5c4d}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--bg);color:var(--dark);line-height:1.6}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+header.site{background:#fff;border-bottom:1px solid #ead9c6;position:sticky;top:0;z-index:10}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;max-width:1100px;margin:0 auto}
+.logo{font-size:1.5rem;font-weight:bold;letter-spacing:.5px}
+.logo span{color:var(--accent)}
+nav.links{display:flex;gap:22px;align-items:center}
+nav.links a{font-family:Arial,Helvetica,sans-serif;font-size:.95rem}
+nav.links a:hover{color:var(--accent)}
+.btn{font-family:Arial,Helvetica,sans-serif;display:inline-block;background:var(--accent);color:#fff;padding:12px 24px;border-radius:999px;border:0;cursor:pointer;font-weight:bold;font-size:.95rem}
+.btn:hover{background:var(--accent2)}
+.btn.ghost{background:transparent;color:var(--dark);border:2px solid var(--dark)}
+.btn.small{padding:9px 18px;font-size:.88rem}
+.toggle{display:none;background:none;border:2px solid var(--dark);border-radius:8px;font-size:1.2rem;padding:4px 10px;cursor:pointer}
+.hero{background:linear-gradient(120deg,#2b1a12 55%,#5b3418 100%);color:#fff;padding:70px 0}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero h1{font-size:3rem;line-height:1.1;margin-bottom:14px}
+.hero h1 em{color:#f6b26b;font-style:normal}
+.hero p.sub{font-family:Arial,Helvetica,sans-serif;color:#e8d5c0;margin-bottom:24px;font-size:1.05rem}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.hero .cta .ghost{color:#fff;border-color:#fff}
+.selo{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:8px 16px;border-radius:999px;font-family:Arial,Helvetica,sans-serif;font-size:.9rem}
+.cup{width:100%;max-width:340px;justify-self:center}
+section{padding:64px 0}
+h2.sec{font-size:2rem;text-align:center;margin-bottom:8px}
+p.secsub{font-family:Arial,Helvetica,sans-serif;text-align:center;color:var(--muted);margin-bottom:32px}
+.cardapio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cardapio-grid>article{background:#fff;border:1px solid #ead9c6;border-radius:16px;padding:22px;box-shadow:0 4px 14px rgba(43,26,18,.06)}
+.cardapio-grid>article h3{font-size:1.2rem;margin-bottom:6px}
+.cardapio-grid>article p{font-family:Arial,Helvetica,sans-serif;color:var(--muted);font-size:.93rem;margin-bottom:12px}
+.preco{font-weight:bold;color:var(--accent);font-size:1.1rem}
+.stats{background:var(--dark);color:#fff;text-align:center;padding:40px 0}
+.stats .num{font-size:2.6rem;color:#f6b26b;font-weight:bold}
+.stats p{font-family:Arial,Helvetica,sans-serif;color:#d9c3ab}
+.depo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.depo-grid>blockquote{background:#fff;border-left:5px solid var(--accent);border-radius:12px;padding:22px;font-style:italic;box-shadow:0 4px 14px rgba(43,26,18,.06)}
+.depo-grid>blockquote footer{font-family:Arial,Helvetica,sans-serif;font-style:normal;color:var(--muted);margin-top:12px;font-size:.9rem}
+footer.site{background:#1d110b;color:#e8d5c0;padding:40px 0;font-family:Arial,Helvetica,sans-serif;font-size:.92rem}
+footer.site .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+footer.site h4{color:#fff;margin-bottom:10px;font-family:Georgia,serif}
+footer.site .base{text-align:center;margin-top:24px;color:#a98d76;font-size:.82rem}
+@media (max-width:768px){
+.hero .wrap{grid-template-columns:1fr;text-align:center}
+.hero h1{font-size:2.1rem}
+.hero .cta{justify-content:center}
+.toggle{display:block}
+nav.links{display:none;flex-direction:column;align-items:flex-start;background:#fff;position:absolute;top:60px;right:12px;left:12px;padding:16px;border:1px solid #ead9c6;border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,.12)}
+nav.links.open{display:flex}
+.cardapio-grid{grid-template-columns:1fr}
+.depo-grid{grid-template-columns:1fr}
+footer.site .cols{grid-template-columns:1fr;text-align:center}
+}
+</style>
+</head>
+<body>
+<header class="site">
+<div class="bar">
+<div class="logo">☕ Café <span>Aurora</span></div>
+<button class="toggle" id="menuBtn" aria-label="Abrir menu">☰</button>
+<nav class="links" id="navMenu">
+<a href="#inicio">Início</a>
+<a href="#cardapio">Cardápio</a>
+<a href="#sobre">Sobre</a>
+<a href="#depoimentos">Depoimentos</a>
+<a href="#contato" class="btn small">Peça agora</a>
+</nav>
+</div>
+</header>
+<main id="inicio">
+<section class="hero">
+<div class="wrap">
+<div>
+<h1>O café que <em>acorda</em> o seu dia.</h1>
+<p class="sub">Grãos selecionados de pequenos produtores, torra artesanal e aquele cheirinho de manhã boa — no coração da cidade.</p>
+<div class="cta">
+<a href="#cardapio" class="btn">Ver cardápio</a>
+<a href="#contato" class="btn ghost">Fazer pedido</a>
+</div>
+<div class="selo">★★★★★ 4.9 — 1.200+ avaliações de clientes felizes</div>
+</div>
+<div>
+<svg class="cup" viewBox="0 0 300 300" role="img" aria-label="Xícara de café">
+<ellipse cx="150" cy="260" rx="100" ry="16" fill="rgba(255,255,255,.18)"/>
+<path d="M60 120 h150 v60 c0 45-35 70-75 70 s-75-25-75-70 z" fill="#fdecd9" stroke="#fff" stroke-width="4"/>
+<path d="M210 135 c35 0 45 15 40 35 c-5 20-20 28-42 25" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round"/>
+<path d="M100 95 c0-12 12-12 12-22 M140 95 c0-12 12-12 12-22 M180 95 c0-12 12-12 12-22" stroke="#f6b26b" stroke-width="6" fill="none" stroke-linecap="round"/>
+<ellipse cx="135" cy="130" rx="75" ry="12" fill="#7c3f16"/>
+</svg>
+</div>
+</div>
+</section>
+<section class="stats" id="sobre">
+<div class="wrap">
+<div class="num" id="contador" data-alvo="52840">0</div>
+<p>cafés servidos com amor desde 2015</p>
+</div>
+</section>
+<section id="cardapio">
+<div class="wrap">
+<h2 class="sec">Nosso cardápio</h2>
+<p class="secsub">Receitas autorais com torra clara e média — escolha o seu ritual.</p>
+<div class="cardapio-grid">
+<article class="menu-card"><h3>Espresso Aurora</h3><p>Blend intenso com notas de chocolate e rapadura.</p><div class="preco">R$ 8,00</div></article>
+<article class="menu-card"><h3>Cappuccino Cremoso</h3><p>Leite vaporizado aveludado com cacau polvilhado.</p><div class="preco">R$ 12,00</div></article>
+<article class="menu-card"><h3>Latte Caramelo</h3><p>Espresso duplo, leite sedoso e calda artesanal.</p><div class="preco">R$ 14,00</div></article>
+<article class="menu-card"><h3>Mocha Avelã</h3><p>Chocolate meio amargo com toque de avelã torrada.</p><div class="preco">R$ 15,00</div></article>
+<article class="menu-card"><h3>Coado da Serra</h3><p>Método filtrado que realça a doçura natural.</p><div class="preco">R$ 10,00</div></article>
+<article class="menu-card"><h3>Affogato Aurora</h3><p>Bola de sorvete de creme banhada em espresso.</p><div class="preco">R$ 18,00</div></article>
+</div>
+</div>
+</section>
+<section id="depoimentos" style="background:var(--cream)">
+<div class="wrap">
+<h2 class="sec">Quem prova, volta</h2>
+<p class="secsub">Histórias de quem começa o dia com a gente.</p>
+<div class="depo-grid">
+<blockquote class="quote">“O melhor cappuccino que já tomei. Virou meu escritório oficial.”<footer>— Marina S., cliente há 2 anos</footer></blockquote>
+<blockquote class="quote">“Atendimento acolhedor e o coado da serra é imbatível.”<footer>— Rafael T., vizinho fiel</footer></blockquote>
+<blockquote class="quote">“Pedi para o aniversário da equipe e todo mundo amou.”<footer>— Camila R., empreendedora</footer></blockquote>
+</div>
+</div>
+</section>
+</main>
+<footer class="site" id="contato">
+<div class="wrap">
+<div class="cols">
+<div><h4>Onde estamos</h4><p>Rua das Flores, 123 — Centro<br>São Paulo/SP — CEP 01234-567</p></div>
+<div><h4>Horários</h4><p>Seg a Sex: 7h às 19h<br>Sáb e Dom: 8h às 14h</p></div>
+<div><h4>Contato</h4><p>(11) 3456-7890<br>oi@cafeaurora.com.br<br>@cafeaurora</p></div>
+</div>
+<div class="base">© 2026 Café Aurora — Cafeteria fictícia criada para demonstração.</div>
+</div>
+</footer>
+<script>
+(function(){
+var btn=document.getElementById('menuBtn');
+var nav=document.getElementById('navMenu');
+btn.addEventListener('click',function(){nav.classList.toggle('open');});
+var el=document.getElementById('contador');
+var alvo=parseInt(el.getAttribute('data-alvo'),10);
+var feito=false;
+function animar(){
+if(feito)return;feito=true;
+var inicio=null,dur=1600;
+function passo(t){
+if(!inicio)inicio=t;
+var p=Math.min((t-inicio)/dur,1);
+el.textContent=Math.floor(alvo*(1-Math.pow(1-p,3))).toLocaleString('pt-BR');
+if(p<1)requestAnimationFrame(passo);else el.textContent=alvo.toLocaleString('pt-BR');
+}
+requestAnimationFrame(passo);
+}
+if('IntersectionObserver' in window){
+new IntersectionObserver(function(e){if(e[0].isIntersecting){animar();}}, {threshold:.4}).observe(el);
+}else{animar();}
+})();
+</script>
+</body>
+</html>

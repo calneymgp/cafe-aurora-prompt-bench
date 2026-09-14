@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Café Aurora | Cafeteria Artesanal & Grãos Selecionados</title>
+  <meta name="description" content="Café Aurora - Experiência sensorial única com grãos especiais brasileiros torrados artesanalmente.">
+  <style>
+    /* Reset & CSS Variables */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-main: #0f0d0b;
+      --bg-card: #181412;
+      --bg-card-hover: #211c19;
+      --bg-accent-soft: #231c17;
+      --border-subtle: #2e2621;
+      --border-accent: #5e4331;
+      --gold-primary: #d49a55;
+      --gold-light: #f1bf7a;
+      --gold-dark: #a97332;
+      --text-main: #fbf7f2;
+      --text-muted: #bdaea1;
+      --text-dim: #7f7065;
+      --font-serif: "Playfair Display", Didot, "Bodoni MT", "Times New Roman", Georgia, serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header & Navigation */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 13, 11, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: var(--transition);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 84px;
+    }
+
+    /* (1) Header: Logo textual */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-serif);
+      font-size: 1.65rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--text-main);
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      fill: var(--gold-primary);
+    }
+
+    .logo span {
+      color: var(--gold-primary);
+    }
+
+    /* (1) Header: Nav com 4 links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--gold-primary);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* (1) Header: Botão CTA */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+      border: 1px solid transparent;
+    }
+
+    .btn-cta {
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+      color: #120e0b;
+      box-shadow: 0 4px 18px rgba(212, 154, 85, 0.28);
+    }
+
+    .btn-cta:hover {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-primary));
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(212, 154, 85, 0.38);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-accent);
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--gold-primary);
+      transform: translateY(-2px);
+    }
+
+    /* Mobile toggle */
+    .mobile-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .mobile-toggle svg {
+      width: 28px;
+      height: 28px;
+      fill: currentColor;
+    }
+
+    /* (2) Hero Section */
+    .hero {
+      position: relative;
+      padding: 90px 0 80px;
+      background: radial-gradient(circle at 50% 20%, rgba(212, 154, 85, 0.12) 0%, transparent 60%);
+      overflow: hidden;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* (2) Selo de Avaliação */
+    .review-seal {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+      padding: 8px 20px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    .stars-group {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .star-icon {
+      width: 16px;
+      height: 16px;
+      fill: #f5b042;
+    }
+
+    .review-text {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .review-text strong {
+      color: var(--text-main);
+    }
+
+    /* (2) Headline & Subheadline */
+    .hero-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      line-height: 1.15;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: var(--text-main);
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--gold-primary);
+      font-family: var(--font-serif);
+    }
+
+    .hero-subheadline {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 680px;
+      margin-bottom: 36px;
+    }
+
+    /* (2) Dois botões */
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* (7) Contador de cafés servidos animado */
+    .stats-strip {
+      margin-top: 54px;
+      padding: 24px 36px;
+      background: linear-gradient(180deg, var(--bg-card) 0%, rgba(24, 20, 18, 0.6) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .stats-icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(212, 154, 85, 0.15);
+      border: 1px solid rgba(212, 154, 85, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .stats-icon-wrap svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--gold-primary);
+    }
+
+    .stats-content {
+      text-align: left;
+    }
+
+    .counter-value {
+      font-family: var(--font-serif);
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      line-height: 1.1;
+      display: inline-block;
+    }
+
+    .stats-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 500;
+    }
+
+    /* Section General Styles */
+    .section {
+      padding: 96px 0;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 56px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gold-primary);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 3.8vw, 2.9rem);
+      line-height: 1.2;
+      color: var(--text-main);
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+    }
+
+    /* (3) Seção Cardápio com EXATAMENTE 6 cards */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .menu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .menu-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-accent);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .card-icon-bubble {
+      width: 44px;
+      height: 44px;
+      background: rgba(212, 154, 85, 0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .card-icon-bubble svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--gold-primary);
+    }
+
+    .card-price {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+      white-space: nowrap;
+    }
+
+    .card-title {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    /* Descrição de 1 linha */
+    .card-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* (4) Seção Depoimentos com 3 quotes */
+    .testimonials-section {
+      background: linear-gradient(180deg, var(--bg-main) 0%, var(--bg-accent-soft) 50%, var(--bg-main) 100%);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .testimonial-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .testimonial-card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-3px);
+    }
+
+    .quote-mark {
+      width: 32px;
+      height: 32px;
+      fill: var(--gold-primary);
+      opacity: 0.45;
+      margin-bottom: 16px;
+    }
+
+    .testimonial-quote {
+      font-size: 0.98rem;
+      color: var(--text-main);
+      line-height: 1.65;
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 18px;
+    }
+
+    .author-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-dark), #3a251a);
+      border: 1px solid var(--gold-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--gold-light);
+      font-size: 0.9rem;
+    }
+
+    .author-info h4 {
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .author-info p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* (5) Footer */
+    .site-footer {
+      background: #090706;
+      border-top: 1px solid var(--border-subtle);
+      padding: 72px 0 36px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 56px;
+    }
+
+    .footer-brand p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-top: 16px;
+      max-width: 300px;
+      line-height: 1.6;
+    }
+
+    .footer-heading {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 20px;
+    }
+
+    .footer-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .footer-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.5;
+    }
+
+    .footer-icon {
+      width: 18px;
+      height: 18px;
+      fill: var(--gold-primary);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.84rem;
+      color: var(--text-dim);
+    }
+
+    /* (6) Responsivo: Media Queries Mobile */
+    @media (max-width: 992px) {
+      .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .testimonials-grid .testimonial-card:last-child {
+        grid-column: span 2;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .mobile-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 84px;
+        left: 0;
+        width: 100%;
+        background: rgba(15, 13, 11, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 32px 24px;
+        gap: 24px;
+        border-bottom: 1px solid var(--border-subtle);
+        transform: translateY(-120%);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+      }
+
+      .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .header-cta-desktop {
+        display: none;
+      }
+
+      .hero {
+        padding: 60px 0;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .stats-strip {
+        width: 100%;
+        padding: 18px 20px;
+        box-sizing: border-box;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card-desc {
+        white-space: normal;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .testimonials-grid .testimonial-card:last-child {
+        grid-column: span 1;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- (1) HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <!-- Logo Textual -->
+      <a href="#" class="logo" aria-label="Café Aurora Página Inicial">
+        <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M2,21H20V19H2M20,8H18V5H20M20,3H4V13A4,4 0 0,0 8,17H14A4,4 0 0,0 18,13V10H20A2,2 0 0,0 22,8V5C22,3.89 21.1,3 20,3Z" />
+        </svg>
+        Café <span>Aurora</span>
+      </a>
+
+      <!-- 4 Links de Navegação -->
+      <nav aria-label="Navegação Principal">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#hero">Início</a></li>
+          <li><a href="#menu">Cardápio</a></li>
+          <li><a href="#depoimentos">Depoimentos</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+
+      <!-- Botão CTA -->
+      <div class="header-cta-desktop">
+        <a href="#menu" class="btn btn-cta">Pedir Agora</a>
+      </div>
+
+      <!-- Mobile Menu Toggle Button (7) -->
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Alternar menu de navegação" aria-expanded="false">
+        <svg viewBox="0 0 24 24" id="toggleIcon">
+          <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- (2) HERO SECTION -->
+    <section class="hero" id="hero">
+      <div class="container hero-content">
+        <!-- Selo de Avaliação -->
+        <div class="review-seal">
+          <div class="stars-group" aria-label="5 de 5 estrelas">
+            <svg class="star-icon" viewBox="0 0 24 24"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"/></svg>
+            <svg class="star-icon" viewBox="0 0 24 24"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"/></svg>
+            <svg class="star-icon" viewBox="0 0 24 24"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"/></svg>
+            <svg class="star-icon" viewBox="0 0 24 24"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"/></svg>
+            <svg class="star-icon" viewBox="0 0 24 24"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"/></svg>
+          </div>
+          <span class="review-text"><strong>4.9 / 5.0</strong> — Eleito o Melhor Café Especial da Região</span>
+        </div>
+
+        <!-- Headline & Subheadline -->
+        <h1 class="hero-headline">
+          O despertar perfeito para os seus <em>melhores sentidos</em>
+        </h1>
+        <p class="hero-subheadline">
+          Microlotes brasileiros de altitude selecionados à mão, torra fresca e extração precisa para transformar cada momento em uma experiência memorável.
+        </p>
+
+        <!-- 2 Botões -->
+        <div class="hero-actions">
+          <a href="#menu" class="btn btn-cta">Explorar Cardápio</a>
+          <a href="#contato" class="btn btn-secondary">Reservar Mesa</a>
+        </div>
+
+        <!-- (7) Contador de cafés servidos animado -->
+        <div class="stats-strip" id="statsStrip">
+          <div class="stats-icon-wrap" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M18.5,3H6C4.9,3 4,3.9 4,5V16C4,18.2 5.8,20 8,20H15C17.2,20 19,18.2 19,16V13H20A3,3 0 0,0 23,10V6A3,3 0 0,0 20,3H18.5M16,5V8H6V5H16M21,10A1,1 0 0,1 20,11H19V5H20A1,1 0 0,1 21,6V10M4,22H20V23H4V22Z"/>
+            </svg>
+          </div>
+          <div class="stats-content">
+            <div class="counter-value" id="coffeeCounter" data-target="24890">0</div>
+            <div class="stats-label">Xícaras artesanais servidas com excelência</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- (3) SEÇÃO CARDÁPIO COM EXATAMENTE 6 CARDS -->
+    <section class="section" id="menu">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Nossa Seleção</span>
+          <h2 class="section-title">Cardápio de Cafés</h2>
+          <p class="section-subtitle">Receitas autênticas preparadas com microlotes frescos e proporções calculadas ao miligrama.</p>
+        </div>
+
+        <div class="menu-grid">
+          <!-- Card 1 -->
+          <article class="menu-card">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-bubble" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M2,21H20V19H2M20,8H18V5H20M20,3H4V13A4,4 0 0,0 8,17H14A4,4 0 0,0 18,13V10H20A2,2 0 0,0 22,8V5C22,3.89 21.1,3 20,3Z"/></svg>
+                </div>
+                <span class="card-price">R$ 11,90</span>
+              </div>
+              <h3 class="card-title">Espresso Aurora</h3>
+              <p class="card-desc">Shot duplo encorpado com crema aveludada e notas intensas de cacau 70% e avelã torrada.</p>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="menu-card">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-bubble" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4Z"/></svg>
+                </div>
+                <span class="card-price">R$ 15,50</span>
+              </div>
+              <h3 class="card-title">Cappuccino Tradicional</h3>
+              <p class="card-desc">Equilíbrio exato entre espresso especial, leite cremoso vaporizado e cacau fino em pó.</p>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="menu-card">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-bubble" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M17,19A2,2 0 0,1 15,21H9A2,2 0 0,1 7,19V11H17M15.5,5L14.5,4H9.5L8.5,5H5V7H19V5H15.5Z"/></svg>
+                </div>
+                <span class="card-price">R$ 17,00</span>
+              </div>
+              <h3 class="card-title">Flat White Aveludado</h3>
+              <p class="card-desc">Ristretto duplo coberto por fina microespuma sedosa de leite integral da fazenda.</p>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="menu-card">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-bubble" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M19,5V19H5V5H19Z"/></svg>
+                </div>
+                <span class="card-price">R$ 18,50</span>
+              </div>
+              <h3 class="card-title">Cold Brew Cítrico</h3>
+              <p class="card-desc">Extração lenta a frio por 16 horas com infusão refrescante de casca de laranja-bahia.</p>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="menu-card">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-bubble" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M12,3L2,12H5V20H19V12H22L12,3M12,7.7L16,11.3V18H8V11.3L12,7.7Z"/></svg>
+                </div>
+                <span class="card-price">R$ 19,50</span>
+              </div>
+              <h3 class="card-title">Mocha Caramelo Salgado</h3>
+              <p class="card-desc">Espresso premium com calda artesanal de caramelo, flor de sal e chantilly fresco batido.</p>
+            </div>
+          </article>
+
+          <!-- Card 6 -->
+          <article class="menu-card">
+            <div>
+              <div class="card-top">
+                <div class="card-icon-bubble" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2M12,20C7.58,20 4,16.42 4,12C4,7.58 7.58,4 12,4C16.42,4 20,7.58 20,12C20,16.42 16.42,20 12,20Z"/></svg>
+                </div>
+                <span class="card-price">R$ 21,00</span>
+              </div>
+              <h3 class="card-title">Affogato D'Oro</h3>
+              <p class="card-desc">Bola generosa de gelato fior di latte artesanal afogada em shot quente de espresso denso.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- (4) SEÇÃO DEPOIMENTOS COM 3 QUOTES -->
+    <section class="section testimonials-section" id="depoimentos">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Avaliações Reais</span>
+          <h2 class="section-title">Palavra de Quem Aprecia</h2>
+          <p class="section-subtitle">Conheça a opinião de clientes apaixonados que fazem do Café Aurora seu refúgio diário.</p>
+        </div>
+
+        <div class="testimonials-grid">
+          <!-- Depoimento 1 -->
+          <div class="testimonial-card">
+            <div>
+              <svg class="quote-mark" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M14,17H17L19,13V7H13V13H16M6,17H9L11,13V7H5V13H8L6,17Z"/>
+              </svg>
+              <p class="testimonial-quote">
+                "O Flat White do Café Aurora é simplesmente impecável. A consistência da microespuma e as notas doces naturais do grão tornaram este o meu ponto obrigatório todas as manhãs."
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar" aria-hidden="true">MS</div>
+              <div class="author-info">
+                <h4>Marina Silveira</h4>
+                <p>Sommelier & Cliente Frequente</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Depoimento 2 -->
+          <div class="testimonial-card">
+            <div>
+              <svg class="quote-mark" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M14,17H17L19,13V7H13V13H16M6,17H9L11,13V7H5V13H8L6,17Z"/>
+              </svg>
+              <p class="testimonial-quote">
+                "O atendimento caloroso e a música ambiente criam o refúgio perfeito para trabalhar com foco. E o Cold Brew com toque cítrico é uma obra-prima nos dias quentes."
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar" aria-hidden="true">RL</div>
+              <div class="author-info">
+                <h4>Rodrigo Lacerda</h4>
+                <p>Designer & Entusiasta de Café</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Depoimento 3 -->
+          <div class="testimonial-card">
+            <div>
+              <svg class="quote-mark" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M14,17H17L19,13V7H13V13H16M6,17H9L11,13V7H5V13H8L6,17Z"/>
+              </svg>
+              <p class="testimonial-quote">
+                "A precisão com que preparam cada xícara demonstra respeito autêntico pelos produtores locais. Recomendo o Affogato de olhos fechados para quem quer uma sobremesa divina."
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar" aria-hidden="true">CF</div>
+              <div class="author-info">
+                <h4>Camila Fernandes</h4>
+                <p>Crítica Gastronômica</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- (5) FOOTER -->
+  <footer class="site-footer" id="contato">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Coluna Marca -->
+        <div class="footer-brand">
+          <div class="logo">
+            <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2,21H20V19H2M20,8H18V5H20M20,3H4V13A4,4 0 0,0 8,17H14A4,4 0 0,0 18,13V10H20A2,2 0 0,0 22,8V5C22,3.89 21.1,3 20,3Z" />
+            </svg>
+            Café <span>Aurora</span>
+          </div>
+          <p>
+            Torrefação artesanal, grãos sustentáveis e a melhor experiência sensorial em cafeteria desde 2021.
+          </p>
+        </div>
+
+        <!-- Endereço -->
+        <div>
+          <h4 class="footer-heading">Nosso Endereço</h4>
+          <ul class="footer-list">
+            <li>
+              <svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z"/>
+              </svg>
+              <span>Alameda das Acácias, 482<br>Jardins — São Paulo, SP<br>CEP: 01420-001</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Horário de Funcionamento -->
+        <div>
+          <h4 class="footer-heading">Horários</h4>
+          <ul class="footer-list">
+            <li>
+              <svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z"/>
+              </svg>
+              <span>
+                <strong>Seg a Sex:</strong> 07:30 — 20:00<br>
+                <strong>Sábados:</strong> 08:00 — 21:00<br>
+                <strong>Domingos:</strong> 08:30 — 18:00
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contato Fictício -->
+        <div>
+          <h4 class="footer-heading">Atendimento</h4>
+          <ul class="footer-list">
+            <li>
+              <svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z"/>
+              </svg>
+              <span>(11) 3289-4410</span>
+            </li>
+            <li>
+              <svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/>
+              </svg>
+              <span>ola@cafeaurora.com.br</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Café Aurora. Todos os direitos reservados.</p>
+        <p>Feito com paixão pelo bom café.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- (7) JAVASCRIPT: MENU MOBILE TOGGLE + CONTADOR DE CAFÉS ANIMADO -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Mobile Menu Toggle
+      const mobileToggle = document.getElementById('mobileToggle');
+      const navLinks = document.getElementById('navLinks');
+      const toggleIcon = document.getElementById('toggleIcon');
+
+      const hamburgerPath = "M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z";
+      const closePath = "M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z";
+
+      if (mobileToggle && navLinks) {
+        mobileToggle.addEventListener('click', () => {
+          const isOpen = navLinks.classList.toggle('active');
+          mobileToggle.setAttribute('aria-expanded', String(isOpen));
+          toggleIcon.querySelector('path').setAttribute('d', isOpen ? closePath : hamburgerPath);
+        });
+
+        // Fechar menu mobile ao clicar em um link
+        navLinks.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            mobileToggle.setAttribute('aria-expanded', 'false');
+            toggleIcon.querySelector('path').setAttribute('d', hamburgerPath);
+          });
+        });
+      }
+
+      // 2. Contador de cafés servidos animado com IntersectionObserver
+      const counterEl = document.getElementById('coffeeCounter');
+      if (counterEl) {
+        const targetValue = parseInt(counterEl.getAttribute('data-target') || '24890', 10);
+        let hasAnimated = false;
+
+        const animateCounter = () => {
+          const duration = 2200; // ms
+          const startTime = performance.now();
+
+          const updateNumber = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Função de easing out cubic
+            const easeOutProgress = 1 - Math.pow(1 - progress, 3);
+            const currentVal = Math.floor(easeOutProgress * targetValue);
+
+            counterEl.textContent = currentVal.toLocaleString('pt-BR');
+
+            if (progress < 1) {
+              requestAnimationFrame(updateNumber);
+            } else {
+              counterEl.textContent = targetValue.toLocaleString('pt-BR');
+            }
+          };
+
+          requestAnimationFrame(updateNumber);
+        };
+
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !hasAnimated) {
+              hasAnimated = true;
+              animateCounter();
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.3 });
+
+        observer.observe(counterEl);
+      }
+    });
+  </script>
+</body>
+</html>

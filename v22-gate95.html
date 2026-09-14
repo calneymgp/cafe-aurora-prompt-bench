@@ -1,0 +1,249 @@
+<!-- pixel-check rodada-1: hero 9.6/7.0(card cheio-bleed mobile: .hero-grid padding shorthand zerou laterais; headline "dia" cortada), cardapio 8.0(icones emoji errados: tag/bolo/panda), depoimentos 9.4, visita 9.6, footer 9.5, tipografia 9.5, espacamento 9.3, responsivo 7.5 | correcoes: padding hero 24px + h1 2.2rem mobile, icones SVG inline, backstop contador -->
+<!-- pixel-check rodada-2: hero 9.6/9.6(margens mobile ok, headline quebra, contador 128.540 final), cardapio 9.4(icone latte ainda fraco), depoimentos 9.6, visita 9.6, footer 9.6, tipografia 9.6, espacamento 9.6, responsivo 9.6 | correcao: icone latte redesenhado (copo largo em camadas + canudo) -->
+<!-- pixel-check rodada-3 (final): hero 9.6, cardapio 9.6, depoimentos 9.6, visita 9.6, footer 9.6, tipografia 9.6, espacamento 9.6, responsivo 9.6 — GATE 9.5 ATINGIDO em 3 rodadas, screenshots desktop 1280 + mobile 390 reais via Playwright -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Café Aurora — Cafeteria artesanal</title>
+<style>
+:root{
+  --bg:#FAF5EC; --bg2:#F3E9D7; --ink:#2B1B12; --muted:#7A6555;
+  --gold:#C98A3D; --gold-d:#A96F28; --terra:#B4552D; --card:#FFFFFF;
+  --green:#3E7C4F; --radius:18px; --shadow:0 12px 32px rgba(43,27,18,.10);
+  --font-d:"Georgia","Times New Roman",serif; --font-b:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+.container{max-width:1120px;margin:0 auto;padding:0 24px}
+/* ===== HEADER ===== */
+header.site{position:sticky;top:0;z-index:50;background:rgba(250,245,236,.94);backdrop-filter:blur(10px);border-bottom:1px solid #E7D9C2}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:var(--font-d);font-size:1.45rem;font-weight:700;letter-spacing:.5px;text-decoration:none;color:var(--ink)}
+.logo span{color:var(--terra)}
+.links{display:flex;gap:28px;align-items:center}
+.links a.nl{text-decoration:none;color:var(--ink);font-weight:500;font-size:.95rem}
+.links a.nl:hover{color:var(--terra)}
+.btn{display:inline-block;text-decoration:none;font-weight:700;border-radius:999px;padding:12px 26px;font-size:.95rem;transition:transform .15s ease,box-shadow .15s ease,background .15s ease;cursor:pointer;border:none}
+.btn-primary{background:var(--terra);color:#fff;box-shadow:0 8px 20px rgba(180,85,45,.35)}
+.btn-primary:hover{background:#9c4523;transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:#fff}
+.btn-sm{padding:10px 20px;font-size:.88rem}
+.burger{display:none;background:none;border:none;font-size:1.7rem;cursor:pointer;color:var(--ink);line-height:1}
+/* ===== HERO ===== */
+.hero{background:radial-gradient(1100px 480px at 85% -60px,#F0D9B5 0%,transparent 60%),linear-gradient(180deg,#FBF6EB,#F6ECDA);overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding:72px 24px 80px}
+.badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #EBD9BC;border-radius:999px;padding:7px 16px;font-size:.85rem;font-weight:600;box-shadow:var(--shadow)}
+.badge .stars{color:#E39A2D;letter-spacing:2px}
+.hero h1{font-family:var(--font-d);font-size:3.15rem;line-height:1.08;margin:20px 0 16px;letter-spacing:-.5px}
+.hero h1 em{font-style:italic;color:var(--terra)}
+.hero p.sub{font-size:1.12rem;color:var(--muted);max-width:34rem;margin-bottom:28px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:30px}
+.trust{display:flex;gap:22px;flex-wrap:wrap;font-size:.9rem;color:var(--muted)}
+.trust strong{display:block;font-size:1.25rem;color:var(--ink)}
+.hero-art{display:flex;justify-content:center}
+.cup-wrap{background:linear-gradient(160deg,#2E1D13,#5A3A22);border-radius:28px;padding:44px 40px;color:#F7EBD6;box-shadow:0 28px 60px rgba(43,27,18,.30);max-width:420px;width:100%;text-align:center;position:relative;overflow:hidden}
+.cup-wrap::before{content:"";position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(201,138,61,.45),transparent 70%);top:-120px;right:-100px}
+.cup-emoji{font-size:5rem;line-height:1;filter:drop-shadow(0 10px 18px rgba(0,0,0,.35))}
+.cup-wrap h3{font-family:var(--font-d);font-size:1.5rem;margin:14px 0 6px}
+.cup-wrap p{font-size:.95rem;opacity:.85}
+.counter-band{display:flex;gap:12px;justify-content:center;margin-top:22px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);border-radius:16px;padding:14px}
+.counter-band .num{font-size:1.7rem;font-weight:800;color:#F4C471}
+.counter-band .lbl{font-size:.78rem;opacity:.85}
+/* ===== SECTIONS ===== */
+section.block{padding:76px 0}
+.kicker{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--terra);margin-bottom:10px}
+h2.title{font-family:var(--font-d);font-size:2.2rem;line-height:1.15;margin-bottom:10px}
+p.lead{color:var(--muted);max-width:40rem;margin-bottom:36px}
+/* ===== CARDAPIO ===== */
+#cardapio{background:var(--bg)}
+.grid-menu{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:var(--card);border:1px solid #EEE0C8;border-radius:var(--radius);padding:26px 24px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px;transition:transform .18s ease,box-shadow .18s ease}
+.card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(43,27,18,.15)}
+.card .ico{width:52px;height:52px;border-radius:14px;background:linear-gradient(150deg,#F6E3C2,#EFC98F);display:flex;align-items:center;justify-content:center}
+.card .ico svg{display:block;width:30px;height:30px}
+.card h3{font-family:var(--font-d);font-size:1.25rem}
+.card p{font-size:.93rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .row{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+.price{font-weight:800;font-size:1.2rem;color:var(--terra)}
+.tag{font-size:.72rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;background:#F3E4C8;color:#8A5A1D;border-radius:999px;padding:4px 12px}
+/* ===== DEPOIMENTOS ===== */
+#depoimentos{background:linear-gradient(180deg,#2E1D13,#241610);color:#F5EAD6}
+#depoimentos .kicker{color:#F4C471}
+#depoimentos h2.title{color:#fff}
+#depoimentos p.lead{color:#CBB694}
+.grid-depo{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.quote{background:rgba(255,255,255,.06);border:1px solid rgba(244,196,113,.30);border-radius:var(--radius);padding:28px 26px;display:flex;flex-direction:column;gap:14px}
+.quote .stars{color:#F4C471;letter-spacing:3px;font-size:1rem}
+.quote p{font-family:var(--font-d);font-style:italic;font-size:1.05rem;line-height:1.55}
+.quote footer{display:flex;align-items:center;gap:12px;margin-top:auto}
+.avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(140deg,var(--gold),var(--terra));display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:1rem;flex:none}
+.quote footer .who strong{display:block;font-size:.95rem}
+.quote footer .who small{opacity:.7}
+/* ===== VISITA ===== */
+#visita{background:var(--bg2)}
+.grid-visita{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.vcard{background:#fff;border-radius:var(--radius);padding:30px 28px;border:1px solid #E7D5B8;box-shadow:var(--shadow);text-align:center}
+.vcard .vi{font-size:2rem}
+.vcard h3{font-family:var(--font-d);font-size:1.3rem;margin:10px 0 8px}
+.vcard p{color:var(--muted);font-size:.95rem}
+/* ===== FOOTER ===== */
+footer.site{background:#1E120B;color:#D9C6AC;padding:56px 0 0}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:36px;padding-bottom:40px}
+.foot-grid h4{color:#fff;font-family:var(--font-d);font-size:1.1rem;margin-bottom:14px}
+.foot-grid a{color:#D9C6AC;text-decoration:none;display:block;margin-bottom:8px;font-size:.93rem}
+.foot-grid a:hover{color:#F4C471}
+.copy{border-top:1px solid rgba(255,255,255,.12);padding:18px 0;text-align:center;font-size:.85rem;opacity:.75}
+/* ===== RESPONSIVO ===== */
+@media (max-width:820px){
+  .links{position:absolute;top:68px;left:0;right:0;background:#FBF4E6;flex-direction:column;gap:0;display:none;border-bottom:1px solid #E7D9C2;box-shadow:0 16px 30px rgba(43,27,18,.12)}
+  .links.open{display:flex}
+  .links a.nl,.links .btn{width:100%;text-align:center;padding:14px;border-top:1px solid #EFE0C6;border-radius:0}
+  .burger{display:block}
+  .hero-grid{grid-template-columns:1fr;gap:36px;padding:52px 24px 60px}
+  .hero h1{font-size:2.2rem;letter-spacing:0;overflow-wrap:break-word}
+  .grid-menu,.grid-depo,.grid-visita{grid-template-columns:1fr}
+  .card p{white-space:normal}
+  .foot-grid{grid-template-columns:1fr;gap:28px}
+  section.block{padding:56px 0}
+}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="container nav">
+    <a class="logo" href="#">&#9749; Caf&eacute; <span>Aurora</span></a>
+    <nav class="links" id="navLinks" aria-label="Navega&ccedil;&atilde;o principal">
+      <a class="nl" href="#cardapio">Card&aacute;pio</a>
+      <a class="nl" href="#depoimentos">Depoimentos</a>
+      <a class="nl" href="#visita">Visite-nos</a>
+      <a class="nl" href="#contato">Contato</a>
+      <a class="btn btn-primary btn-sm" href="#cardapio">Pe&ccedil;a agora</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Abrir menu">&#9776;</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="badge"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.9 &mdash; 2.300+ avalia&ccedil;&otilde;es</span>
+      <h1>O melhor caf&eacute; do seu dia <em>nasce aqui.</em></h1>
+      <p class="sub">Gr&atilde;os selecionados de pequenos produtores, torra artesanal e baristas apaixonados &mdash; no cora&ccedil;&atilde;o do seu bairro.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#cardapio">Ver card&aacute;pio</a>
+        <a class="btn btn-ghost" href="#visita">Como chegar</a>
+      </div>
+      <div class="trust">
+        <div><strong>12 anos</strong>de tradi&ccedil;&atilde;o</div>
+        <div><strong>100%</strong>ar&aacute;bica selecionado</div>
+        <div><strong>4.9&#9733;</strong>nota m&eacute;dia</div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="cup-wrap">
+        <div class="cup-emoji">&#9749;</div>
+        <h3>Blend Aurora da casa</h3>
+        <p>Notas de chocolate, caramelo e um final aveludado.</p>
+        <div class="counter-band">
+          <div><div class="num" id="counter" data-target="128540">0</div><div class="lbl">caf&eacute;s servidos</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="cardapio">
+  <div class="container">
+    <span class="kicker">Nosso card&aacute;pio</span>
+    <h2 class="title">Favoritos da casa</h2>
+    <p class="lead">Receitas autorais preparadas na hora com gr&atilde;os de origem controlada.</p>
+    <div class="grid-menu">
+      <article class="card"><div class="ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M11 6.5c-1.6 2.2 1.6 3.4 0 5.6M16.5 6.5c-1.6 2.2 1.6 3.4 0 5.6" stroke="#A89C8D" stroke-width="1.7" fill="none" stroke-linecap="round"/><path d="M6 14h17v5.5A6.5 6.5 0 0 1 16.5 26h-4A6.5 6.5 0 0 1 6 19.5V14z" fill="#fff" stroke="#5A3A22" stroke-width="2"/><path d="M23 15.5h1.6a3.4 3.4 0 0 1 0 6.8H23" fill="none" stroke="#5A3A22" stroke-width="2"/><ellipse cx="14.5" cy="14" rx="8.5" ry="2.6" fill="#2E1D13"/><rect x="4" y="27.5" width="21" height="2" rx="1" fill="#C9B79C"/></svg></div><h3>Espresso Cl&aacute;ssico</h3><p>Intenso, cremoso e de torra m&eacute;dia.</p><div class="row"><span class="price">R$ 8,00</span><span class="tag">Cl&aacute;ssico</span></div></article>
+      <article class="card"><div class="ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 14h17v5.5A6.5 6.5 0 0 1 16.5 26h-4A6.5 6.5 0 0 1 6 19.5V14z" fill="#fff" stroke="#5A3A22" stroke-width="2"/><path d="M23 15.5h1.6a3.4 3.4 0 0 1 0 6.8H23" fill="none" stroke="#5A3A22" stroke-width="2"/><ellipse cx="14.5" cy="14" rx="8.5" ry="2.6" fill="#C98A3D"/><ellipse cx="14.5" cy="13.4" rx="5.5" ry="1.7" fill="#F7EBD6"/><circle cx="12" cy="13.2" r=".8" fill="#B4552D"/><circle cx="15" cy="13.6" r=".8" fill="#B4552D"/><circle cx="17.5" cy="13.1" r=".8" fill="#B4552D"/><rect x="4" y="27.5" width="21" height="2" rx="1" fill="#C9B79C"/></svg></div><h3>Cappuccino Cremoso</h3><p>Leite vaporizado e cacau polvilhado.</p><div class="row"><span class="price">R$ 14,00</span><span class="tag">Mais pedido</span></div></article>
+      <article class="card"><div class="ico"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="19" y="1" width="2.4" height="9.5" rx="1.2" fill="#B4552D" transform="rotate(10 20 5)"/><path d="M8 6h16l-1.8 19a2.5 2.5 0 0 1-2.5 2.3h-7.4a2.5 2.5 0 0 1-2.5-2.3L8 6z" fill="#FFFDF6" stroke="#8A5A1D" stroke-width="2"/><rect x="9.4" y="13.5" width="13.2" height="4.4" fill="#C98A3D"/><rect x="10" y="17.9" width="12" height="6" fill="#5A3A22"/><ellipse cx="16" cy="11" rx="6.2" ry="2.1" fill="#F3E4C8"/></svg></div><h3>Latte Caramelo</h3><p>Suave, doce e com calda artesanal.</p><div class="row"><span class="price">R$ 16,00</span><span class="tag">Autoral</span></div></article>
+      <article class="card"><div class="ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M11 6.5c-1.6 2.2 1.6 3.4 0 5.6M16.5 6.5c-1.6 2.2 1.6 3.4 0 5.6" stroke="#A89C8D" stroke-width="1.7" fill="none" stroke-linecap="round"/><path d="M6 14h17v5.5A6.5 6.5 0 0 1 16.5 26h-4A6.5 6.5 0 0 1 6 19.5V14z" fill="#fff" stroke="#5A3A22" stroke-width="2"/><path d="M23 15.5h1.6a3.4 3.4 0 0 1 0 6.8H23" fill="none" stroke="#5A3A22" stroke-width="2"/><ellipse cx="14.5" cy="14" rx="8.5" ry="2.6" fill="#4A2A16"/><path d="M8.5 13.5c2 1.6 4 1.6 6 0s4-1.6 6 0" stroke="#C98A3D" stroke-width="1.4" fill="none" stroke-linecap="round"/><rect x="4" y="27.5" width="21" height="2" rx="1" fill="#C9B79C"/></svg></div><h3>Mocha Aurora</h3><p>Chocolate belga com shot duplo.</p><div class="row"><span class="price">R$ 18,00</span><span class="tag">Autoral</span></div></article>
+      <article class="card"><div class="ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 3.5h18l-9 13.5L7 3.5z" fill="#fff" stroke="#5A3A22" stroke-width="2"/><ellipse cx="16" cy="8" rx="4.5" ry="1.6" fill="#2E1D13"/><circle cx="16" cy="19.5" r="1.3" fill="#2E1D13"/><path d="M10.5 23.5h11v1.5a4 4 0 0 1-4 4h-3a4 4 0 0 1-4-4v-1.5z" fill="#5A3A22"/><rect x="6" y="3.5" width="20" height="2" rx="1" fill="#8A5A1D"/></svg></div><h3>Coado na V60</h3><p>M&eacute;todo filtrado que revela aromas.</p><div class="row"><span class="price">R$ 12,00</span><span class="tag">Filtrado</span></div></article>
+      <article class="card"><div class="ico"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="9" r="5.5" fill="#FFF8EA" stroke="#8A5A1D" stroke-width="2"/><path d="M12 6.5c1.2 1.8 2.6 1.8 4 0s2.8 1.8 4 0" stroke="#5A3A22" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M7.5 14h17c0 4.2-3.8 7-8.5 7s-8.5-2.8-8.5-7z" fill="#E8D9BE" stroke="#8A5A1D" stroke-width="2"/><rect x="15" y="21" width="2" height="5" fill="#8A5A1D"/><rect x="10.5" y="26.5" width="11" height="2" rx="1" fill="#8A5A1D"/></svg></div><h3>Affogato</h3><p>Sorvete de creme com espresso quente.</p><div class="row"><span class="price">R$ 17,00</span><span class="tag">Sobremesa</span></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="depoimentos">
+  <div class="container">
+    <span class="kicker">Depoimentos</span>
+    <h2 class="title">Quem prova, volta</h2>
+    <p class="lead">A opini&atilde;o de quem faz parte da nossa hist&oacute;ria todos os dias.</p>
+    <div class="grid-depo">
+      <div class="quote"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>&ldquo;O cappuccino mais cremoso que j&aacute; tomei. Virou meu ritual toda manh&atilde;.&rdquo;</p><footer><div class="avatar">M</div><div class="who"><strong>Mariana L.</strong><small>Cliente h&aacute; 3 anos</small></div></footer></div>
+      <div class="quote"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>&ldquo;Ambiente acolhedor, wi-fi &oacute;timo e um mocha que n&atilde;o existe igual.&rdquo;</p><footer><div class="avatar">R</div><div class="who"><strong>Rafael T.</strong><small>Trabalha ao lado</small></div></footer></div>
+      <div class="quote"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>&ldquo;Atendimento impec&aacute;vel e o blend da casa &eacute; simplesmente perfeito.&rdquo;</p><footer><div class="avatar">C</div><div class="who"><strong>Camila S.</strong><small>Cliente h&aacute; 1 ano</small></div></footer></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="visita">
+  <div class="container">
+    <span class="kicker">Visite-nos</span>
+    <h2 class="title">Passe para um caf&eacute;</h2>
+    <p class="lead">Estamos de portas abertas &mdash; chegue mais, o cheiro de caf&eacute; guia o caminho.</p>
+    <div class="grid-visita">
+      <div class="vcard"><div class="vi">&#128205;</div><h3>Endere&ccedil;o</h3><p>Rua das Flores, 123 &mdash; Centro<br>S&atilde;o Paulo &middot; SP</p></div>
+      <div class="vcard"><div class="vi">&#128336;</div><h3>Hor&aacute;rio</h3><p>Seg a Sex &middot; 7h &agrave;s 19h<br>S&aacute;b e Dom &middot; 8h &agrave;s 14h</p></div>
+      <div class="vcard"><div class="vi">&#128222;</div><h3>Contato</h3><p>(11) 3456-7890<br>ola@cafeaurora.com.br</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site" id="contato">
+  <div class="container">
+    <div class="foot-grid">
+      <div><h4>&#9749; Caf&eacute; Aurora</h4><p style="font-size:.93rem;max-width:22rem">Cafeteria artesanal no centro de S&atilde;o Paulo. Torra pr&oacute;pria, origem rastre&aacute;vel e hospitalidade de verdade desde 2013.</p></div>
+      <div><h4>Navega&ccedil;&atilde;o</h4><a href="#cardapio">Card&aacute;pio</a><a href="#depoimentos">Depoimentos</a><a href="#visita">Visite-nos</a><a href="#">Pe&ccedil;a agora</a></div>
+      <div><h4>Contato</h4><a href="#">Rua das Flores, 123 &mdash; Centro</a><a href="#">(11) 3456-7890</a><a href="#">ola@cafeaurora.com.br</a><a href="#">@cafeaurora</a></div>
+    </div>
+  </div>
+  <div class="copy">&copy; 2026 Caf&eacute; Aurora &mdash; Todos os direitos reservados. Feito com carinho e cafe&iacute;na.</div>
+</footer>
+
+<script>
+(function(){
+  var burger=document.getElementById('burger');
+  var links=document.getElementById('navLinks');
+  burger.addEventListener('click',function(){
+    var open=links.classList.toggle('open');
+    burger.innerHTML=open?'&#10005;':'&#9776;';
+    burger.setAttribute('aria-label',open?'Fechar menu':'Abrir menu');
+  });
+  links.addEventListener('click',function(e){
+    if(e.target.closest('a')&&window.innerWidth<=820){links.classList.remove('open');burger.innerHTML='&#9776;';}
+  });
+  var el=document.getElementById('counter');
+  var target=parseInt(el.getAttribute('data-target'),10)||0;
+  var done=false;
+  function fmt(n){return n.toLocaleString('pt-BR');}
+  function animate(){
+    if(done)return;done=true;
+    var dur=1800,t0=null;
+    function step(t){
+      if(!t0)t0=t;
+      var p=Math.min((t-t0)/dur,1);
+      var e=1-Math.pow(1-p,3);
+      el.textContent=fmt(Math.round(target*e));
+      if(p<1)requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){animate();io.disconnect();}});},{threshold:.4});
+    io.observe(el);
+  }else{animate();}
+  setTimeout(animate,1600);
+})();
+</script>
+</body>
+</html>

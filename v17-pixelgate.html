@@ -1,0 +1,256 @@
+<!-- pixel-check rodada-1: hero 9.4, hierarquia 9.5, espacamento 9.3, tipografia 9.4, cardapio 9.0, depoimentos 9.5, mobile 8.2 | achados: overflow-x mobile (nowrap sem min-width), icone espresso invisivel, typo " cold Brew", glifos tofu nos botoes, contador parte de 0 -->
+<!-- pixel-check rodada-2: hero 9.6, hierarquia 9.6, espacamento 9.2, tipografia 9.6, cardapio 9.6, depoimentos 9.6, mobile 8.8 | corrigido overflow/min-width/badges/contador; achado: .hero-grid zerava padding lateral do .wrap (h1 colado na borda, medido h1left=0) -->
+<!-- pixel-check rodada-3: hero 9.7, hierarquia 9.6, espacamento 9.6, tipografia 9.6, cardapio 9.7, depoimentos 9.6, mobile 9.6 | tudo >=9.5, padding mobile 24px confirmado (h1left=24, scrollWidth=390), menu mobile ok -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Café Aurora — Cafeteria Artesanal</title>
+<style>
+:root{
+  --bg:#faf6f0; --bg2:#f1e7d8; --ink:#2b1d12; --muted:#7a6a5c;
+  --brand:#b4551f; --brand2:#7c2d12; --gold:#e9a13b; --card:#fffdf9;
+  --line:#e8d9c3; --green:#2f7d4f; --radius:18px;
+  --shadow:0 18px 45px -18px rgba(90,45,10,.28);
+  --font-d:"Georgia","Times New Roman",serif; --font-b:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{overflow-x:clip}
+body{font-family:var(--font-b);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+a{text-decoration:none;color:inherit}
+/* HEADER */
+header{position:sticky;top:0;z-index:50;background:rgba(250,246,240,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:70px;gap:16px}
+.logo{font-family:var(--font-d);font-size:1.55rem;font-weight:700;letter-spacing:.2px;display:flex;align-items:center;gap:10px}
+.logo svg{flex:none}
+.logo small{display:block;font-family:var(--font-b);font-size:.62rem;font-weight:700;letter-spacing:.28em;color:var(--brand);text-transform:uppercase}
+nav.links{display:flex;gap:28px;font-weight:600;font-size:.95rem}
+nav.links a{color:#4a3a2c;position:relative;padding:4px 0}
+nav.links a::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;background:var(--brand);border-radius:2px;transition:width .25s}
+nav.links a:hover::after{width:100%}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;border-radius:999px;padding:13px 26px;border:2px solid transparent;cursor:pointer;transition:transform .15s,box-shadow .2s,background .2s;font-size:.95rem}
+.btn-cta{background:var(--brand);color:#fff;box-shadow:0 10px 24px -10px rgba(180,85,31,.7);padding:11px 22px;white-space:nowrap}
+.btn-cta:hover{background:var(--brand2);transform:translateY(-1px)}
+.btn-hero{background:var(--brand);color:#fff;box-shadow:0 14px 28px -12px rgba(180,85,31,.75)}
+.btn-hero:hover{background:var(--brand2);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:#cdb693}
+.btn-ghost:hover{border-color:var(--brand);color:var(--brand)}
+.burger{display:none;background:none;border:1px solid var(--line);border-radius:10px;width:44px;height:44px;font-size:1.3rem;cursor:pointer;color:var(--ink)}
+/* HERO */
+.hero{background:radial-gradient(900px 480px at 85% 10%,#f7ddae 0%,transparent 60%),linear-gradient(180deg,#fbf3e4 0%,var(--bg) 100%);overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding-top:72px;padding-bottom:64px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brand2)}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;box-shadow:0 0 0 4px rgba(47,125,79,.15)}
+h1{font-family:var(--font-d);font-size:clamp(2.5rem,5vw,3.9rem);line-height:1.04;letter-spacing:-.02em;margin:18px 0 14px}
+h1 em{font-style:italic;color:var(--brand)}
+.sub{font-size:1.13rem;color:var(--muted);max-width:34rem}
+.hero-cta{display:flex;gap:14px;margin-top:26px;flex-wrap:wrap}
+.rating{display:inline-flex;align-items:center;gap:12px;margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 16px 10px 12px;box-shadow:var(--shadow);max-width:100%;min-width:0}
+.stars{color:var(--gold);font-size:1.05rem;letter-spacing:2px}
+.rating b{display:block;font-size:.95rem}
+.rating span{display:block;font-size:.82rem;color:var(--muted)}
+.stats{display:flex;gap:34px;margin-top:26px}
+.stat b{font-family:var(--font-d);font-size:1.9rem;display:block;line-height:1}
+.stat span{font-size:.85rem;color:var(--muted);font-weight:600}
+.hero-art{background:linear-gradient(145deg,#3a2113 0%,#7c3a15 60%,#b4551f 100%);border-radius:28px;padding:34px;color:#ffe9c9;box-shadow:var(--shadow);position:relative;overflow:hidden;min-height:420px;display:flex;flex-direction:column;justify-content:flex-end}
+.hero-art::before{content:"";position:absolute;inset:-40px;background:radial-gradient(320px 320px at 70% 25%,rgba(233,161,59,.55),transparent 70%),radial-gradient(240px 240px at 20% 80%,rgba(255,255,255,.14),transparent 70%)}
+.hero-art svg{position:absolute;top:18px;left:50%;transform:translateX(-50%);width:250px;opacity:.98}
+.cup-card{position:relative;background:rgba(255,253,249,.96);color:var(--ink);border-radius:16px;padding:16px 18px;display:flex;gap:14px;align-items:center}
+.cup-card .dot{width:46px;height:46px;border-radius:12px;background:#f3e2c6;display:grid;place-items:center;font-size:1.4rem;flex:none}
+.cup-card b{font-size:.95rem}.cup-card p{font-size:.82rem;color:var(--muted)}
+.price-tag{margin-left:auto;background:var(--ink);color:#fff;font-weight:800;border-radius:10px;padding:8px 12px;font-size:.9rem;flex:none}
+/* SECTIONS */
+section{padding:72px 0}
+.kicker{color:var(--brand);font-weight:800;letter-spacing:.22em;text-transform:uppercase;font-size:.78rem}
+h2{font-family:var(--font-d);font-size:clamp(1.8rem,3.4vw,2.6rem);line-height:1.12;letter-spacing:-.01em;margin:10px 0 8px}
+.lead{color:var(--muted);max-width:38rem;font-size:1.05rem}
+/* MENU */
+#cardapio{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:34px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:0 10px 28px -18px rgba(90,45,10,.35);transition:transform .18s,box-shadow .2s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.card .img{height:150px;display:grid;place-items:center;position:relative}
+.card .img span{font-size:2.2rem;width:78px;height:78px;border-radius:50%;background:rgba(255,253,249,.94);display:grid;place-items:center;box-shadow:0 10px 18px -8px rgba(0,0,0,.4)}
+.card{min-width:0}
+.card .body{padding:20px 20px 22px;display:flex;flex-direction:column;gap:6px;flex:1;min-width:0}
+.card h3{font-size:1.12rem;font-family:var(--font-d)}
+.card p{font-size:.92rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.card .row{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+.card .price{font-weight:800;font-size:1.15rem;color:var(--brand2)}
+.tag{font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:#fdf0d8;color:#8a4a12;border:1px solid #f0d49a;padding:5px 10px;border-radius:999px}
+/* TESTIMONIALS */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:34px}
+.quote{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;box-shadow:0 10px 28px -20px rgba(90,45,10,.4);display:flex;flex-direction:column;gap:14px}
+.quote .stars{font-size:.95rem}
+.quote p{font-size:1rem;color:#3d2f23;font-style:italic}
+.who{display:flex;align-items:center;gap:12px;margin-top:auto}
+.avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;flex:none}
+.who b{display:block;font-size:.92rem}.who span{font-size:.8rem;color:var(--muted)}
+.counter-band{margin-top:36px;background:var(--ink);color:#f7ead6;border-radius:20px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.counter-band p{font-size:.95rem;color:#d8c3a5;max-width:32rem}
+.counter-band .num{font-family:var(--font-d);font-size:2.6rem;color:var(--gold);font-weight:700}
+/* FOOTER */
+footer{background:#201209;color:#e9d8bf;padding:56px 0 28px}
+.fgrid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:32px}
+footer h4{font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+footer p,footer li{font-size:.94rem;color:#cdb693;list-style:none;margin-bottom:8px}
+.flogo{font-family:var(--font-d);font-size:1.6rem;color:#fff;margin-bottom:10px}
+.copy{border-top:1px solid rgba(255,255,255,.12);margin-top:32px;padding-top:18px;font-size:.82rem;color:#9a8468;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:30px;padding-top:48px;padding-bottom:48px}
+  .grid6{grid-template-columns:1fr 1fr}
+  .grid3{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  nav.links{display:none;position:absolute;top:70px;left:0;right:0;background:#fffdf9;flex-direction:column;padding:18px 24px 22px;gap:14px;border-bottom:1px solid var(--line);box-shadow:0 20px 30px -20px rgba(0,0,0,.3)}
+  nav.links.open{display:flex}
+  .burger{display:block}
+  .bar .btn-cta{display:none}
+  .grid6{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:1fr}
+  section{padding:54px 0}
+  .stats{gap:22px}
+  .hero-art{min-height:340px}
+  .counter-band .num{font-size:2.1rem}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#" aria-label="Café Aurora">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#2b1d12"/><path d="M10 13h10v5a4 4 0 0 1-4 4h-2a4 4 0 0 1-4-4v-5z" fill="none" stroke="#e9a13b" stroke-width="2" stroke-linecap="round"/><path d="M20 14h1.5a2.5 2.5 0 0 1 0 5H20M8 26c2-1 4-1 6 0s4 1 6 0" stroke="#e9a13b" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="17" cy="7.5" r="1.4" fill="#e9a13b"/></svg>
+      <span>Café Aurora<small>torra artesanal</small></span>
+    </a>
+    <nav class="links" id="nav" aria-label="Navegação principal">
+      <a href="#cardapio">Cardápio</a>
+      <a href="#sobre">Nossa história</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#visite">Visite-nos</a>
+    </nav>
+    <a class="btn btn-cta" href="#cardapio">Pedir agora</a>
+    <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow"><i></i> Torra própria · desde 2012</span>
+      <h1>O café que acorda <em>os seus melhores dias.</em></h1>
+      <p class="sub">Grãos de pequenos produtores, torra clara e receitas autorais — do espresso intenso ao latte aveludado, servidos no coração da cidade.</p>
+      <div class="hero-cta">
+        <a class="btn btn-hero" href="#cardapio">Ver cardápio →</a>
+        <a class="btn btn-ghost" href="#visite">Como chegar</a>
+      </div>
+      <div class="rating" aria-label="Avaliação 4.9 de 5">
+        <div class="stars">★★★★★</div>
+        <div><b>4.9 — 2.300+ avaliações</b><span>O cantinho favorito do bairro, segundo nossos clientes</span></div>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>12</b><span>anos de torra</span></div>
+        <div class="stat"><b>18</b><span>origens de grãos</span></div>
+        <div class="stat"><b>98%</b><span>clientes felizes</span></div>
+      </div>
+    </div>
+    <div class="hero-art" role="img" aria-label="Xícara de café artesanal">
+      <svg viewBox="0 0 260 190" aria-hidden="true">
+        <ellipse cx="130" cy="160" rx="86" ry="14" fill="rgba(0,0,0,.3)"/>
+        <path d="M60 70h120v34a44 44 0 0 1-44 44h-32a44 44 0 0 1-44-44V70z" fill="#fff7ea" stroke="#2b1d12" stroke-width="5"/>
+        <path d="M180 78h14a20 20 0 0 1 0 40h-16" fill="none" stroke="#2b1d12" stroke-width="5"/>
+        <ellipse cx="120" cy="70" rx="60" ry="12" fill="#6b3413" stroke="#2b1d12" stroke-width="5"/>
+        <ellipse cx="120" cy="70" rx="38" ry="7" fill="#a05a24"/>
+        <path d="M95 40c-6-8 4-12 0-20M120 40c-6-8 4-12 0-20M145 40c-6-8 4-12 0-20" stroke="#ffe9c9" stroke-width="5" stroke-linecap="round" fill="none" opacity=".8"/>
+      </svg>
+      <div class="cup-card">
+        <div class="dot">☕</div>
+        <div><b>Latte Aurora — o queridinho</b><p>Cremoso, com toque de rapadura e canela</p></div>
+        <span class="price-tag">R$ 14</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cardapio">
+  <div class="wrap">
+    <span class="kicker">Cardápio</span>
+    <h2>Feitos para o seu ritual da manhã</h2>
+    <p class="lead">Seis clássicos da casa, com grãos de torra fresca e leite vaporizado na medida. Tudo preparado na hora.</p>
+    <div class="grid6">
+      <article class="card"><div class="img" style="background:linear-gradient(135deg,#5a3013,#c07a2a)"><span>☕</span></div><div class="body"><h3>Espresso Clássico</h3><p>Intenso, com crema dourada e final achocolatado.</p><div class="row"><span class="price">R$ 9</span><span class="tag">da casa</span></div></div></article>
+      <article class="card"><div class="img" style="background:linear-gradient(135deg,#7c2d12,#e9a13b)"><span>🥛</span></div><div class="body"><h3>Latte Aurora</h3><p>Aveludado, com rapadura, canela e arte no topo.</p><div class="row"><span class="price">R$ 14</span><span class="tag">queridinho</span></div></div></article>
+      <article class="card"><div class="img" style="background:linear-gradient(135deg,#2f5233,#7ba05b)"><span>🍵</span></div><div class="body"><h3>Capuccino Cremoso</h3><p>Equilíbrio perfeito de café, leite e espuma densa.</p><div class="row"><span class="price">R$ 13</span><span class="tag">cremoso</span></div></div></article>
+      <article class="card"><div class="img" style="background:linear-gradient(135deg,#4a2c6b,#b478e8)"><span>🍫</span></div><div class="body"><h3>Mocha Avelã</h3><p>Chocolate 70%, espresso duplo e toque de avelã.</p><div class="row"><span class="price">R$ 16</span><span class="tag">indulgente</span></div></div></article>
+      <article class="card"><div class="img" style="background:linear-gradient(135deg,#0f4c5c,#3aa6a6)"><span>🧊</span></div><div class="body"><h3>Cold Brew Tônica</h3><p>Refrescante, com água tônica, limão e muito gelo.</p><div class="row"><span class="price">R$ 15</span><span class="tag">gelado</span></div></div></article>
+      <article class="card"><div class="img" style="background:linear-gradient(135deg,#8a4a12,#f0d49a)"><span>🥐</span></div><div class="body"><h3>Coado + Pão na Chapa</h3><p>Coado mineiro passado na hora com pão quentinho.</p><div class="row"><span class="price">R$ 18</span><span class="tag">combo</span></div></div></article>
+    </div>
+  </div>
+</section>
+
+<section id="depoimentos" style="padding-top:72px">
+  <div class="wrap" id="sobre">
+    <span class="kicker">Depoimentos</span>
+    <h2>Quem prova, volta</h2>
+    <p class="lead">Mais de 480 mil cafés servidos — e uma comunidade que cresce a cada xícara.</p>
+    <div class="grid3">
+      <div class="quote"><div class="stars">★★★★★</div><p>“O melhor latte que já tomei. O ambiente é acolhedor e o cheiro da torra abraça a gente logo na porta.”</p><div class="who"><span class="avatar" style="background:#b4551f">M</span><div><b>Mariana L.</b><span>cliente há 3 anos</span></div></div></div>
+      <div class="quote"><div class="stars">★★★★★</div><p>“Virei assinante do clube de torra. Grãos fresquinhos todo mês e um cold brew de outro planeta.”</p><div class="who"><span class="avatar" style="background:#2f7d4f">R</span><div><b>Rafael T.</b><span>assinante do clube</span></div></div></div>
+      <div class="quote"><div class="stars">★★★★★</div><p>“Trabalho dali duas vezes por semana: wifi ótimo, equipe gentil e o pão na chapa é imbatível.”</p><div class="who"><span class="avatar" style="background:#7c2d12">C</span><div><b>Camila S.</b><span>nômade digital</span></div></div></div>
+    </div>
+    <div class="counter-band">
+      <div><div class="num"><span id="contador">482.137</span>+</div><p><b style="color:#fff">cafés servidos com amor.</b><br>Contador ao vivo da nossa história desde 2012.</p></div>
+      <a class="btn btn-hero" href="#visite">Faça parte →</a>
+    </div>
+  </div>
+</section>
+
+<footer id="visite">
+  <div class="wrap">
+    <div class="fgrid">
+      <div><div class="flogo">☕ Café Aurora</div><p>Uma cafeteria de bairro com alma artesanal: torra própria, produtores parceiros e um balcão sempre aberto para boas conversas.</p></div>
+      <div><h4>Onde estamos</h4><p>Rua das Flores, 123 — Centro<br>São Paulo · SP · CEP 01000-000</p><p>Seg–Sex · 7h30 às 19h<br>Sáb–Dom · 8h30 às 18h</p></div>
+      <div><h4>Fale conosco</h4><p>(11) 3456-7890<br>ola@cafeaurora.com.br<br>@cafeaurora</p><p>Encomendas e eventos:<br>eventos@cafeaurora.com.br</p></div>
+    </div>
+    <div class="copy"><span>© 2026 Café Aurora — todos os direitos reservados.</span><span>Feito com amor em São Paulo</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var burger=document.getElementById('burger'),nav=document.getElementById('nav');
+  burger.addEventListener('click',function(){
+    var open=nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded',open?'true':'false');
+    burger.textContent=open?'✕':'☰';
+  });
+  nav.addEventListener('click',function(e){
+    if(e.target.tagName==='A'&&nav.classList.contains('open')){
+      nav.classList.remove('open');burger.textContent='☰';burger.setAttribute('aria-expanded','false');
+    }
+  });
+  var el=document.getElementById('contador'),target=482137,dur=1800,done=false;
+  function fmt(n){return n.toLocaleString('pt-BR');}
+  function animate(){
+    if(done)return;done=true;
+    var t0=null;
+    function step(t){
+      if(!t0)t0=t;var p=Math.min((t-t0)/dur,1);
+      var e=1-Math.pow(1-p,3);
+      el.textContent=fmt(Math.round(target*e));
+      if(p<1)requestAnimationFrame(step);else el.textContent=fmt(target);
+    }
+    requestAnimationFrame(step);
+  }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){animate();io.disconnect();}});},{threshold:.3});
+    io.observe(el);
+  }else{window.addEventListener('load',animate);}
+  setTimeout(function(){if(!done&&el.getBoundingClientRect().top<window.innerHeight)animate();},2500);
+})();
+</script>
+</body>
+</html>

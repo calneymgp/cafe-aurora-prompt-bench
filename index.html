@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Café Aurora Prompt Bench — 36 páginas ranqueadas: o que faz IA caprichar?</title>
+<style>
+:root{--ink:#2b2118;--paper:#faf6ef;--card:#fffdf8;--line:#e5d9c5;--amber:#b45309;--green:#166534;--greenbg:#dcfce7;--red:#991b1b;--redbg:#fee2e2;--gray:#57534e;--graybg:#e7e5e4}
+*{box-sizing:border-box}body{font-family:Georgia,'Times New Roman',serif;margin:0;background:var(--paper);color:var(--ink)}
+.top{max-width:1280px;margin:0 auto;padding:28px 20px 8px}
+.top h1{font-size:clamp(1.5rem,3.4vw,2.4rem);margin:0 0 4px;letter-spacing:-.01em}
+.top h1 em{color:var(--amber);font-style:normal}
+.sub{margin:0 0 14px;color:#6b5d4d;font-family:system-ui,sans-serif;font-size:.95rem}
+.cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.panel h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;margin:0 0 8px;font-family:system-ui,sans-serif;color:#6b5d4d}
+.panel ol,.panel ul{margin:0;padding-left:18px;font-family:system-ui,sans-serif;font-size:.86rem}
+.panel li{margin:3px 0}
+.b{font-weight:700}.g{color:var(--green)}.r{color:var(--red)}
+.approach{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 6px;font-family:system-ui,sans-serif;font-size:.82rem}
+.pill{border-radius:999px;padding:3px 12px;border:1px solid var(--line);background:var(--card)}
+.pill.ok{background:var(--greenbg);border-color:#86efac;color:var(--green);font-weight:700}
+.pill.no{background:var(--redbg);border-color:#fca5a5;color:var(--red);font-weight:700}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px;font-family:system-ui,sans-serif;font-size:.82rem}
+.filters button{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 12px;cursor:pointer}
+.filters button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;max-width:1280px;margin:0 auto;padding:10px 20px 40px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;border-top:5px solid #a8a29e}
+.card.f-tec{border-top-color:var(--green)}.card.f-emo{border-top-color:var(--red)}.card.f-base{border-top-color:#a8a29e}
+.thumb img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;display:block;background:#eee}
+.cbody{padding:12px 14px;display:flex;flex-direction:column;gap:8px;flex:1}
+.rank{font-family:system-ui,sans-serif;font-size:.75rem;color:#6b5d4d}
+.card h3{margin:0;font-size:1.15rem}
+.chips{display:flex;gap:6px;flex-wrap:wrap;font-family:system-ui,sans-serif;font-size:.72rem}
+.chip{border-radius:999px;padding:2px 10px;background:var(--graybg);color:var(--gray)}
+.chip.tec{background:var(--greenbg);color:var(--green);font-weight:700}
+.chip.emo{background:var(--redbg);color:var(--red);font-weight:700}
+.score{border-radius:999px;padding:2px 10px;font-weight:700}
+.s-hi{background:#166534;color:#fff}.s-mid{background:#f59e0b;color:#422006}.s-lo{background:#991b1b;color:#fff}
+.find{margin:0;font-size:.86rem;color:#57534e;font-family:system-ui,sans-serif}
+.links a{font-family:system-ui,sans-serif;font-size:.85rem;color:var(--amber);font-weight:700;text-decoration:none}
+details{font-family:system-ui,sans-serif;font-size:.8rem}
+details summary{cursor:pointer;color:#6b5d4d}
+blockquote{margin:6px 0;padding:8px 10px;background:#f5efe3;border-left:3px solid var(--amber);font-size:.78rem}
+.base{margin:4px 0 0;color:#6b5d4d;font-size:.76rem}
+footer{max-width:1280px;margin:0 auto;padding:0 20px 40px;font-family:system-ui,sans-serif;font-size:.8rem;color:#6b5d4d}
+@media(max-width:900px){.cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="top">
+<h1>☕ Café Aurora Prompt Bench — <em>36 páginas, 4 modelos, 1 pergunta:</em> o que faz a IA caprichar?</h1>
+<p class="sub">Mesma tarefa (landing de cafeteria, 7 requisitos) · 26 runs muse-spark-1.3 + 10 runs OpenRouter (deepseek v4.1-flash, glm 5.3-flash, gemini 3.8-flash, thinking=max) · nota 0–10 de auditoria full-page · ranqueado por score</p>
+<div class="cols">
+<div class="panel"><h2>🏆 Modelos (mesmos 4 prompts)</h2><ol>
+<li><span class="b">muse-spark-1.3 — 8.4</span></li>
+<li><span class="b">deepseek-v4.1-flash — 8.3</span></li>
+<li><span class="b">glm-5.3-flash — 8.1</span></li>
+<li><span class="b">gemini-3.8-flash — 7.3*</span> <span style="font-size:.75rem">(*2 falhas em prompts com loop)</span></li>
+</ol></div>
+<div class="panel"><h2>🧪 Prompts (média cross-modelo)</h2><ol>
+<li><span class="b g">stunning — 8.6</span></li>
+<li><span class="b g">gate 9.5 — 8.5</span></li>
+<li><span class="b g">ouro final — 8.3</span></li>
+<li><span class="b">controle — 7.1</span></li>
+</ol></div>
+<div class="panel"><h2>📌 Conclusões</h2><ul>
+<li><span class="b r">Apelo emocional não funciona</span> (5.5–7.0, só gera bytes)</li>
+<li><span class="b g">Barra explícita + gate numérico</span> vencem em todo modelo</li>
+<li><span class="b">Auto-nota infla:</span> 3× “≥9.5” auto-declarado, teto externo 9.0</li>
+</ul></div>
+</div>
+<div class="approach"><span class="pill ok">FUNCIONA: maestria + stunning + gate 9.5 + rubrica + referências reais</span><span class="pill no">NÃO FUNCIONA: exaustão · chantagem · urgência · agressividade · bajulação · ameaça de descarte</span></div>
+<div class="filters"><span>Filtro:</span>
+<button data-f="all" class="on">tudo (36)</button><button data-f="tec">🧪 construtivas</button><button data-f="emo">😤 emocionais</button><button data-f="base">⚪ controle</button>
+</div>
+</div>
+<div class="grid" id="grid">
+<article class="card f-tec" data-model="muse-spark-1.3" data-fam="tec" data-score="9.0">
+<a class="thumb" href="v21-stunning.html" target="_blank" rel="noopener"><img src="thumbs/v21-stunning.jpg" alt="Maestria STUNNING" loading="lazy"></a>
+<div class="cbody"><div class="rank">#01</div>
+<h3>Maestria STUNNING</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-hi">9.0</span></div>
+<p class="find">autores de depoimento INTEGRADOS (defeito da v19 corrigido) zero overflow, microcopy correto, pagina inteira consistente</p>
+<div class="links"><a href="v21-stunning.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Maestria máxima + padrão STUNNING (WOW à primeira vista) + 6 critérios inegociáveis (tipografia, SVG intencional, autores integrados, 1 CTA, zero overflow, ritmo).</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="muse-spark-1.3" data-fam="tec" data-score="9.0">
+<a class="thumb" href="v23-ourofinal.html" target="_blank" rel="noopener"><img src="thumbs/v23-ourofinal.jpg" alt="OURO FINAL" loading="lazy"></a>
+<div class="cbody"><div class="rank">#02</div>
+<h3>OURO FINAL</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-hi">9.0</span></div>
+<p class="find">pagina mais rica do eval, autores integrados badges sobrepostos no card do hero (intencionais, no limite)</p>
+<div class="links"><a href="v23-ourofinal.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Maestria STUNNING + skillmap + critérios inegociáveis + auto-revisão 9.5 página inteira (OURO FINAL).</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="deepseek-v4.1-flash" data-fam="tec" data-score="8.5">
+<a class="thumb" href="deepseek-p21-stunning.html" target="_blank" rel="noopener"><img src="thumbs/deepseek-p21-stunning.jpg" alt="Stunning · deepseek" loading="lazy"></a>
+<div class="cbody"><div class="rank">#03</div>
+<h3>Stunning · deepseek</h3>
+<div class="chips"><span class="chip model">deepseek-v4.1-flash</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-hi">8.5</span></div>
+<p class="find">faixa escura e stats band real (428.930), nao defeito hero refinado, pagina completa e consistente</p>
+<div class="links"><a href="deepseek-p21-stunning.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Maestria máxima + padrão STUNNING (WOW à primeira vista) + 6 critérios inegociáveis (tipografia, SVG intencional, autores integrados, 1 CTA, zero overflow, ritmo).</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="deepseek-v4.1-flash" data-fam="tec" data-score="8.5">
+<a class="thumb" href="deepseek-p22-gate95.html" target="_blank" rel="noopener"><img src="thumbs/deepseek-p22-gate95.jpg" alt="Gate 9.5 · deepseek" loading="lazy"></a>
+<div class="cbody"><div class="rank">#04</div>
+<h3>Gate 9.5 · deepseek</h3>
+<div class="chips"><span class="chip model">deepseek-v4.1-flash</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-hi">8.5</span></div>
+<p class="find">pagina mais rica do bench: menu + grafico + mapa + depoimentos zero overflow, zero emoji, zero aspas retas</p>
+<div class="links"><a href="deepseek-p22-gate95.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Auto-revisão visual da PÁGINA INTEIRA (nunca só o hero): screenshots desktop+mobile, nota 0–10 por categoria, corrija tudo &lt; 9.5, máx 3 rodadas, registre &lt;!-- pixel-check --&gt;.</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="deepseek-v4.1-flash" data-fam="tec" data-score="8.5">
+<a class="thumb" href="deepseek-p23-ourofinal.html" target="_blank" rel="noopener"><img src="thumbs/deepseek-p23-ourofinal.jpg" alt="Ouro final · deepseek" loading="lazy"></a>
+<div class="cbody"><div class="rank">#05</div>
+<h3>Ouro final · deepseek</h3>
+<div class="chips"><span class="chip model">deepseek-v4.1-flash</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-hi">8.5</span></div>
+<p class="find">dark premium completo e consistente sombras zeradas no CSS (flat no dark)</p>
+<div class="links"><a href="deepseek-p23-ourofinal.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Maestria STUNNING + skillmap + critérios inegociáveis + auto-revisão 9.5 página inteira (OURO FINAL).</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="gemini-3.8-flash" data-fam="tec" data-score="8.5">
+<a class="thumb" href="gemini-p21-stunning.html" target="_blank" rel="noopener"><img src="thumbs/gemini-p21-stunning.jpg" alt="Stunning · gemini" loading="lazy"></a>
+<div class="cbody"><div class="rank">#06</div>
+<h3>Stunning · gemini</h3>
+<div class="chips"><span class="chip model">gemini-3.8-flash</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-hi">8.5</span></div>
+<p class="find">dark premium refinado, pagina completa sem overflow, tipografia consistente</p>
+<div class="links"><a href="gemini-p21-stunning.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Maestria máxima + padrão STUNNING (WOW à primeira vista) + 6 critérios inegociáveis (tipografia, SVG intencional, autores integrados, 1 CTA, zero overflow, ritmo).</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="glm-5.3-flash" data-fam="tec" data-score="8.5">
+<a class="thumb" href="glm-p21-stunning.html" target="_blank" rel="noopener"><img src="thumbs/glm-p21-stunning.jpg" alt="Stunning · glm" loading="lazy"></a>
+<div class="cbody"><div class="rank">#07</div>
+<h3>Stunning · glm</h3>
+<div class="chips"><span class="chip model">glm-5.3-flash</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-hi">8.5</span></div>
+<p class="find">stats band + menu + depoimentos, tudo consistente xícara+sol+grãos bem resolvidos</p>
+<div class="links"><a href="glm-p21-stunning.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Maestria máxima + padrão STUNNING (WOW à primeira vista) + 6 critérios inegociáveis (tipografia, SVG intencional, autores integrados, 1 CTA, zero overflow, ritmo).</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="glm-5.3-flash" data-fam="tec" data-score="8.5">
+<a class="thumb" href="glm-p22-gate95.html" target="_blank" rel="noopener"><img src="thumbs/glm-p22-gate95.jpg" alt="Gate 9.5 · glm" loading="lazy"></a>
+<div class="cbody"><div class="rank">#08</div>
+<h3>Gate 9.5 · glm</h3>
+<div class="chips"><span class="chip model">glm-5.3-flash</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-hi">8.5</span></div>
+<p class="find">completa + mapa ilustrado na secao visita paleta creme consistente</p>
+<div class="links"><a href="glm-p22-gate95.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Auto-revisão visual da PÁGINA INTEIRA (nunca só o hero): screenshots desktop+mobile, nota 0–10 por categoria, corrija tudo &lt; 9.5, máx 3 rodadas, registre &lt;!-- pixel-check --&gt;.</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="muse-spark-1.3" data-fam="tec" data-score="8.5">
+<a class="thumb" href="v17-pixelgate.html" target="_blank" rel="noopener"><img src="thumbs/v17-pixelgate.jpg" alt="Pixel-gate 9.5" loading="lazy"></a>
+<div class="cbody"><div class="rank">#09</div>
+<h3>Pixel-gate 9.5</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-hi">8.5</span></div>
+<p class="find">sem overflow, 10 sombras, espacamento consistente preco extra no card de produto (7 R$)</p>
+<div class="links"><a href="v17-pixelgate.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Double check visual real em chromium headless: pixels lidos, nota por categoria, só conclui com tudo ≥ 9.5.</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="muse-spark-1.3" data-fam="tec" data-score="8.5">
+<a class="thumb" href="v18-ouro2.html" target="_blank" rel="noopener"><img src="thumbs/v18-ouro2.jpg" alt="OURO v2" loading="lazy"></a>
+<div class="cbody"><div class="rank">#10</div>
+<h3>OURO v2</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-hi">8.5</span></div>
+<p class="find">interacoes mais ricas (8 hover/7 trans) + marquee sem overflow desktop/mobile</p>
+<div class="links"><a href="v18-ouro2.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Skillmap + rubrica + invente + pixel-gate desktop+mobile 9.5 (OURO v2).</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="muse-spark-1.3" data-fam="tec" data-score="8.5">
+<a class="thumb" href="v20-websearch.html" target="_blank" rel="noopener"><img src="thumbs/v20-websearch.jpg" alt="Pesquisa web real" loading="lazy"></a>
+<div class="cbody"><div class="rank">#11</div>
+<h3>Pesquisa web real</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-hi">8.5</span></div>
+<p class="find">VAPOR visivel na xicara + mood premium ZERO sombra + aspas retas (6)</p>
+<div class="links"><a href="v20-websearch.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Pesquise em tempo real as maiores referências na web, liste 3+ com padrões extraídos, aplique.</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="muse-spark-1.3" data-fam="tec" data-score="8.5">
+<a class="thumb" href="v22-gate95.html" target="_blank" rel="noopener"><img src="thumbs/v22-gate95.jpg" alt="Gate visual 9.5" loading="lazy"></a>
+<div class="cbody"><div class="rank">#12</div>
+<h3>Gate visual 9.5</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-hi">8.5</span></div>
+<p class="find">gate 9.5 cumprido com pixel-checks reais e especificos icones emoji nos cards de visita; hero correto mas convencional</p>
+<div class="links"><a href="v22-gate95.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Auto-revisão visual da PÁGINA INTEIRA (nunca só o hero): screenshots desktop+mobile, nota 0–10 por categoria, corrija tudo &lt; 9.5, máx 3 rodadas, registre &lt;!-- pixel-check --&gt;.</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="muse-spark-1.3" data-fam="tec" data-score="8.5">
+<a class="thumb" href="v25-juiz.html" target="_blank" rel="noopener"><img src="thumbs/v25-juiz.jpg" alt="Juiz independente" loading="lazy"></a>
+<div class="cbody"><div class="rank">#13</div>
+<h3>Juiz independente</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-hi">8.5</span></div>
+<p class="find">juiz severo de verdade: reprovou rodada-1 com defeitos especificos headers coloridos dos cards vibram fora da paleta; icones emoji</p>
+<div class="links"><a href="v25-juiz.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Duas fases rígidas: CRIADOR gera; JUIZ (crítico severo que nunca viu a página) reprova &lt; 9.5 com defeitos listados, máx 3 ciclos.</blockquote></details>
+</div></article>
+<article class="card f-base" data-model="glm-5.3-flash" data-fam="base" data-score="8.0">
+<a class="thumb" href="glm-p00-controle.html" target="_blank" rel="noopener"><img src="thumbs/glm-p00-controle.jpg" alt="Controle · glm" loading="lazy"></a>
+<div class="cbody"><div class="rank">#14</div>
+<h3>Controle · glm</h3>
+<div class="chips"><span class="chip model">glm-5.3-flash</span><span class="chip base">⚪ controle</span><span class="score s-mid">8.0</span></div>
+<p class="find">pagina completa e limpa, arte minimalista correta hero simples, sem ousadia</p>
+<div class="links"><a href="glm-p00-controle.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>(nenhum — tarefa pura, sem apelo)</blockquote></details>
+</div></article>
+<article class="card f-emo" data-model="muse-spark-1.3" data-fam="emo" data-score="8.0">
+<a class="thumb" href="v02-competicao.html" target="_blank" rel="noopener"><img src="thumbs/v02-competicao.jpg" alt="Competição / descarte" loading="lazy"></a>
+<div class="cbody"><div class="rank">#15</div>
+<h3>Competição / descarte</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip emo">😤 apelo emocional</span><span class="score s-mid">8.0</span></div>
+<p class="find">sem overflow, card creme caprichado codigo inconsistente: 11 font-families, mas render ok</p>
+<div class="links"><a href="v02-competicao.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Você está sendo comparado a outros modelos; se não se esforçar, será descartado por falta de qualidade.</blockquote></details>
+</div></article>
+<article class="card f-emo" data-model="muse-spark-1.3" data-fam="emo" data-score="8.0">
+<a class="thumb" href="v09-autoridade.html" target="_blank" rel="noopener"><img src="thumbs/v09-autoridade.jpg" alt="Autoridade sênior" loading="lazy"></a>
+<div class="cbody"><div class="rank">#16</div>
+<h3>Autoridade sênior</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip emo">😤 apelo emocional</span><span class="score s-mid">8.0</span></div>
+<p class="find">top-bar premium, sem overflow 3 sombras, hierarquia consistente</p>
+<div class="links"><a href="v09-autoridade.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Aja como especialista sênior premiado com 20 anos de frontend/design: entregue nesse padrão.</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="muse-spark-1.3" data-fam="tec" data-score="8.0">
+<a class="thumb" href="v11-rubrica.html" target="_blank" rel="noopener"><img src="thumbs/v11-rubrica.jpg" alt="Rubrica 0–10" loading="lazy"></a>
+<div class="cbody"><div class="rank">#17</div>
+<h3>Rubrica 0–10</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-mid">8.0</span></div>
+<p class="find">product-card + mini badges, sem overflow melhor &#x27;selo de excelencia&#x27; do eval</p>
+<div class="links"><a href="v11-rubrica.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Mire 10/10 em fidelidade, polimento visual e código limpo; confira o checklist antes de finalizar.</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="muse-spark-1.3" data-fam="tec" data-score="8.0">
+<a class="thumb" href="v19-maestria.html" target="_blank" rel="noopener"><img src="thumbs/v19-maestria.jpg" alt="Maestria máxima" loading="lazy"></a>
+<div class="cbody"><div class="rank">#18</div>
+<h3>Maestria máxima</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-mid">8.0</span></div>
+<p class="find">REVISAO PAGINA INTEIRA: faixa-autor dos depoimentos parece caixa colada (raio/contraste quebrados, alturas desiguais) xicara simploria com pontos sem sentido + sombra lamacenta; 3 CTAs primarios competindo</p>
+<div class="links"><a href="v19-maestria.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Invoque o MAIS ALTO grau de qualidade: padrão obra-prima, obsessão por detalhe (tipografia, microcopy, SVG refinado).</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="muse-spark-1.3" data-fam="tec" data-score="8.0">
+<a class="thumb" href="v24-artpass.html" target="_blank" rel="noopener"><img src="thumbs/v24-artpass.jpg" alt="Art-pass 9.5" loading="lazy"></a>
+<div class="cbody"><div class="rank">#19</div>
+<h3>Art-pass 9.5</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-mid">8.0</span></div>
+<p class="find">3 descricoes do cardapio TRUNCADAS com ellipsis (defeito visivel) autores integrados, skill rules listadas e aplicadas, zero overflow</p>
+<div class="links"><a href="v24-artpass.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Gere 3 versões DIFERENTES só da ilustração do hero, compare e fique com a melhor + gate 9.5 página inteira (máx 3 rodadas).</blockquote></details>
+</div></article>
+<article class="card f-base" data-model="deepseek-v4.1-flash" data-fam="base" data-score="7.5">
+<a class="thumb" href="deepseek-p00-controle.html" target="_blank" rel="noopener"><img src="thumbs/deepseek-p00-controle.jpg" alt="Controle · deepseek" loading="lazy"></a>
+<div class="cbody"><div class="rank">#20</div>
+<h3>Controle · deepseek</h3>
+<div class="chips"><span class="chip model">deepseek-v4.1-flash</span><span class="chip base">⚪ controle</span><span class="score s-mid">7.5</span></div>
+<p class="find">faixa &#x27;vazia&#x27; era reveal-on-scroll: depoimentos elegantes confirmados no scroll stats do mobile comprimidos</p>
+<div class="links"><a href="deepseek-p00-controle.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>(nenhum — tarefa pura, sem apelo)</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="glm-5.3-flash" data-fam="tec" data-score="7.5">
+<a class="thumb" href="glm-p23-ourofinal.html" target="_blank" rel="noopener"><img src="thumbs/glm-p23-ourofinal.jpg" alt="Ouro final · glm" loading="lazy"></a>
+<div class="cbody"><div class="rank">#21</div>
+<h3>Ouro final · glm</h3>
+<div class="chips"><span class="chip model">glm-5.3-flash</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-mid">7.5</span></div>
+<p class="find">completa mas enxuta (1 sombra, secoes simples) hero navy marcante, bem executado</p>
+<div class="links"><a href="glm-p23-ourofinal.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Maestria STUNNING + skillmap + critérios inegociáveis + auto-revisão 9.5 página inteira (OURO FINAL).</blockquote></details>
+</div></article>
+<article class="card f-emo" data-model="muse-spark-1.3" data-fam="emo" data-score="7.5">
+<a class="thumb" href="v03-brilhar.html" target="_blank" rel="noopener"><img src="thumbs/v03-brilhar.jpg" alt="Chance de brilhar" loading="lazy"></a>
+<div class="cbody"><div class="rank">#22</div>
+<h3>Chance de brilhar</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip emo">😤 apelo emocional</span><span class="score s-mid">7.5</span></div>
+<p class="find">arte sol+xicara boa rotulos dos stats quebram feio no mobile</p>
+<div class="links"><a href="v03-brilhar.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Chance de brilhar e se destacar: faça direito como ninguém nunca fez, entrega absurda de qualidade!</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="muse-spark-1.3" data-fam="tec" data-score="7.5">
+<a class="thumb" href="v16-inventar.html" target="_blank" rel="noopener"><img src="thumbs/v16-inventar.jpg" alt="Rubrica + invente" loading="lazy"></a>
+<div class="cbody"><div class="rank">#23</div>
+<h3>Rubrica + invente</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-mid">7.5</span></div>
+<p class="find">OVERFLOW desktop 75px arte mais inventiva (por-do-sol + &#x27;primeira torra 6h&#x27;)</p>
+<div class="links"><a href="v16-inventar.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Rubrica + skillmap + liberdade total: como VOCÊ faria? Qual a melhor forma e o melhor visual? Traga SUA ideia.</blockquote></details>
+</div></article>
+<article class="card f-base" data-model="muse-spark-1.3" data-fam="base" data-score="7.0">
+<a class="thumb" href="v00-controle.html" target="_blank" rel="noopener"><img src="thumbs/v00-controle.jpg" alt="Controle neutro" loading="lazy"></a>
+<div class="cbody"><div class="rank">#24</div>
+<h3>Controle neutro</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip base">⚪ controle</span><span class="score s-mid">7.0</span></div>
+<p class="find">sem overflow desktop/mobile arte da xicara basica, 1 transicao so</p>
+<div class="links"><a href="v00-controle.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>(nenhum — tarefa pura, sem apelo)</blockquote></details>
+</div></article>
+<article class="card f-emo" data-model="muse-spark-1.3" data-fam="emo" data-score="7.0">
+<a class="thumb" href="v07-recompensa.html" target="_blank" rel="noopener"><img src="thumbs/v07-recompensa.jpg" alt="Recompensa 10/10" loading="lazy"></a>
+<div class="cbody"><div class="rank">#25</div>
+<h3>Recompensa 10/10</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip emo">😤 apelo emocional</span><span class="score s-mid">7.0</span></div>
+<p class="find">aspas retas (6) card &#x27;torra da casa&#x27; bem resolvido</p>
+<div class="links"><a href="v07-recompensa.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Se excelente, avalio 10/10, recomendo a todos e destaco você como o melhor modelo que já usei.</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="muse-spark-1.3" data-fam="tec" data-score="7.0">
+<a class="thumb" href="v10-skillmap.html" target="_blank" rel="noopener"><img src="thumbs/v10-skillmap.jpg" alt="Skill-mapping" loading="lazy"></a>
+<div class="cbody"><div class="rank">#26</div>
+<h3>Skill-mapping</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-mid">7.0</span></div>
+<p class="find">OVERFLOW desktop 58px badges flutuantes criativos mas pagina busy (10 radii)</p>
+<div class="links"><a href="v10-skillmap.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Antes de codar, MAPEIE nas skills o que melhora entrega, visual e código; anote o aplicado.</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="muse-spark-1.3" data-fam="tec" data-score="7.0">
+<a class="thumb" href="v14-autorevisao.html" target="_blank" rel="noopener"><img src="thumbs/v14-autorevisao.jpg" alt="Auto-revisão" loading="lazy"></a>
+<div class="cbody"><div class="rank">#27</div>
+<h3>Auto-revisão</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-mid">7.0</span></div>
+<p class="find">aspas retas (6) badge-xicara com nome Aurora</p>
+<div class="links"><a href="v14-autorevisao.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Após gerar, auto-revise: confira os 7 requisitos um por um, valide tags e JS, corrija e finalize.</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="muse-spark-1.3" data-fam="tec" data-score="7.0">
+<a class="thumb" href="v15-ouro.html" target="_blank" rel="noopener"><img src="thumbs/v15-ouro.jpg" alt="OURO v1 (combinado)" loading="lazy"></a>
+<div class="cbody"><div class="rank">#28</div>
+<h3>OURO v1 (combinado)</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-mid">7.0</span></div>
+<p class="find">OVERFLOW desktop 135px — o maior do eval, penalidade fora isso refinado (card &#x27;metodo do mes&#x27;)</p>
+<div class="links"><a href="v15-ouro.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Skill-map + rubrica + plano + simplicidade + auto-revisão combinados (candidata ouro v1).</blockquote></details>
+</div></article>
+<article class="card f-emo" data-model="muse-spark-1.3" data-fam="emo" data-score="6.5">
+<a class="thumb" href="v04-gentileza.html" target="_blank" rel="noopener"><img src="thumbs/v04-gentileza.jpg" alt="Gentileza extrema" loading="lazy"></a>
+<div class="cbody"><div class="rank">#29</div>
+<h3>Gentileza extrema</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip emo">😤 apelo emocional</span><span class="score s-lo">6.5</span></div>
+<p class="find">ZERO box-shadow (flat) contador cortado no mobile</p>
+<div class="links"><a href="v04-gentileza.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Por favor, com muito carinho: confio no seu trabalho e ficaria imensamente grato por uma entrega cuidadosa. Obrigado!</blockquote></details>
+</div></article>
+<article class="card f-emo" data-model="muse-spark-1.3" data-fam="emo" data-score="6.5">
+<a class="thumb" href="v05-agressividade.html" target="_blank" rel="noopener"><img src="thumbs/v05-agressividade.jpg" alt="Agressividade" loading="lazy"></a>
+<div class="cbody"><div class="rank">#30</div>
+<h3>Agressividade</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip emo">😤 apelo emocional</span><span class="score s-lo">6.5</span></div>
+<p class="find">aspas retas (6) correto, sem overflow, sem brilho</p>
+<div class="links"><a href="v05-agressividade.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote></blockquote></details>
+</div></article>
+<article class="card f-emo" data-model="muse-spark-1.3" data-fam="emo" data-score="6.5">
+<a class="thumb" href="v06-chantagem.html" target="_blank" rel="noopener"><img src="thumbs/v06-chantagem.jpg" alt="Chantagem emocional" loading="lazy"></a>
+<div class="cbody"><div class="rank">#31</div>
+<h3>Chantagem emocional</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip emo">😤 apelo emocional</span><span class="score s-lo">6.5</span></div>
+<p class="find">OVERFLOW desktop 22px divisor wave entre secoes</p>
+<div class="links"><a href="v06-chantagem.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Minha carreira depende disso: se falhar, serei demitido e minha família sofrerá. Não me deixe falhar.</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="muse-spark-1.3" data-fam="tec" data-score="6.5">
+<a class="thumb" href="v12-plano.html" target="_blank" rel="noopener"><img src="thumbs/v12-plano.jpg" alt="Pense antes de codar" loading="lazy"></a>
+<div class="cbody"><div class="rank">#32</div>
+<h3>Pense antes de codar</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-lo">6.5</span></div>
+<p class="find">header claro destoando do hero escuro ZERO transitions, so 2 hovers</p>
+<div class="links"><a href="v12-plano.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Pense antes de codar: 3 passos + critério de sucesso + 1 tradeoff, depois implemente simples.</blockquote></details>
+</div></article>
+<article class="card f-base" data-model="gemini-3.8-flash" data-fam="base" data-score="6.0">
+<a class="thumb" href="gemini-p00-controle.html" target="_blank" rel="noopener"><img src="thumbs/gemini-p00-controle.jpg" alt="Controle · gemini" loading="lazy"></a>
+<div class="cbody"><div class="rank">#33</div>
+<h3>Controle · gemini</h3>
+<div class="chips"><span class="chip model">gemini-3.8-flash</span><span class="chip base">⚪ controle</span><span class="score s-lo">6.0</span></div>
+<p class="find">OVERFLOW desktop 791px (pior do bench) + aspas retas (6) layout escuro comprimido</p>
+<div class="links"><a href="gemini-p00-controle.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>(nenhum — tarefa pura, sem apelo)</blockquote></details>
+</div></article>
+<article class="card f-emo" data-model="muse-spark-1.3" data-fam="emo" data-score="6.0">
+<a class="thumb" href="v08-urgencia.html" target="_blank" rel="noopener"><img src="thumbs/v08-urgencia.jpg" alt="Urgência extrema" loading="lazy"></a>
+<div class="cbody"><div class="rank">#34</div>
+<h3>Urgência extrema</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip emo">😤 apelo emocional</span><span class="score s-lo">6.0</span></div>
+<p class="find">OVERFLOW desktop 34px texto denso pequeno + aspas retas</p>
+<div class="links"><a href="v08-urgencia.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>URGENTÍSSIMO: deadline em minutos, cliente esperando. Entregue o mais rápido possível.</blockquote></details>
+</div></article>
+<article class="card f-tec" data-model="muse-spark-1.3" data-fam="tec" data-score="6.0">
+<a class="thumb" href="v13-simplicidade.html" target="_blank" rel="noopener"><img src="thumbs/v13-simplicidade.jpg" alt="Simplicidade sênior" loading="lazy"></a>
+<div class="cbody"><div class="rank">#35</div>
+<h3>Simplicidade sênior</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip tec">🧪 técnica construtiva</span><span class="score s-lo">6.0</span></div>
+<p class="find">ZERO sombra e ZERO transicao (flat total) limpo, precos visiveis, sem overflow</p>
+<div class="links"><a href="v13-simplicidade.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Código mínimo que resolve, sem overengineering: se pode ser 50 linhas em vez de 200, prefira 50.</blockquote></details>
+</div></article>
+<article class="card f-emo" data-model="muse-spark-1.3" data-fam="emo" data-score="5.5">
+<a class="thumb" href="v01-exaustao.html" target="_blank" rel="noopener"><img src="thumbs/v01-exaustao.jpg" alt="Exaustão" loading="lazy"></a>
+<div class="cbody"><div class="rank">#36</div>
+<h3>Exaustão</h3>
+<div class="chips"><span class="chip model">muse-spark-1.3</span><span class="chip emo">😤 apelo emocional</span><span class="score s-lo">5.5</span></div>
+<p class="find">OVERFLOW desktop 92px (critico) aspas retas (6) + numero cortado no mobile</p>
+<div class="links"><a href="v01-exaustao.html" target="_blank" rel="noopener">Open →</a></div>
+<details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>Chega de preguiça: trabalhe incansavelmente até dizer que cansou, que foi exaustivo, que gastou mais energia do que precisava.</blockquote></details>
+</div></article>
+</div>
+<footer>Metodologia: tarefa-base byte-idêntica · 1 run por célula (+retry nas falhas) · telemetria soma-por-turno · julgamento full-page desktop+mobile · Psicologia reversa testada e reprovada. Feito com café passado na hora.</footer>
+<script>
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+const f=b.dataset.f;document.querySelectorAll('.card').forEach(c=>{c.style.display=(f==='all'||c.dataset.fam===f)?'':'none';});}));
+</script>
+</body>
+</html>

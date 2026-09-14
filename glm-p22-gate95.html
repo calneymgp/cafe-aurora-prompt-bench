@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<!--
+pixel-check rodada-1 (desktop 1440px + mobile 390px, screenshots reais página completa):
+hero 9.0 | cardapio 9.8 | depoimentos 9.3 | secao-visita 9.7 | footer 9.7 | tipografia 9.3 | espacamento 9.5 | responsivo 9.0
+defeitos: (1) menu mobile: CTA do painel com texto marrom apagado (.nav a sobrescreve .btn-primary); (2) hero mobile: eyebrow
+"TORREFAÇÃO ARTESANAL · DESDE 2012" quebra em 2 linhas; (3) hero mobile: stats com órfão "14 anos de história" em linha própria;
+(4) depoimentos: subhead com órfão "dias."; (5) hero mobile: chip "Aberto agora" cobre a alça da xícara.
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Café Aurora — cafeteria e torrefação artesanal em São Paulo</title>
+<meta name="description" content="Grãos de origem única, torra artesanal em pequenos lotes e o melhor cappuccino dos Jardins. Café Aurora, desde 2012.">
+<style>
+:root{
+  --bg:#FAF4EA;
+  --surface:#FFFDF8;
+  --ink:#2A1B0F;
+  --ink-soft:#6E5A49;
+  --ink-faint:#A08B76;
+  --line:#EADCC6;
+  --accent:#B45A2C;
+  --accent-deep:#93411C;
+  --accent-soft:#F7E3D0;
+  --accent-ghost:#FBEFDF;
+  --gold:#D9A13B;
+  --green:#3E7C4F;
+  --dark:#2B1B0D;
+  --cream:#F7EBDB;
+  --cream-dim:#CDB899;
+  --shadow-card:0 24px 48px -24px rgba(64,36,12,.28);
+  --ff-display:Georgia,"Times New Roman",serif;
+  --ff-body:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{font-family:var(--ff-body);font-size:16px;line-height:1.7;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button{font:inherit;border:0;background:none;cursor:pointer;color:inherit}
+::selection{background:var(--accent);color:#FFF6EA}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.container{width:min(1160px,100% - 48px);margin-inline:auto}
+.skip-link{position:absolute;left:16px;top:-56px;z-index:200;background:var(--ink);color:#FFF6EA;padding:.55rem 1.1rem;border-radius:8px;font-size:.9rem;transition:top .2s}
+.skip-link:focus{top:12px}
+
+/* ---------- Header ---------- */
+.site-header{position:sticky;top:0;z-index:100;background:rgba(250,244,234,.87);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.header-inner{display:flex;align-items:center;gap:2rem;height:76px}
+.brand{display:flex;align-items:center;gap:.65rem;flex:none}
+.brand-mark{width:38px;height:38px;flex:none}
+.brand-name{font-family:var(--ff-display);font-size:1.32rem;letter-spacing:-.01em;white-space:nowrap}
+.brand-name em{font-style:italic;color:var(--accent)}
+.nav{margin-left:auto;display:flex;align-items:center;gap:1.9rem}
+.nav a{font-size:.95rem;font-weight:500;color:var(--ink-soft);padding:.35rem 0;position:relative;transition:color .2s}
+.nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;background:var(--accent);border-radius:2px;transition:right .25s}
+.nav a:hover{color:var(--ink)}
+.nav a:hover::after{right:0}
+.nav a.btn-primary,.nav a.btn-primary:hover{color:#FFF6EA}
+.menu-toggle{display:none;width:42px;height:42px;border:1px solid var(--line);border-radius:12px;background:var(--surface);align-items:center;justify-content:center;flex-direction:column;gap:5px;flex:none}
+.menu-toggle span{display:block;width:18px;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s}
+body.nav-open .menu-toggle span:nth-child(1){transform:translateY(3.5px) rotate(45deg)}
+body.nav-open .menu-toggle span:nth-child(2){transform:translateY(-3.5px) rotate(-45deg)}
+.nav-cta{display:none}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;font-weight:600;font-size:.97rem;line-height:1;padding:.95rem 1.65rem;border-radius:999px;border:1.5px solid transparent;transition:background .2s,color .2s,border-color .2s,transform .2s,box-shadow .2s;white-space:nowrap}
+.btn svg{width:17px;height:17px;flex:none}
+.btn-primary{background:var(--accent);color:#FFF6EA;box-shadow:0 14px 28px -14px rgba(180,90,44,.75)}
+.btn-primary:hover{background:var(--accent-deep);transform:translateY(-2px);box-shadow:0 18px 32px -14px rgba(147,65,28,.7)}
+.btn-ghost{border-color:rgba(42,27,15,.3);color:var(--ink)}
+.btn-ghost:hover{background:rgba(42,27,15,.06);border-color:rgba(42,27,15,.5)}
+.btn-sm{padding:.6rem 1.15rem;font-size:.88rem}
+.header-cta{flex:none}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;overflow:hidden;padding:84px 0 92px}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:
+  radial-gradient(900px 520px at 88% -12%,#F6DEC0 0%,rgba(246,222,192,0) 62%),
+  radial-gradient(880px 460px at -10% 110%,#F2E3CC 0%,rgba(242,227,204,0) 58%)}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.04fr .96fr;gap:4rem;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:.65rem;font-size:.76rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
+.eyebrow::before{content:"";width:30px;height:2px;background:var(--accent);border-radius:2px}
+.hero h1{font-family:var(--ff-display);font-weight:400;font-size:clamp(2.7rem,5.3vw,4.25rem);line-height:1.05;letter-spacing:-.02em;margin:1.1rem 0 1.3rem}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero-sub{max-width:56ch;font-size:1.09rem;color:var(--ink-soft)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2.1rem}
+.rating{display:flex;align-items:center;gap:.95rem;margin-top:2.3rem}
+.avatars{display:flex;flex:none}
+.avatar{width:36px;height:36px;border-radius:50%;border:2px solid var(--bg);display:grid;place-items:center;font-size:.7rem;font-weight:700;color:#FFF6EA;margin-left:-10px}
+.avatar:first-child{margin-left:0}
+.avatar.a1{background:linear-gradient(135deg,#C4652F,#8F4A22)}
+.avatar.a2{background:linear-gradient(135deg,#C99A3F,#8F6A1F)}
+.avatar.a3{background:linear-gradient(135deg,#7C5C3E,#4E3A28)}
+.rating-stars{display:flex;gap:2px;color:var(--gold);flex:none}
+.rating-stars svg{width:17px;height:17px}
+.rating-text{font-size:.9rem;color:var(--ink-soft);line-height:1.45}
+.rating-text strong{color:var(--ink);font-size:1rem}
+.hero-stats{display:flex;flex-wrap:wrap;gap:2.6rem;margin-top:2.9rem;padding-top:1.9rem;border-top:1px solid var(--line)}
+.stat-num{display:block;font-family:var(--ff-display);font-size:2.05rem;line-height:1.15;color:var(--ink);font-variant-numeric:tabular-nums}
+.stat-num.is-accent{color:var(--accent)}
+.stat-label{font-size:.86rem;color:var(--ink-soft)}
+.hero-visual{position:relative}
+.visual-frame{border-radius:36px;box-shadow:0 40px 80px -36px rgba(64,36,12,.45)}
+.steam path{animation:steamFloat 3.4s ease-in-out infinite}
+.steam path:nth-child(2){animation-delay:.6s}
+.steam path:nth-child(3){animation-delay:1.2s}
+@keyframes steamFloat{0%,100%{transform:translateY(0);opacity:.95}55%{transform:translateY(-7px);opacity:.55}}
+.chip{position:absolute;display:flex;align-items:center;gap:.6rem;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:.66rem .95rem;font-size:.8rem;font-weight:600;box-shadow:0 18px 36px -18px rgba(64,36,12,.45);white-space:nowrap}
+.chip-dot{width:9px;height:9px;border-radius:50%;flex:none}
+.chip-1{top:9%;left:-6%}
+.chip-2{bottom:11%;right:-5%}
+
+/* ---------- Section heads ---------- */
+.section-head{max-width:640px;margin:0 auto 3.2rem;text-align:center}
+.section-head .eyebrow{justify-content:center}
+.section-head h2{font-family:var(--ff-display);font-weight:400;font-size:clamp(2rem,3.5vw,2.8rem);line-height:1.12;letter-spacing:-.015em;margin:.95rem 0 1rem}
+.section-head p{font-size:1.02rem;color:var(--ink-soft)}
+
+/* ---------- Cardápio ---------- */
+.menu-section{padding:96px 0 104px;background:linear-gradient(180deg,var(--bg) 0%,#F5EBDC 100%)}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.35rem}
+.menu-card{position:relative;display:flex;flex-direction:column;gap:.65rem;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:1.7rem 1.6rem 1.45rem;transition:transform .25s,box-shadow .25s,border-color .25s}
+.menu-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-card);border-color:#DEC8A6}
+.menu-icon{width:46px;height:46px;border-radius:14px;background:var(--accent-ghost);border:1px solid var(--accent-soft);color:var(--accent-deep);display:grid;place-items:center;margin-bottom:.35rem}
+.menu-icon svg{width:23px;height:23px}
+.menu-card h3{font-family:var(--ff-display);font-weight:700;font-size:1.17rem;letter-spacing:-.01em}
+.menu-card>p{font-size:.92rem;line-height:1.55;color:var(--ink-soft)}
+.menu-foot{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-top:auto;padding-top:.9rem}
+.price{font-family:var(--ff-display);font-weight:700;font-size:1.28rem;color:var(--accent-deep);font-variant-numeric:tabular-nums}
+.tag{font-size:.67rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-soft);padding:.34rem .7rem;border-radius:999px}
+.menu-note{margin-top:2.4rem;text-align:center;font-size:.92rem;color:var(--ink-soft)}
+.menu-note svg{display:inline-block;width:15px;height:15px;vertical-align:-3px;margin-right:.45rem;color:var(--gold)}
+
+/* ---------- Depoimentos ---------- */
+.testimonials{position:relative;overflow:hidden;background:var(--dark);color:var(--cream);padding:96px 0}
+.testimonials::before{content:"\201C";position:absolute;top:-70px;left:2%;font-family:var(--ff-display);font-size:430px;line-height:1;color:rgba(247,235,219,.055);pointer-events:none}
+.testimonials .eyebrow{color:#E3A45C}
+.testimonials .eyebrow::before{background:#E3A45C}
+.testimonials .section-head h2{color:#FFF8ED}
+.testimonials .section-head p{color:var(--cream-dim)}
+.testimonials .section-head{max-width:700px}
+.t-grid{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:1.35rem}
+.t-card{display:flex;flex-direction:column;gap:1rem;background:rgba(247,235,219,.055);border:1px solid rgba(247,235,219,.14);border-radius:20px;padding:1.85rem 1.7rem 1.7rem;transition:transform .25s,border-color .25s,background .25s}
+.t-card:hover{transform:translateY(-6px);border-color:rgba(247,235,219,.32);background:rgba(247,235,219,.09)}
+.t-stars{display:flex;gap:2px;color:var(--gold)}
+.t-stars svg{width:16px;height:16px}
+.t-card blockquote{font-size:.98rem;line-height:1.68;color:#F2E6D3}
+.t-author{display:flex;align-items:center;gap:.85rem;margin-top:auto;padding-top:.6rem}
+.t-avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-size:.78rem;font-weight:700;color:#FFF6E8;flex:none}
+.t-avatar.v1{background:linear-gradient(135deg,#C4652F,#8F4A22)}
+.t-avatar.v2{background:linear-gradient(135deg,#C99A3F,#8F6A1F)}
+.t-avatar.v3{background:linear-gradient(135deg,#6E7F4A,#46532B)}
+.t-name{font-weight:600;font-size:.95rem;color:#FFF6E8}
+.t-role{font-size:.8rem;color:var(--cream-dim)}
+
+/* ---------- Visita ---------- */
+.visit{padding:100px 0}
+.visit-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:4rem;align-items:center}
+.visit .section-head{margin:0 0 2.2rem;text-align:left;max-width:none}
+.visit .section-head .eyebrow{justify-content:flex-start}
+.visit-list{display:flex;flex-direction:column;gap:1.5rem;margin-bottom:2.4rem}
+.visit-item{display:flex;gap:1.05rem}
+.visit-icon{flex:none;width:46px;height:46px;border-radius:14px;background:var(--accent-ghost);border:1px solid var(--accent-soft);color:var(--accent-deep);display:grid;place-items:center}
+.visit-icon svg{width:22px;height:22px}
+.visit-item h3{font-size:.99rem;font-weight:600;margin-bottom:.1rem}
+.visit-item p{font-size:.93rem;color:var(--ink-soft);line-height:1.6}
+.visit-item a{color:var(--accent-deep);font-weight:600;text-decoration:underline;text-decoration-color:rgba(147,65,28,.35);text-underline-offset:3px;transition:text-decoration-color .2s}
+.visit-item a:hover{text-decoration-color:var(--accent-deep)}
+.visit-actions{display:flex;flex-wrap:wrap;gap:.9rem}
+.map-card{background:var(--surface);border:1px solid var(--line);border-radius:26px;padding:16px;box-shadow:0 32px 64px -32px rgba(64,36,12,.35)}
+.map-card>svg{width:100%;height:auto;border-radius:14px}
+.pin-pulse{transform-box:fill-box;transform-origin:center;animation:pinPulse 2.6s ease-out infinite}
+@keyframes pinPulse{0%{transform:scale(.5);opacity:.55}70%,100%{transform:scale(1.8);opacity:0}}
+
+/* ---------- Footer ---------- */
+.site-footer{background:#231508;color:#EFE1CB;padding-top:76px}
+.footer-grid{display:grid;grid-template-columns:1.35fr 1fr 1fr 1.05fr;gap:2.6rem;padding-bottom:3.4rem}
+.footer-brand .brand-name{color:#FFF6E8}
+.footer-brand>p{margin-top:1.1rem;font-size:.92rem;color:var(--cream-dim);max-width:32ch}
+.socials{display:flex;gap:.7rem;margin-top:1.5rem}
+.socials a{width:40px;height:40px;border-radius:50%;border:1px solid rgba(239,225,206,.25);display:grid;place-items:center;color:#EFE1CB;transition:background .2s,border-color .2s,color .2s}
+.socials a:hover{background:var(--accent);border-color:var(--accent);color:#FFF6EA}
+.socials svg{width:18px;height:18px}
+.footer-h{font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#B99A72;margin-bottom:1.15rem}
+.site-footer address{font-style:normal}
+.site-footer li{font-size:.93rem;color:#E4D2B6;line-height:1.9}
+.site-footer a{transition:color .2s}
+.site-footer a:hover{color:#FFD9AE}
+.hours li{display:flex;align-items:baseline;gap:.6rem;max-width:240px}
+.hours .dots{flex:1;border-bottom:1px dotted rgba(239,225,206,.32);transform:translateY(-4px)}
+.hours .t{color:#FFF3E0}
+.footer-bottom{border-top:1px solid rgba(239,225,206,.13);padding:1.5rem 0 1.7rem;display:flex;align-items:center;justify-content:space-between;gap:.8rem;flex-wrap:wrap;font-size:.83rem;color:#A88F6E}
+
+/* ---------- Responsivo ---------- */
+@media (max-width:1020px){
+  .hero{padding-top:64px}
+  .hero-grid{grid-template-columns:1fr;gap:3.4rem}
+  .hero-visual{width:100%;max-width:560px;margin:0 auto}
+  .chip-1{left:2%}
+  .chip-2{right:2%}
+  .menu-grid{grid-template-columns:repeat(2,1fr)}
+  .visit-grid{grid-template-columns:1fr;gap:3rem}
+  .map-card{max-width:640px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2.4rem}
+}
+@media (max-width:860px){
+  .t-grid{grid-template-columns:1fr;max-width:560px;margin-inline:auto}
+}
+@media (max-width:840px){
+  .menu-toggle{display:inline-flex}
+  .nav{position:absolute;top:100%;left:0;right:0;display:none;flex-direction:column;align-items:stretch;gap:0;background:#FDFAF3;border-bottom:1px solid var(--line);box-shadow:0 32px 44px -32px rgba(64,36,12,.4);padding:.6rem 24px 1.6rem}
+  body.nav-open .nav{display:flex}
+  .nav a{font-size:1.02rem;padding:.9rem .2rem;border-bottom:1px solid #F0E5D0}
+  .nav a::after{display:none}
+  .nav-cta{display:inline-flex;margin-top:1.2rem;width:100%}
+  .header-cta{display:none}
+  .hero-stats{gap:1.8rem}
+}
+@media (max-width:640px){
+  .container{width:calc(100% - 40px)}
+  .hero{padding:56px 0 72px}
+  .hero-actions{flex-direction:column;align-items:stretch}
+  .rating{flex-wrap:wrap;row-gap:.7rem}
+  .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem .9rem}
+  .stat-num{font-size:1.42rem}
+  .stat-label{font-size:.76rem}
+  .menu-section{padding:72px 0 80px}
+  .testimonials{padding:72px 0}
+  .visit{padding:72px 0}
+  .menu-grid{grid-template-columns:1fr}
+  .chip{font-size:.72rem;padding:.5rem .75rem}
+  .chip-1{top:5%}
+  .eyebrow{font-size:.72rem;letter-spacing:.14em}
+  .eyebrow::before{width:22px}
+  .chip-2{bottom:5%;right:2%}
+  .footer-grid{grid-template-columns:1fr;gap:2.2rem}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:.35rem}
+  .map-card{padding:10px;border-radius:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .steam path,.pin-pulse{animation:none}
+  .btn,.menu-card,.t-card{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#inicio">Pular para o conteúdo</a>
+
+<!-- sprite de ícones -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="ic-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.8l2.9 5.8 6.3.9-4.6 4.5 1.1 6.3L12 17.4l-5.7 2.9 1.1-6.3L2.8 9.5l6.3-.9z"/></symbol>
+  <symbol id="ic-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M4 12h15m-6-6 6 6-6 6"/></symbol>
+  <symbol id="ic-espresso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 10h11v3.5A5.5 5.5 0 0 1 10.5 19h0A5.5 5.5 0 0 1 5 13.5Z"/><path d="M16 11.2h1.4a2.5 2.5 0 0 1 0 5H16"/><path d="M8.6 3.6c-.9 1.1.9 1.7 0 2.8M12.2 3.6c-.9 1.1.9 1.7 0 2.8"/></symbol>
+  <symbol id="ic-cappuccino" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 10h11v3.5A5.5 5.5 0 0 1 10.5 19h0A5.5 5.5 0 0 1 5 13.5Z"/><path d="M16 11.2h1.4a2.5 2.5 0 0 1 0 5H16"/><path d="M7.6 12.8c1.1-1 2.2-1 3.2 0s2.1 1 3.2 0"/><circle cx="9.5" cy="5.4" r=".6" fill="currentColor" stroke="none"/><circle cx="12.4" cy="4.4" r=".6" fill="currentColor" stroke="none"/><circle cx="14" cy="6.6" r=".6" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="ic-latte" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5h8l-1.1 15a2.2 2.2 0 0 1-2.2 2h-.4a2.2 2.2 0 0 1-2.2-2Z"/><path d="M8.5 10h7M8.2 14h7.6"/></symbol>
+  <symbol id="ic-mocha" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9h12v6.5A4.5 4.5 0 0 1 12.5 20h-3A4.5 4.5 0 0 1 5 15.5Z"/><path d="M17 10.5h1.2a2.4 2.4 0 0 1 0 4.8H17"/><path d="M8.5 5.8c1-.9 2 .9 3.5 0s2.5.9 3.5 0"/></symbol>
+  <symbol id="ic-coldbrew" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5h4"/><path d="M10.5 2.5v3c0 .9-.5 1.4-1.1 2A4.6 4.6 0 0 0 8 11v6.5A3.5 3.5 0 0 0 11.5 21h1a3.5 3.5 0 0 0 3.5-3.5V11c0-1.6-.6-2.7-1.4-3.5-.6-.6-1.1-1.1-1.1-2v-3"/><path d="M8 14.5h8"/></symbol>
+  <symbol id="ic-affogato" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6.6" r="3"/><path d="M7 10.4h10l-2.3 5.6a3.1 3.1 0 0 1-5.4 0Z"/><path d="M12 9.6v.8"/></symbol>
+  <symbol id="ic-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.5S5.5 15.7 5.5 10.4a6.5 6.5 0 0 1 13 0c0 5.3-6.5 11.1-6.5 11.1Z"/><circle cx="12" cy="10.4" r="2.4"/></symbol>
+  <symbol id="ic-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.4"/><path d="M12 7.4V12l3.1 2"/></symbol>
+  <symbol id="ic-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 3.5h3l1.6 4-2 1.5a12.5 12.5 0 0 0 5.9 5.9l1.5-2 4 1.6v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 3.5 5.7a2 2 0 0 1 2-2.2Z"/></symbol>
+  <symbol id="ic-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.2" y="5.2" width="17.6" height="13.6" rx="2.4"/><path d="m4.5 7.5 7.5 5.4 7.5-5.6"/></symbol>
+  <symbol id="ic-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.6" y="3.6" width="16.8" height="16.8" rx="4.6"/><circle cx="12" cy="12" r="3.8"/><circle cx="17" cy="7" r=".7" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="ic-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4.5 4.5 19.5 19.5M19.5 4.5l-15 15"/></symbol>
+  <symbol id="ic-whatsapp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.6a8.4 8.4 0 0 0-7.2 12.7L3.6 20.4l4.2-1.1A8.4 8.4 0 1 0 12 3.6Z"/><path d="M9.2 8.6c-.4 2.3 2.6 5.4 5 5l1-1.8-2-1-.9.9c-.9-.3-1.9-1.3-2.2-2.2l.9-.9-1-2Z"/></symbol>
+  <symbol id="ic-bean" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><ellipse cx="12" cy="12" rx="9" ry="6.2" transform="rotate(-28 12 12)"/><path d="M6 15.4c2.6-5 7-7.2 12-7"/></symbol>
+</svg>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#inicio" aria-label="Café Aurora — voltar ao início">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#B45A2C"/>
+        <path d="M11 21.5a9 9 0 0 1 18 0Z" fill="#F7EBDB"/>
+        <path d="M8 21.5h24" stroke="#F7EBDB" stroke-width="2" stroke-linecap="round"/>
+        <path d="M12.5 26.5h15l-1.2 4.6a4 4 0 0 1-3.9 3h-4.8a4 4 0 0 1-3.9-3Z" fill="#F7EBDB"/>
+        <path d="M16 5.5c-1 1.3 1 1.9 0 3.2M20.5 4.5c-1 1.3 1 1.9 0 3.2" stroke="#F7EBDB" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+      </svg>
+      <span class="brand-name">Café <em>Aurora</em></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Navegação principal">
+      <a href="#cardapio">Cardápio</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#visita">Visita</a>
+      <a href="#contato">Contato</a>
+      <a href="tel:+551140028922" class="btn btn-primary btn-sm nav-cta">Reservar mesa</a>
+    </nav>
+    <a href="tel:+551140028922" class="btn btn-primary btn-sm header-cta">Reservar mesa</a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="inicio">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Torrefação artesanal · desde 2012</span>
+        <h1>O amanhecer tem <em>gosto</em> de café.</h1>
+        <p class="hero-sub">Grãos de fazendas brasileiras torrados em pequenos lotes toda semana, receitas de balcão feitas na hora e uma xícara que transforma a primeira hora do dia em cerimônia.</p>
+        <div class="hero-actions">
+          <a href="#cardapio" class="btn btn-primary">Ver o cardápio
+            <svg aria-hidden="true"><use href="#ic-arrow"/></svg>
+          </a>
+          <a href="#visita" class="btn btn-ghost">Reservar uma mesa</a>
+        </div>
+        <div class="rating" role="img" aria-label="Avaliação média 4,9 de 5 estrelas, com mais de 2.400 avaliações">
+          <div class="avatars" aria-hidden="true">
+            <span class="avatar a1">MC</span><span class="avatar a2">RN</span><span class="avatar a3">BL</span>
+          </div>
+          <div class="rating-stars" aria-hidden="true">
+            <svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg>
+            <svg viewBox="0 0 24 24"><defs><linearGradient id="half-star" x1="0" y1="0" x2="1" y2="0"><stop offset="50%" stop-color="#D9A13B"/><stop offset="50%" stop-color="#E9D9BC"/></linearGradient></defs><path fill="url(#half-star)" d="M12 2.8l2.9 5.8 6.3.9-4.6 4.5 1.1 6.3L12 17.4l-5.7 2.9 1.1-6.3L2.8 9.5l6.3-.9z"/></svg>
+          </div>
+          <p class="rating-text"><strong>4,9 de 5</strong><br>2.412 avaliações de clientes</p>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-num is-accent" id="cafes-counter" data-target="128547">128.547</span>
+            <span class="stat-label">cafés servidos</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">12</span>
+            <span class="stat-label">origens de fazenda</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">14</span>
+            <span class="stat-label">anos de história</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <svg class="visual-frame" viewBox="0 0 560 560" role="img" aria-labelledby="heroSvgTitle">
+          <title id="heroSvgTitle">Xícara de café fumegando diante de um sol que nasce</title>
+          <defs>
+            <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF9EE"/><stop offset="1" stop-color="#F6D8B2"/></linearGradient>
+            <linearGradient id="gSun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EDBE63"/><stop offset="1" stop-color="#C4652F"/></linearGradient>
+            <linearGradient id="gCup" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFBF3"/><stop offset="1" stop-color="#F0DCC0"/></linearGradient>
+            <clipPath id="clipFrame"><rect width="560" height="560" rx="36"/></clipPath>
+            <clipPath id="clipSun"><circle cx="280" cy="322" r="121"/></clipPath>
+            <clipPath id="clipCup"><path d="M212 366h136l-9 76c-2.4 16-15.6 28-31.8 28h-54.4c-16.2 0-29.4-12-31.8-28Z"/></clipPath>
+          </defs>
+          <rect width="560" height="560" rx="36" fill="url(#gSky)"/>
+          <g clip-path="url(#clipFrame)">
+            <g stroke="#D9A13B" stroke-width="2.4" stroke-linecap="round" opacity=".75">
+              <path d="M92 118v16M84 126h16"/>
+              <path d="M470 92v12M464 98h12"/>
+              <path d="M436 196v10M431 201h10"/>
+              <path d="M118 236v10M113 241h10"/>
+              <path d="M398 76v8M394 80h8"/>
+            </g>
+            <g fill="none" stroke-linecap="round">
+              <path d="M52 322 A228 228 0 0 1 508 322" stroke="#E2B269" stroke-width="2.5" opacity=".6"/>
+              <path d="M90 322 A190 190 0 0 1 470 322" stroke="#CE8C4B" stroke-width="2.5" opacity=".5"/>
+              <path d="M128 322 A152 152 0 0 1 432 322" stroke="#C4652F" stroke-width="2" opacity=".4" stroke-dasharray="1 14"/>
+            </g>
+            <circle cx="280" cy="330" r="122" fill="url(#gSun)"/>
+            <g clip-path="url(#clipSun)" fill="#F6D8B2" opacity=".9">
+              <rect x="150" y="244" width="260" height="8" rx="4"/>
+              <rect x="150" y="270" width="260" height="8" rx="4"/>
+              <rect x="150" y="296" width="260" height="8" rx="4"/>
+            </g>
+            <rect x="40" y="327" width="480" height="5" rx="2.5" fill="#33200F"/>
+            <rect x="0" y="332" width="560" height="228" fill="#33200F"/>
+            <rect x="0" y="332" width="560" height="3" fill="#E2B269" opacity=".35"/>
+            <g stroke="#C9A06B" stroke-width="1.6" fill="none" opacity=".55">
+              <ellipse cx="88" cy="512" rx="12" ry="7.5" transform="rotate(-16 88 512)"/>
+              <path d="M78 515c7-2 13-3.6 20-5"/>
+              <ellipse cx="472" cy="540" rx="12" ry="7.5" transform="rotate(14 472 540)"/>
+              <path d="M462 542c7-1.8 13-3 20-4"/>
+              <ellipse cx="150" cy="548" rx="10" ry="6" transform="rotate(8 150 548)"/>
+            </g>
+            <ellipse cx="280" cy="481" rx="132" ry="20" fill="#1D1006" opacity=".45"/>
+            <ellipse cx="280" cy="470" rx="112" ry="19" fill="#F3E2C8"/>
+            <ellipse cx="280" cy="469" rx="86" ry="13" fill="#E8D1AE"/>
+            <path d="M344 392c30-4 42 12 32 30-7 13-22 19-34 17" fill="none" stroke="#F3E2C8" stroke-width="12" stroke-linecap="round"/>
+            <path d="M212 366h136l-9 76c-2.4 16-15.6 28-31.8 28h-54.4c-16.2 0-29.4-12-31.8-28Z" fill="url(#gCup)"/>
+            <g clip-path="url(#clipCup)">
+              <rect x="204" y="396" width="152" height="12" fill="#C4652F"/>
+            </g>
+            <ellipse cx="280" cy="366" rx="68" ry="13" fill="#FFFDF7"/>
+            <ellipse cx="280" cy="366" rx="55" ry="9" fill="#5F3315"/>
+            <path d="M238 364c14-6 70-6 84 0" stroke="#C98F4E" stroke-width="2.5" fill="none" opacity=".9"/>
+            <g class="steam" fill="none" stroke="#FFF6E6" stroke-width="6" stroke-linecap="round">
+              <path d="M242 336c-12-16 12-24 0-44"/>
+              <path d="M280 330c-12-16 12-24 0-46"/>
+              <path d="M318 336c-12-16 12-24 0-44"/>
+            </g>
+          </g>
+        </svg>
+        <div class="chip chip-1"><span class="chip-dot" style="background:var(--accent)"></span>Torra da semana · Cerrado, MG</div>
+        <div class="chip chip-2"><span class="chip-dot" style="background:var(--green)"></span>Aberto agora · até 19h</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CARDÁPIO ============ -->
+  <section class="menu-section" id="cardapio">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Cardápio</span>
+        <h2>Clássicos da casa, feitos no ponto</h2>
+        <p>Do primeiro espresso ao affogato da sobremesa: seis receitas que saem do nosso balcão milhares de vezes por semana.</p>
+      </div>
+      <div class="menu-grid">
+        <article class="menu-card">
+          <div class="menu-icon"><svg aria-hidden="true"><use href="#ic-espresso"/></svg></div>
+          <h3>Espresso Aurora</h3>
+          <p>Blend 70% arábica, crema dourada e cacau.</p>
+          <div class="menu-foot"><span class="price">R$ 7,00</span><span class="tag">Clássico</span></div>
+        </article>
+        <article class="menu-card">
+          <div class="menu-icon"><svg aria-hidden="true"><use href="#ic-cappuccino"/></svg></div>
+          <h3>Cappuccino da Casa</h3>
+          <p>Leite aveludado, canela do Ceilão e latte art.</p>
+          <div class="menu-foot"><span class="price">R$ 12,00</span><span class="tag">Mais pedido</span></div>
+        </article>
+        <article class="menu-card">
+          <div class="menu-icon"><svg aria-hidden="true"><use href="#ic-latte"/></svg></div>
+          <h3>Latte Caramelo Salgado</h3>
+          <p>Caramelo artesanal com flor de sal.</p>
+          <div class="menu-foot"><span class="price">R$ 15,50</span><span class="tag">Favorito</span></div>
+        </article>
+        <article class="menu-card">
+          <div class="menu-icon"><svg aria-hidden="true"><use href="#ic-mocha"/></svg></div>
+          <h3>Mocha Avelã</h3>
+          <p>Cacau 55%, avelã tostada e chantilly.</p>
+          <div class="menu-foot"><span class="price">R$ 16,50</span><span class="tag">Intenso</span></div>
+        </article>
+        <article class="menu-card">
+          <div class="menu-icon"><svg aria-hidden="true"><use href="#ic-coldbrew"/></svg></div>
+          <h3>Cold Brew Tônica</h3>
+          <p>18 horas de extração a frio e laranja.</p>
+          <div class="menu-foot"><span class="price">R$ 14,00</span><span class="tag">Novidade</span></div>
+        </article>
+        <article class="menu-card">
+          <div class="menu-icon"><svg aria-hidden="true"><use href="#ic-affogato"/></svg></div>
+          <h3>Affogato Aurora</h3>
+          <p>Sorvete bourbon afogado em espresso.</p>
+          <div class="menu-foot"><span class="price">R$ 18,00</span><span class="tag">Sobremesa</span></div>
+        </article>
+      </div>
+      <p class="menu-note"><svg aria-hidden="true"><use href="#ic-bean"/></svg>Espresso sempre acompanhado do biscoito da casa · leites vegetais sem custo extra</p>
+    </div>
+  </section>
+
+  <!-- ============ DEPOIMENTOS ============ -->
+  <section class="testimonials" id="depoimentos">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Depoimentos</span>
+        <h2>Palavra de quem tem mesa cativa</h2>
+        <p>Bairro pequeno, opiniões grandes — o que dizem os que passam por aqui todos os dias.</p>
+      </div>
+      <div class="t-grid">
+        <article class="t-card">
+          <div class="t-stars" aria-label="5 de 5 estrelas">
+            <svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg>
+          </div>
+          <blockquote>“O cappuccino da Aurora arruinou todos os outros para mim. Saio de casa dez minutos mais cedo só para garantir a mesa da janela.”</blockquote>
+          <div class="t-author">
+            <span class="t-avatar v1" aria-hidden="true">MC</span>
+            <div><p class="t-name">Marina Castilho</p><p class="t-role">Arquiteta e vizinha do bairro</p></div>
+          </div>
+        </article>
+        <article class="t-card">
+          <div class="t-stars" aria-label="5 estrelas">
+            <svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg>
+          </div>
+          <blockquote>“Vinte anos puxando espresso e raramente vejo crema tão dourada quanto a daqui. É o melhor da cidade, sem discussão.”</blockquote>
+          <div class="t-author">
+            <span class="t-avatar v2" aria-hidden="true">RN</span>
+            <div><p class="t-name">Rafael Nogueira</p><p class="t-role">Barista aposentado</p></div>
+          </div>
+        </article>
+        <article class="t-card">
+          <div class="t-stars" aria-label="5 estrelas">
+            <svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg>
+          </div>
+          <blockquote>“Transformei o lugar no meu escritório: Wi-Fi rápido, tomada em toda mesa e um time que lembra meu pedido de cor.”</blockquote>
+          <div class="t-author">
+            <span class="t-avatar v3" aria-hidden="true">BL</span>
+            <div><p class="t-name">Beatriz Lima</p><p class="t-role">Designer de produto</p></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VISITA ============ -->
+  <section class="visit" id="visita">
+    <div class="container visit-grid">
+      <div class="visit-copy">
+        <div class="section-head">
+          <span class="eyebrow">Visite-nos</span>
+          <h2>A esquina mais cheirosa dos Jardins</h2>
+          <p>Calçada de sombra, entrada acessível e o cheiro de torra fresca na porta. Chegue cedo: a mesa da janela é disputada.</p>
+        </div>
+        <div class="visit-list">
+          <div class="visit-item">
+            <span class="visit-icon"><svg aria-hidden="true"><use href="#ic-pin"/></svg></span>
+            <div>
+              <h3>Endereço</h3>
+              <p>Rua das Acácias, 128 — Jardins · São Paulo, SP</p>
+            </div>
+          </div>
+          <div class="visit-item">
+            <span class="visit-icon"><svg aria-hidden="true"><use href="#ic-clock"/></svg></span>
+            <div>
+              <h3>Horários</h3>
+              <p>Seg a Sex, 7h às 19h · Sáb, 8h às 20h · Dom, 8h às 14h</p>
+            </div>
+          </div>
+          <div class="visit-item">
+            <span class="visit-icon"><svg aria-hidden="true"><use href="#ic-phone"/></svg></span>
+            <div>
+              <h3>Contato</h3>
+              <p><a href="tel:+551140028922">(11) 4002-8922</a> · <a href="mailto:ola@cafeaurora.com.br">ola@cafeaurora.com.br</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="visit-actions">
+          <a href="tel:+551140028922" class="btn btn-primary">Ligar agora</a>
+          <a href="mailto:ola@cafeaurora.com.br" class="btn btn-ghost">Enviar e-mail</a>
+        </div>
+      </div>
+      <div class="map-card">
+        <svg viewBox="0 0 560 430" role="img" aria-label="Mapa ilustrado mostrando o Café Aurora na Rua das Acácias, 128">
+          <rect width="560" height="430" rx="14" fill="#F1E5CE"/>
+          <g fill="#E9DBBD" opacity=".6">
+            <rect x="140" y="20" width="140" height="90" rx="10"/>
+            <rect x="320" y="20" width="130" height="90" rx="10"/>
+            <rect x="140" y="150" width="140" height="80" rx="10"/>
+            <rect x="320" y="150" width="130" height="80" rx="10"/>
+            <rect x="20" y="150" width="80" height="80" rx="10"/>
+            <rect x="490" y="150" width="120" height="80" rx="10"/>
+            <rect x="140" y="270" width="140" height="70" rx="10"/>
+            <rect x="320" y="270" width="130" height="70" rx="10"/>
+            <rect x="320" y="380" width="130" height="30" rx="10"/>
+          </g>
+          <g stroke="#E3D2AE" stroke-width="15" stroke-linecap="round" fill="none">
+            <path d="M0 130H560"/>
+            <path d="M0 245H560"/>
+            <path d="M0 360H560"/>
+            <path d="M125 0V430"/>
+            <path d="M305 0V430"/>
+            <path d="M465 0V430"/>
+          </g>
+          <path d="M0 245H560" stroke="#FBF3E2" stroke-width="2.4" stroke-dasharray="16 13" opacity=".9" fill="none"/>
+          <path d="M560 48c-80 18-104 84-184 92s-64 82-142 94" stroke="#B9D5DE" stroke-width="22" fill="none" stroke-linecap="round" opacity=".85"/>
+          <path d="M22 306c44-58 148-64 194-26s-8 104-86 112-146-38-108-86Z" fill="#CFDFC0"/>
+          <g fill="#B3C79C">
+            <circle cx="70" cy="330" r="11"/><circle cx="120" cy="356" r="9"/><circle cx="160" cy="322" r="10"/><circle cx="96" cy="384" r="8"/>
+          </g>
+          <g transform="translate(305 215)">
+            <circle class="pin-pulse" r="26" fill="#C4652F" opacity=".5"/>
+            <path d="M0 10C0 10-24-14-24-34a24 24 0 1 1 48 0C24-14 0 10 0 10Z" fill="#C4652F" stroke="#8F4A22" stroke-width="2"/>
+            <circle cy="-33" r="9.5" fill="#FFF7EA"/>
+          </g>
+          <g transform="translate(305 262)">
+            <rect x="-118" y="0" width="236" height="62" rx="12" fill="#FFFDF7" stroke="#E0CEA8"/>
+            <text x="0" y="26" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="17" font-weight="bold" fill="#2A1B0F">Café Aurora</text>
+            <text x="0" y="47" text-anchor="middle" font-family="Georgia, serif" font-size="12.5" fill="#6E5A49">Rua das Acácias, 128 · Jardins</text>
+          </g>
+          <g transform="translate(514 54)">
+            <circle r="19" fill="#FFFDF7" stroke="#E0CEA8"/>
+            <path d="M0-10 4.5 7 0 3.6-4.5 7Z" fill="#C4652F"/>
+            <text y="15" text-anchor="middle" font-family="Georgia, serif" font-size="8.5" fill="#6E5A49">N</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contato">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#inicio" aria-label="Café Aurora — voltar ao início">
+          <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+            <circle cx="20" cy="20" r="19" fill="#B45A2C"/>
+            <path d="M11 21.5a9 9 0 0 1 18 0Z" fill="#F7EBDB"/>
+            <path d="M8 21.5h24" stroke="#F7EBDB" stroke-width="2" stroke-linecap="round"/>
+            <path d="M12.5 26.5h15l-1.2 4.6a4 4 0 0 1-3.9 3h-4.8a4 4 0 0 1-3.9-3Z" fill="#F7EBDB"/>
+            <path d="M16 5.5c-1 1.3 1 1.9 0 3.2M20.5 4.5c-1 1.3 1 1.9 0 3.2" stroke="#F7EBDB" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+          </svg>
+          <span class="brand-name">Café <em>Aurora</em></span>
+        </a>
+        <p>Cafeteria e torrefação artesanal nos Jardins. Torra semanal, pães de fermentação natural e Wi-Fi liberado.</p>
+        <div class="socials">
+          <a href="#contato" aria-label="Instagram do Café Aurora"><svg><use href="#ic-instagram"/></svg></a>
+          <a href="#contato" aria-label="Perfil do Café Aurora no X"><svg><use href="#ic-x"/></svg></a>
+          <a href="#contato" aria-label="WhatsApp do Café Aurora"><svg><use href="#ic-whatsapp"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-h">Endereço</h4>
+        <address>
+          <ul>
+            <li>Rua das Acácias, 128</li>
+            <li>Jardins · São Paulo, SP</li>
+            <li>CEP 01423-090</li>
+          </ul>
+        </address>
+      </div>
+      <div>
+        <h4 class="footer-h">Horários</h4>
+        <ul class="hours">
+          <li><span>Seg – Sex</span><span class="dots" aria-hidden="true"></span><span class="t">7h – 19h</span></li>
+          <li><span>Sábado</span><span class="dots" aria-hidden="true"></span><span class="t">8h – 20h</span></li>
+          <li><span>Domingo</span><span class="dots" aria-hidden="true"></span><span class="t">8h – 14h</span></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-h">Contato</h4>
+        <ul>
+          <li><a href="tel:+551140028922">(11) 4002-8922</a></li>
+          <li><a href="tel:+5511991234567">WhatsApp (11) 99123-4567</a></li>
+          <li><a href="mailto:ola@cafeaurora.com.br">ola@cafeaurora.com.br</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Café Aurora — Cafeteria &amp; Torrefação Ltda.</span>
+      <span>Feito com carinho (e muito café) em São Paulo.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* ----- menu mobile ----- */
+  var body = document.body;
+  var toggle = document.querySelector('.menu-toggle');
+  function setNav(open) {
+    body.classList.toggle('nav-open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+  }
+  toggle.addEventListener('click', function () {
+    setNav(!body.classList.contains('nav-open'));
+  });
+  document.querySelectorAll('.nav a').forEach(function (link) {
+    link.addEventListener('click', function () { setNav(false); });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && body.classList.contains('nav-open')) setNav(false);
+  });
+  var mq = window.matchMedia('(min-width: 841px)');
+  var onMq = function (e) { if (e.matches) setNav(false); };
+  if (mq.addEventListener) mq.addEventListener('change', onMq);
+
+  /* ----- contador de cafés servidos ----- */
+  var counter = document.getElementById('cafes-counter');
+  if (counter) {
+    var target = parseInt(counter.getAttribute('data-target'), 10) || 0;
+    var fmt = function (n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); };
+    var started = false;
+    var animate = function () {
+      if (started) return;
+      started = true;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !window.requestAnimationFrame) {
+        counter.textContent = fmt(target);
+        return;
+      }
+      var dur = 1900, t0 = null;
+      var step = function (now) {
+        if (t0 === null) t0 = now;
+        var p = Math.min((now - t0) / dur, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        counter.textContent = fmt(Math.round(target * eased));
+        if (p < 1) requestAnimationFrame(step);
+      };
+      counter.textContent = fmt(0);
+      requestAnimationFrame(step);
+    };
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { io.disconnect(); animate(); }
+        });
+      }, { threshold: 0.4 });
+      io.observe(counter);
+    } else {
+      counter.textContent = fmt(target);
+    }
+  }
+})();
+</script>
+</body>
+</html>

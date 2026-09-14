@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Café Aurora — O amanhecer em cada xícara</title>
+<meta name="description" content="Café Aurora: cafeteria artesanal no centro. Grãos de origem, torra clara e brunch servido até as 14h.">
+<style>
+:root{
+  --creme:#FAF4E8; --creme-2:#F3E9D6; --papel:#FFFDF7;
+  --tinta:#231407; --tinta-suave:#5C4A38; --linha:#E7D8BE;
+  --caramelo:#B96A1F; --caramelo-esc:#8F4E12; --dourado:#D9A441;
+  --verde:#2F4A34; --verde-fundo:#EAF0E6;
+  --raio:20px; --raio-p:14px;
+  --sombra-p:0 1px 2px rgba(35,20,7,.07),0 10px 28px rgba(35,20,7,.09);
+  --sombra-g:0 2px 6px rgba(35,20,7,.08),0 24px 60px rgba(35,20,7,.14);
+  --ritmo:clamp(64px,8vw,104px);
+  --fonte-titulo:Georgia,"Times New Roman","Century Schoolbook",serif;
+  --fonte-texto:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+html,body{overflow-x:clip;max-width:100%}
+body{font-family:var(--fonte-texto);background:var(--creme);color:var(--tinta);
+  line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+.container{width:min(1120px,100% - 48px);margin-inline:auto}
+::selection{background:var(--dourado);color:var(--tinta)}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.78rem;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--caramelo-esc)}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--caramelo);border-radius:2px}
+h1,h2,h3{font-family:var(--fonte-titulo);line-height:1.08;letter-spacing:-.015em;font-weight:700}
+.section{padding-block:var(--ritmo)}
+.section-sub{color:var(--tinta-suave);max-width:60ch;font-size:1.06rem}
+/* ---------- Botões: 1 primário por tela ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-weight:700;font-size:.98rem;text-decoration:none;border-radius:999px;
+  padding:15px 30px;border:1.5px solid transparent;cursor:pointer;
+  transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
+.btn-primario{background:var(--tinta);color:#FFF8EA;box-shadow:var(--sombra-p)}
+.btn-primario:hover{background:#3A2410;transform:translateY(-2px);box-shadow:var(--sombra-g)}
+.btn-fantasma{background:transparent;color:var(--tinta);border-color:#CBB68F}
+.btn-fantasma:hover{border-color:var(--tinta);transform:translateY(-2px)}
+.btn-claro{background:#FFF8EA;color:var(--tinta)}
+/* ---------- Topo ---------- */
+.topo{position:sticky;top:0;z-index:50;background:rgba(250,244,232,.92);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--linha)}
+.topo-inner{display:flex;align-items:center;gap:28px;height:72px}
+.marca{display:flex;align-items:center;gap:11px;text-decoration:none;margin-right:auto}
+.marca-nome{font-family:var(--fonte-titulo);font-size:1.35rem;font-weight:700;letter-spacing:-.01em}
+.marca-nome em{font-style:italic;color:var(--caramelo-esc)}
+.nav{display:flex;align-items:center;gap:26px}
+.nav a{text-decoration:none;font-size:.95rem;font-weight:600;color:var(--tinta-suave)}
+.nav a:hover{color:var(--tinta)}
+.topo .btn{padding:11px 22px;font-size:.9rem}
+.menu-btn{display:none;background:none;border:1px solid #CBB68F;border-radius:10px;
+  width:44px;height:44px;cursor:pointer;color:var(--tinta)}
+/* ---------- Herói ---------- */
+.hero{position:relative;overflow:clip;padding:clamp(48px,6vw,88px) 0 clamp(56px,6vw,96px)}
+.hero-fundo{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(720px 420px at 82% 18%,rgba(217,164,65,.28),transparent 65%),
+  radial-gradient(560px 380px at 8% 90%,rgba(185,106,31,.14),transparent 60%)}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;
+  gap:clamp(32px,5vw,72px);align-items:center}
+.hero h1{font-size:clamp(2.5rem,5.2vw,4.15rem);margin:18px 0 18px}
+.hero h1 em{font-style:italic;color:var(--caramelo-esc)}
+.hero-sub{font-size:clamp(1.02rem,1.4vw,1.2rem);color:var(--tinta-suave);max-width:46ch}
+.hero-acoes{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.selo{display:inline-flex;align-items:center;gap:12px;background:var(--papel);
+  border:1px solid var(--linha);border-radius:999px;padding:9px 18px 9px 10px;
+  box-shadow:var(--sombra-p);margin-top:26px;font-size:.92rem}
+.selo-estrelas{background:var(--tinta);color:#F6C453;font-weight:700;letter-spacing:.06em;
+  border-radius:999px;padding:7px 13px;font-size:.85rem}
+.selo strong{color:var(--tinta)}
+.contador{margin-top:22px;display:flex;align-items:baseline;gap:10px;color:var(--tinta-suave)}
+.contador-num{font-family:var(--fonte-titulo);font-size:2rem;font-weight:700;color:var(--tinta);
+  font-variant-numeric:tabular-nums}
+.hero-arte{background:linear-gradient(160deg,#2B1A0C 0%,#4A2C12 55%,#7A4A1C 100%);
+  border-radius:28px;box-shadow:var(--sombra-g);padding:clamp(24px,3vw,40px);
+  position:relative;overflow:hidden;color:#F7E9CF}
+.hero-arte::after{content:"";position:absolute;inset:auto -30% -45% -30%;height:70%;
+  background:radial-gradient(closest-side,rgba(217,164,65,.35),transparent);pointer-events:none}
+.hero-arte figcaption{margin-top:18px;display:flex;justify-content:space-between;gap:6px 14px;
+  flex-wrap:wrap;font-size:.86rem;color:#EAD9B8}
+.hero-arte figcaption strong{color:#FFF4DE}
+/* ---------- Faixa ---------- */
+.faixa{background:var(--tinta);color:#F1E3C8;font-size:.9rem}
+.faixa-inner{display:flex;gap:28px;justify-content:space-between;flex-wrap:wrap;
+  padding-block:15px}
+.faixa span{display:inline-flex;align-items:center;gap:9px;white-space:nowrap}
+/* ---------- Cardápio ---------- */
+.cardapio{background:var(--papel);border-block:1px solid var(--linha)}
+.cabecalho{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+  margin-bottom:40px;flex-wrap:wrap}
+.cabecalho h2{font-size:clamp(1.9rem,3.4vw,2.7rem);margin-top:14px}
+.link-seta{font-weight:700;color:var(--caramelo-esc);text-decoration:none;font-size:.96rem;
+  border-bottom:2px solid var(--dourado);padding-bottom:2px}
+.grade-cardapio{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.prato{background:var(--creme);border:1px solid var(--linha);border-radius:var(--raio);
+  padding:26px 24px 24px;box-shadow:var(--sombra-p);display:flex;flex-direction:column;gap:12px;
+  transition:transform .2s ease,box-shadow .2s ease}
+.prato:hover{transform:translateY(-4px);box-shadow:var(--sombra-g)}
+.prato-icone{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;
+  background:#fff;border:1px solid var(--linha)}
+.prato h3{font-size:1.28rem}
+.prato p{color:var(--tinta-suave);font-size:.97rem}
+.prato-linha{margin-top:auto;display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--linha);padding-top:14px}
+.preco{font-family:var(--fonte-titulo);font-size:1.3rem;font-weight:700}
+.tag{font-size:.74rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--caramelo-esc);background:#F6E7C9;border-radius:999px;padding:5px 11px}
+/* ---------- História ---------- */
+.historia-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(32px,5vw,64px);align-items:center}
+.historia h2{font-size:clamp(1.9rem,3.4vw,2.7rem);margin:14px 0 16px}
+.historia p+p{margin-top:12px}
+.lista-check{list-style:none;margin-top:22px;display:grid;gap:13px}
+.lista-check li{display:flex;gap:12px;align-items:flex-start;color:var(--tinta-suave)}
+.lista-check svg{flex:none;margin-top:3px}
+.painel-foto{background:var(--verde);color:#EDF2E6;border-radius:28px;padding:34px 30px;
+  box-shadow:var(--sombra-p);position:relative;overflow:hidden}
+.painel-foto h3{font-size:1.5rem;margin-bottom:8px}
+.painel-foto p{color:#CBD8C2;font-size:.97rem;max-width:44ch}
+.dados{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+.dado{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
+  border-radius:var(--raio-p);padding:16px 14px;text-align:center}
+.dado b{display:block;font-family:var(--fonte-titulo);font-size:1.5rem}
+.dado span{font-size:.82rem;color:#CBD8C2}
+/* ---------- Depoimentos ---------- */
+.depoimentos{background:linear-gradient(180deg,var(--creme-2),var(--creme));border-top:1px solid var(--linha)}
+.depoimentos h2{font-size:clamp(1.9rem,3.4vw,2.7rem);margin:14px 0 12px}
+.grade-depo{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:36px}
+.depoimento{background:var(--papel);border:1px solid var(--linha);border-radius:var(--raio);
+  box-shadow:var(--sombra-p);padding:28px 26px 24px;display:flex;flex-direction:column;gap:16px}
+.depoimento .estrelas{color:var(--caramelo);letter-spacing:.18em;font-size:.9rem}
+.depoimento blockquote{font-family:var(--fonte-titulo);font-size:1.08rem;line-height:1.5;
+  font-style:italic;color:#3A2A18}
+.depoimento blockquote::before{content:"\201C"}
+.depoimento blockquote::after{content:"\201D"}
+.autor{margin-top:auto;display:flex;align-items:center;gap:13px;border-top:1px solid var(--linha);padding-top:18px}
+.avatar{width:46px;height:46px;border-radius:50%;flex:none;display:grid;place-items:center;
+  font-weight:800;font-size:.95rem;color:#FFF8EA}
+.autor-nome{font-weight:700;font-size:.95rem;line-height:1.3}
+.autor-papel{font-size:.85rem;color:var(--tinta-suave)}
+/* ---------- Visita / CTA final ---------- */
+.visita-cartao{background:var(--tinta);color:#F5E8D0;border-radius:28px;
+  padding:clamp(32px,5vw,64px);display:grid;grid-template-columns:1.1fr .9fr;
+  gap:clamp(28px,4vw,56px);align-items:center;box-shadow:var(--sombra-g);
+  position:relative;overflow:hidden}
+.visita-cartao::before{content:"";position:absolute;width:520px;height:520px;right:-160px;top:-160px;
+  background:radial-gradient(closest-side,rgba(217,164,65,.30),transparent);pointer-events:none}
+.visita-cartao h2{font-size:clamp(1.8rem,3.2vw,2.6rem);color:#FFF6E3;margin:12px 0 12px}
+.visita-cartao p{color:#D9C6A4;max-width:44ch}
+.visita-cartao .eyebrow{color:var(--dourado)}
+.visita-info{display:grid;gap:12px;background:rgba(255,248,234,.06);
+  border:1px solid rgba(255,248,234,.16);border-radius:var(--raio);padding:24px}
+.visita-info div{display:flex;gap:12px;align-items:flex-start;font-size:.96rem}
+.visita-acoes{margin-top:24px;display:flex;gap:14px;flex-wrap:wrap}
+/* ---------- Rodapé ---------- */
+.rodape{background:#170D04;color:#CBB894;padding:56px 0 28px;margin-top:var(--ritmo)}
+.rodape-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:32px}
+.rodape h4{color:#FFF3DC;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.rodape p,.rodape a{font-size:.94rem;color:#CBB894;text-decoration:none}
+.rodape a:hover{color:#fff}
+.rodape-marca{font-family:var(--fonte-titulo);font-size:1.5rem;color:#FFF3DC}
+.rodape-base{margin-top:40px;border-top:1px solid rgba(255,243,220,.16);padding-top:20px;
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.85rem}
+/* ---------- Responsivo ---------- */
+@media (max-width:960px){
+  .hero-grid,.historia-grid,.visita-cartao{grid-template-columns:1fr}
+  .grade-cardapio,.grade-depo{grid-template-columns:1fr 1fr}
+  .rodape-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .nav{display:none;position:absolute;top:72px;left:0;right:0;background:var(--papel);
+    flex-direction:column;align-items:stretch;padding:12px 24px 20px;gap:0;
+    border-bottom:1px solid var(--linha);box-shadow:var(--sombra-g)}
+  .nav.aberto{display:flex}
+  .nav a{padding:13px 4px;border-top:1px solid var(--linha)}
+  .nav a:first-child{border-top:0}
+  .menu-btn{display:inline-flex;align-items:center;justify-content:center}
+  .topo .btn-cta{display:none}
+  .grade-cardapio,.grade-depo{grid-template-columns:1fr}
+  .dados{grid-template-columns:1fr 1fr}
+  .hero-acoes .btn{flex:1 1 auto}
+  .faixa-inner{gap:10px}
+  .faixa span{white-space:normal}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none !important;animation:none !important}
+}
+</style>
+</head>
+<body>
+<header class="topo">
+  <div class="container topo-inner">
+    <a class="marca" href="#topo" aria-label="Café Aurora — início">
+      <svg width="38" height="38" viewBox="0 0 38 38" fill="none" aria-hidden="true">
+        <circle cx="19" cy="19" r="18" fill="#231407"/>
+        <path d="M8 22.5c2.4-4.6 6.4-7 11-7s8.6 2.4 11 7" stroke="#D9A441" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="19" cy="12.5" r="3.4" fill="#D9A441"/>
+        <path d="M11.5 25.5h13.2l-1.4 3.2a2 2 0 0 1-1.8 1.2h-6.9a2 2 0 0 1-1.8-1.2l-1.3-3.2Z" fill="#FAF4E8"/>
+        <path d="M25.2 26.2h1.6a2.4 2.4 0 0 0 0-4.8h-1.4" stroke="#FAF4E8" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <span class="marca-nome">Café <em>Aurora</em></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Navegação principal">
+      <a href="#cardapio">Cardápio</a>
+      <a href="#historia">Nossa história</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#visita">Visite-nos</a>
+    </nav>
+    <a class="btn btn-primario btn-cta" href="#visita">Pedir agora</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+</header>
+<main id="topo">
+<section class="hero">
+  <div class="hero-fundo" aria-hidden="true"></div>
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">Torra artesanal desde 2016</span>
+      <h1>O amanhecer tem cheiro de <em>café passado na hora.</em></h1>
+      <p class="hero-sub">Grãos de pequenos produtores, torra clara da semana e um salão calmo no centro para começar bem o dia — do espresso rápido ao brunch sem pressa.</p>
+      <div class="hero-acoes">
+        <a class="btn btn-primario" href="#cardapio">Ver cardápio</a>
+        <a class="btn btn-fantasma" href="#historia">Nossa história</a>
+      </div>
+      <div class="selo" aria-label="Avaliação: 4,9 de 5 em mais de 1.200 avaliações">
+        <span class="selo-estrelas">★ 4,9</span>
+        <span><strong>1.200+ avaliações</strong> de quem já amanheceu aqui</span>
+      </div>
+      <div class="contador" aria-live="polite">
+        <span class="contador-num" id="contadorCafes" data-alvo="48500">0</span>
+        <span>cafés servidos com calma desde 2016</span>
+      </div>
+    </div>
+    <figure class="hero-arte" aria-label="Ilustração: xícara de café sob o sol nascente">
+      <svg viewBox="0 0 480 360" width="100%" role="img" aria-hidden="true">
+        <defs>
+          <linearGradient id="ceu" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#E8B558"/><stop offset="1" stop-color="#8F4E12"/>
+          </linearGradient>
+          <linearGradient id="xic" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#FFF6E3"/><stop offset="1" stop-color="#EAD3A8"/>
+          </linearGradient>
+        </defs>
+        <circle cx="240" cy="118" r="62" fill="#F6C453"/>
+        <g stroke="#F6C453" stroke-width="5" stroke-linecap="round" opacity=".85">
+          <path d="M240 28v18M158 46l13 13M322 46l-13 13M110 118h20M350 118h20"/>
+        </g>
+        <path d="M60 150c60-26 120-38 180-38s120 12 180 38" stroke="#F2D9A4" stroke-width="2.5" fill="none" opacity=".55"/>
+        <path d="M84 168c52-22 104-32 156-32s104 10 156 32" stroke="#F2D9A4" stroke-width="2" fill="none" opacity=".4"/>
+        <g stroke="#F7E9CF" stroke-width="6" stroke-linecap="round" fill="none" opacity=".9">
+          <path d="M196 210c-10-16 8-24 0-42s8-26 0-44"/>
+          <path d="M240 214c-10-16 8-24 0-42s8-26 0-44"/>
+          <path d="M284 210c-10-16 8-24 0-42s8-26 0-44"/>
+        </g>
+        <ellipse cx="240" cy="318" rx="150" ry="20" fill="#1D1006" opacity=".55"/>
+        <path d="M140 236h200l-18 56a24 24 0 0 1-22 16H180a24 24 0 0 1-22-16l-18-56Z" fill="url(#xic)"/>
+        <path d="M140 236h200l-4 12H144l-4-12Z" fill="#B96A1F"/>
+        <ellipse cx="240" cy="236" rx="100" ry="14" fill="#6B3A14"/>
+        <ellipse cx="240" cy="234" rx="86" ry="10" fill="#3A2110"/>
+        <path d="M340 244h18a24 24 0 0 1 0 48h-24" fill="none" stroke="#FFF6E3" stroke-width="12" stroke-linecap="round"/>
+        <path d="M120 330h240" stroke="#D9A441" stroke-width="6" stroke-linecap="round"/>
+        <g fill="#2B1A0C">
+          <ellipse cx="120" cy="300" rx="14" ry="10" transform="rotate(-24 120 300)"/>
+          <ellipse cx="362" cy="296" rx="14" ry="10" transform="rotate(20 362 296)"/>
+        </g>
+        <g stroke="#2B1A0C" stroke-width="2" opacity=".8">
+          <path d="M112 294c5 5 11 8 17 9M354 290c5 5 11 8 17 9"/>
+        </g>
+      </svg>
+      <figcaption><span><strong>Torra clara</strong> · Cerrado e Mogiana</span><span>Extração às 9h, 13h e 17h</span></figcaption>
+    </figure>
+  </div>
+</section>
+<div class="faixa" aria-hidden="true">
+  <div class="container faixa-inner">
+    <span>☕ Torra fresca toda terça-feira</span>
+    <span>🥐 Brunch servido até as 14h</span>
+    <span>🌱 Grãos de comércio justo</span>
+  </div>
+</div>
+<section class="section cardapio" id="cardapio">
+  <div class="container">
+    <div class="cabecalho">
+      <div>
+        <span class="eyebrow">Cardápio da casa</span>
+        <h2>Os queridinhos<br>do balcão</h2>
+      </div>
+      <a class="link-seta" href="#visita">Ver cardápio completo na loja →</a>
+    </div>
+    <div class="grade-cardapio">
+      <article class="prato">
+        <span class="prato-icone" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M6 11h13v6a5 5 0 0 1-5 5H11a5 5 0 0 1-5-5v-6Z" stroke="#8F4E12" stroke-width="2"/><path d="M19 12h1.5a3 3 0 0 1 0 6H19" stroke="#8F4E12" stroke-width="2" stroke-linecap="round"/><path d="M10 5c-1.2 1.6 1.2 2.4 0 4M14 5c-1.2 1.6 1.2 2.4 0 4" stroke="#D9A441" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+        <h3>Espresso Clássico</h3>
+        <p>Blend da casa em extração dupla e crema aveludada.</p>
+        <div class="prato-linha"><span class="preco">R$&nbsp;7</span><span class="tag">Mais pedido</span></div>
+      </article>
+      <article class="prato">
+        <span class="prato-icone" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M6 10h13v7a5 5 0 0 1-5 5h-3a5 5 0 0 1-5-5v-7Z" stroke="#8F4E12" stroke-width="2"/><path d="M19 11h1.5a3.5 3.5 0 0 1 0 7H19" stroke="#8F4E12" stroke-width="2" stroke-linecap="round"/><path d="M7 7c3 1.5 8 1.5 11 0" stroke="#D9A441" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+        <h3>Latte Aurora</h3>
+        <p>Espresso suave com leite vaporizado e arte do dia.</p>
+        <div class="prato-linha"><span class="preco">R$&nbsp;12</span><span class="tag">Assinatura</span></div>
+      </article>
+      <article class="prato">
+        <span class="prato-icone" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="6" y="9" width="13" height="11" rx="3" stroke="#8F4E12" stroke-width="2"/><path d="M19 11h1.5a3 3 0 0 1 0 6H19" stroke="#8F4E12" stroke-width="2" stroke-linecap="round"/><circle cx="10" cy="8" r="1.4" fill="#D9A441"/><circle cx="14" cy="6.5" r="1.4" fill="#D9A441"/><circle cx="17" cy="8" r="1.4" fill="#D9A441"/></svg></span>
+        <h3>Capuccino Cremoso</h3>
+        <p>Terço certinho de café, leite e espuma com cacau.</p>
+        <div class="prato-linha"><span class="preco">R$&nbsp;13</span><span class="tag">Cremoso</span></div>
+      </article>
+      <article class="prato">
+        <span class="prato-icone" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M6 10h13v7a5 5 0 0 1-5 5h-3a5 5 0 0 1-5-5v-7Z" stroke="#8F4E12" stroke-width="2"/><path d="M9 14.5h7" stroke="#B96A1F" stroke-width="2" stroke-linecap="round"/><path d="M12 6.5h4l-1 3h-4l1-3Z" fill="#8F4E12"/></svg></span>
+        <h3>Mocha Avelã</h3>
+        <p>Chocolate meio amargo com toque tostado de avelã.</p>
+        <div class="prato-linha"><span class="preco">R$&nbsp;14</span><span class="tag">Aconchego</span></div>
+      </article>
+      <article class="prato">
+        <span class="prato-icone" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M8 8h12l-1.6 10a3 3 0 0 1-3 2.6h-2.8a3 3 0 0 1-3-2.6L8 8Z" stroke="#8F4E12" stroke-width="2" stroke-linejoin="round"/><path d="M7 8h14" stroke="#8F4E12" stroke-width="2" stroke-linecap="round"/><path d="M13 13c0 2-2 2-2 4" stroke="#D9A441" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+        <h3>Coado da Casa</h3>
+        <p>Passado lento no V60 com notas de rapadura e laranja.</p>
+        <div class="prato-linha"><span class="preco">R$&nbsp;10</span><span class="tag">Filtrado</span></div>
+      </article>
+      <article class="prato">
+        <span class="prato-icone" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M5 13h15v3a6 6 0 0 1-6 6h-3a6 6 0 0 1-6-6v-3Z" stroke="#8F4E12" stroke-width="2"/><circle cx="14" cy="9" r="3.4" fill="#F3E9D6" stroke="#8F4E12" stroke-width="2"/><path d="M12.5 9h3" stroke="#8F4E12" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        <h3>Affogato Caramelo</h3>
+        <p>Bola de creme com espresso quente e fio de caramelo.</p>
+        <div class="prato-linha"><span class="preco">R$&nbsp;16</span><span class="tag">Sobremesa</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+<section class="section historia" id="historia">
+  <div class="container historia-grid">
+    <div>
+      <span class="eyebrow">Nossa história</span>
+      <h2>Uma varanda, um fogão e a receita da avó</h2>
+      <p class="section-sub">A Aurora nasceu em 2016 na varanda da Dona Cida, com um coador de pano e pão de queijo saindo do forno. Hoje temos torra própria, mas o ritual continua o mesmo: café fresco, mesa posta e ninguém com pressa de ir embora.</p>
+      <ul class="lista-check">
+        <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#2F4A34"/><path d="m6.5 10.2 2.4 2.4 4.6-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Torra própria toda semana</strong> — doçura alta, acidez equilibrada.</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#2F4A34"/><path d="m6.5 10.2 2.4 2.4 4.6-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Produtores parceiros</strong> do Cerrado e da Mogiana, com preço justo.</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#2F4A34"/><path d="m6.5 10.2 2.4 2.4 4.6-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Cozinha de fazenda</strong> — tudo feito na casa, do bolo ao caramelo.</span></li>
+      </ul>
+    </div>
+    <div class="painel-foto">
+      <h3>Da colheita à xícara em 14 dias</h3>
+      <p>Compramos lotes pequenos, provamos cada safra e torramos claro para preservar a origem. O resultado é um café doce mesmo sem açúcar.</p>
+      <div class="dados">
+        <div class="dado"><b>9</b><span>produtores parceiros</span></div>
+        <div class="dado"><b>14</b><span>dias da colheita à xícara</span></div>
+        <div class="dado"><b>100%</b><span>arábica especial</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section depoimentos" id="depoimentos">
+  <div class="container">
+    <span class="eyebrow">Quem passa, volta</span>
+    <h2>O que dizem<br>nossos fregueses</h2>
+    <p class="section-sub">Nota média 4,9 em mais de 1.200 avaliações — e o melhor termômetro: a fila mansa das oito da manhã.</p>
+    <div class="grade-depo">
+      <figure class="depoimento">
+        <span class="estrelas" aria-label="5 de 5 estrelas">★★★★★</span>
+        <blockquote>O coado daqui me fez largar o açúcar de vez. Chego pelo café e fico pelo cheiro de bolo saindo do forno.</blockquote>
+        <figcaption class="autor">
+          <span class="avatar" style="background:#8F4E12" aria-hidden="true">MA</span>
+          <span><span class="autor-nome">Mariana Alves</span><br><span class="autor-papel">Arquiteta · freguesa há 3 anos</span></span>
+        </figcaption>
+      </figure>
+      <figure class="depoimento">
+        <span class="estrelas" aria-label="5 de 5 estrelas">★★★★★</span>
+        <blockquote>Trabalho do salão duas vezes por semana. Internet boa, tomada em toda mesa e um latte que nunca falha.</blockquote>
+        <figcaption class="autor">
+          <span class="avatar" style="background:#2F4A34" aria-hidden="true">RT</span>
+          <span><span class="autor-nome">Rafael Teixeira</span><br><span class="autor-papel">Designer · escritório emprestado</span></span>
+        </figcaption>
+      </figure>
+      <figure class="depoimento">
+        <span class="estrelas" aria-label="5 de 5 estrelas">★★★★★</span>
+        <blockquote>Levei minha mãe num sábado e viramos clientes do brunch. O affogato de caramelo é o melhor da cidade, sem exagero.</blockquote>
+        <figcaption class="autor">
+          <span class="avatar" style="background:#B96A1F" aria-hidden="true">CS</span>
+          <span><span class="autor-nome">Camila Souza</span><br><span class="autor-papel">Professora · fã do brunch</span></span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+<section class="section" id="visita">
+  <div class="container">
+    <div class="visita-cartao">
+      <div>
+        <span class="eyebrow">Passe para um café</span>
+        <h2>Amanhã cedinho, a mesa já está posta.</h2>
+        <p>Chegue sem reserva durante a semana. Aos sábados, garantimos seu lugar na varanda com um toque no botão.</p>
+        <div class="visita-acoes">
+          <a class="btn btn-claro" href="mailto:oi@cafeaurora.exemplo">Reservar uma mesa</a>
+        </div>
+      </div>
+      <div class="visita-info">
+        <div><span aria-hidden="true">📍</span><span><strong>Rua das Acácias, 123 — Centro</strong><br>Flores do Campo · a 5 min da praça central</span></div>
+        <div><span aria-hidden="true">🕰️</span><span><strong>Seg. a sex., 7h–19h · Sáb., 8h–14h</strong><br>Brunch servido até as 14h · Domingo fechado</span></div>
+        <div><span aria-hidden="true">✉️</span><span><strong>oi@cafeaurora.exemplo</strong><br>(35) 3333-1212 · encomendas com 1 dia de antecedência</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="rodape">
+  <div class="container">
+    <div class="rodape-grid">
+      <div>
+        <p class="rodape-marca" style="display:flex;align-items:center;gap:10px"><svg width="30" height="30" viewBox="0 0 38 38" fill="none" aria-hidden="true"><circle cx="19" cy="19" r="18" fill="#F5E8D0"/><path d="M8 22.5c2.4-4.6 6.4-7 11-7s8.6 2.4 11 7" stroke="#8F4E12" stroke-width="2" stroke-linecap="round"/><circle cx="19" cy="12.5" r="3.4" fill="#8F4E12"/><path d="M11.5 25.5h13.2l-1.4 3.2a2 2 0 0 1-1.8 1.2h-6.9a2 2 0 0 1-1.8-1.2l-1.3-3.2Z" fill="#231407"/></svg>Café Aurora</p>
+        <p style="margin-top:10px;max-width:32ch">Cafeteria artesanal no centro. Torra própria, cozinha de fazenda e uma varanda para ver o dia nascer.</p>
+      </div>
+      <div><h4>Endereço</h4><p>Rua das Acácias, 123 — Centro<br>Flores do Campo · MG<br>CEP 37000-000</p></div>
+      <div><h4>Horário</h4><p>Seg. a sex., 7h–19h<br>Sábado, 8h–14h<br>Domingo, fechado</p></div>
+      <div><h4>Contato</h4><p><a href="mailto:oi@cafeaurora.exemplo">oi@cafeaurora.exemplo</a><br><a href="tel:+553533331212">(35) 3333-1212</a><br><a href="#topo">@cafeaurora</a></p></div>
+    </div>
+    <div class="rodape-base"><span>© 2026 Café Aurora · Todos os direitos reservados</span><span>Feito com café passado na hora</span></div>
+  </div>
+</footer>
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),nav=document.getElementById('nav');
+  btn.addEventListener('click',function(){
+    var aberto=nav.classList.toggle('aberto');
+    btn.setAttribute('aria-expanded',aberto?'true':'false');
+    btn.setAttribute('aria-label',aberto?'Fechar menu':'Abrir menu');
+  });
+  nav.addEventListener('click',function(e){
+    if(e.target.tagName==='A'){nav.classList.remove('aberto');btn.setAttribute('aria-expanded','false');}
+  });
+  var el=document.getElementById('contadorCafes');
+  var alvo=parseInt(el.getAttribute('data-alvo'),10)||48500;
+  var jaAnimou=false;
+  function formata(n){return n.toLocaleString('pt-BR');}
+  function anima(){
+    if(jaAnimou)return;jaAnimou=true;
+    var dur=1800,t0=null;
+    function passo(t){
+      if(!t0)t0=t;
+      var p=Math.min((t-t0)/dur,1);
+      var e=1-Math.pow(1-p,3);
+      el.textContent=formata(Math.round(alvo*e));
+      if(p<1)requestAnimationFrame(passo);
+    }
+    if('requestAnimationFrame' in window)requestAnimationFrame(passo);
+    else el.textContent=formata(alvo);
+  }
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(ent,obs){if(ent[0].isIntersecting){anima();obs.disconnect();}},{threshold:.4}).observe(el);
+  }else{anima();}
+})();
+</script>
+</body>
+</html>
