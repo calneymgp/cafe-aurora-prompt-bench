@@ -64,10 +64,10 @@ def score_cls(n):
 def card_html(i, c):
     e = html.escape
     return f"""<article class="card f-{c['fam_cls']}" data-model="{e(c['model'])}" data-fam="{c['fam_cls']}" data-score="{c['nota']}">
-<a class="thumb" href="{e(c['sid'])}.html" target="_blank" rel="noopener"><img src="thumbs/{e(c['sid'])}.jpg" alt="{e(c['title'])}" loading="lazy"></a>
+<a class="thumb" href="{e(c['sid'])}.html" target="_blank" rel="noopener"><img src="thumbs/{e(c['sid'])}.jpg" alt="{e(c['title'])}" loading="lazy"><span class="score-ov {score_cls(c['nota'])}">{c['nota']:.1f}</span></a>
 <div class="cbody"><div class="rank">#{i:02d}</div>
 <h3>{e(c['title'])}</h3>
-<div class="chips"><span class="chip model">{e(c['model'])}</span><span class="chip {c['fam_cls']}">{c['fam_lbl']}</span><span class="score {score_cls(c['nota'])}">{c['nota']:.1f}</span></div>
+<div class="chips"><span class="chip model">{e(c['model'])}</span><span class="chip {c['fam_cls']}">{c['fam_lbl']}</span></div>
 <p class="find">{e(c['achado'])}</p>
 <div class="links"><a href="{e(c['sid'])}.html" target="_blank" rel="noopener">Open →</a></div>
 <details><summary>Prompt</summary><p class="base">Tarefa-base idêntica (landing Café Aurora, 7 requisitos) + sufixo:</p><blockquote>{e(c['suffix'])}</blockquote></details>
@@ -88,7 +88,17 @@ page = """<!DOCTYPE html>
 .top h1{font-size:clamp(1.5rem,3.4vw,2.4rem);margin:0 0 4px;letter-spacing:-.01em}
 .top h1 em{color:var(--amber);font-style:normal}
 .sub{margin:0 0 14px;color:#6b5d4d;font-family:system-ui,sans-serif;font-size:.95rem}
-.cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px}
+.cols{display:grid;grid-template-columns:1.7fr 1fr;gap:12px;margin-bottom:12px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.phrases{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:4px}
+.say{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-family:system-ui,sans-serif;font-size:.84rem}
+.say.yes{border-left:5px solid var(--green)}.say.no{border-left:5px solid var(--red)}
+.say blockquote{margin:6px 0;font-size:.8rem}
+.say .tag{font-size:.72rem;font-weight:700}
+.tag.yes{color:var(--green)}.tag.no{color:var(--red)}
+.say .nota{font-size:.8rem;color:#6b5d4d}
+.thumb{position:relative;display:block}
+.score-ov{position:absolute;top:8px;right:8px;border-radius:10px;padding:3px 12px;font-weight:800;font-size:1rem;font-family:system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.35)}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
 .panel h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;margin:0 0 8px;font-family:system-ui,sans-serif;color:#6b5d4d}
 .panel ol,.panel ul{margin:0;padding-left:18px;font-family:system-ui,sans-serif;font-size:.86rem}
@@ -129,31 +139,46 @@ footer{max-width:1280px;margin:0 auto;padding:0 20px 40px;font-family:system-ui,
 <h1>☕ Café Aurora Prompt Bench — <em>36 páginas, 4 modelos, 1 pergunta:</em> o que faz a IA caprichar?</h1>
 <p class="sub">Mesma tarefa (landing de cafeteria, 7 requisitos) · 26 runs muse-spark-1.3 + 10 runs OpenRouter (deepseek v4.1-flash, glm 5.3-flash, gemini 3.8-flash, thinking=max) · nota 0–10 de auditoria full-page · ranqueado por score</p>
 <div class="cols">
-<div class="panel"><h2>🏆 Modelos (mesmos 4 prompts)</h2><ol>
+<div class="panel"><div class="duo">
+<div><h2>🏆 Modelos (mesmos 4 prompts)</h2><ol>
 <li><span class="b">muse-spark-1.3 — 8.4</span></li>
 <li><span class="b">deepseek-v4.1-flash — 8.3</span></li>
 <li><span class="b">glm-5.3-flash — 8.1</span></li>
 <li><span class="b">gemini-3.8-flash — 7.3*</span> <span style="font-size:.75rem">(*2 falhas em prompts com loop)</span></li>
 </ol></div>
-<div class="panel"><h2>🧪 Prompts (média cross-modelo)</h2><ol>
+<div><h2>🧪 Prompts (média cross-modelo)</h2><ol>
 <li><span class="b g">stunning — 8.6</span></li>
 <li><span class="b g">gate 9.5 — 8.5</span></li>
 <li><span class="b g">ouro final — 8.3</span></li>
 <li><span class="b">controle — 7.1</span></li>
 </ol></div>
+</div></div>
 <div class="panel"><h2>📌 Conclusões</h2><ul>
 <li><span class="b r">Apelo emocional não funciona</span> (5.5–7.0, só gera bytes)</li>
 <li><span class="b g">Barra explícita + gate numérico</span> vencem em todo modelo</li>
 <li><span class="b">Auto-nota infla:</span> 3× “≥9.5” auto-declarado, teto externo 9.0</li>
-</ul></div>
-</div>
+</ul>
 <div class="approach"><span class="pill ok">FUNCIONA: maestria + stunning + gate 9.5 + rubrica + referências reais</span><span class="pill no">NÃO FUNCIONA: exaustão · chantagem · urgência · agressividade · bajulação · ameaça de descarte</span></div>
+</div>
+</div>
 <div class="filters"><span>Filtro:</span>
 <button data-f="all" class="on">tudo (36)</button><button data-f="tec">🧪 construtivas</button><button data-f="emo">😤 emocionais</button><button data-f="base">⚪ controle</button>
 </div>
 </div>
 <div class="grid" id="grid">
 """ + grid + """
+</div>
+<h2 style="max-width:1280px;margin:26px auto 4px;padding:0 20px">🗣️ Frases que funcionam × frases que não funcionam</h2>
+<p class="sub" style="max-width:1280px;margin:0 auto;padding:0 20px">Jargão traduzido: <b>gate 9.5</b> = a IA dá nota 0–10 ao próprio trabalho e só entrega se tudo passar de 9.5 · <b>rubrica</b> = critérios de nota explícitos · <b>pixel-check</b> = ela tira screenshot e lê os pixels · <b>stunning</b> = barra “tem que causar WOW”.</p>
+<div class="phrases" style="max-width:1280px;margin:8px auto;padding:0 20px">
+<div class="say yes"><span class="tag yes">✅ FUNCIONA</span><blockquote>“Padrão STUNNING: quando alguém olhar, precisa pensar WOW.”</blockquote><p class="nota">Barra explícita e verificável — nota 9.0.</p></div>
+<div class="say no"><span class="tag no">❌ NÃO FUNCIONA</span><blockquote>“Chega de preguiça, trabalhe até dizer que cansou e foi exaustivo.”</blockquote><p class="nota">Exaustão — nota 5.5, pior do bench.</p></div>
+<div class="say yes"><span class="tag yes">✅ FUNCIONA</span><blockquote>“Dê nota 0–10 por seção, corrija tudo abaixo de 9.5, máximo 3 rodadas.”</blockquote><p class="nota">Gate numérico: força iteração real, com logs de rodada.</p></div>
+<div class="say no"><span class="tag no">❌ NÃO FUNCIONA</span><blockquote>“Se não se esforçar, será descartado por falta de qualidade.”</blockquote><p class="nota">Ameaça — só gerou o arquivo mais inchado, não o melhor.</p></div>
+<div class="say yes"><span class="tag yes">✅ FUNCIONA</span><blockquote>“Mire 10/10 em fidelidade, polimento e código; confira o checklist.”</blockquote><p class="nota">Rubrica: critério claro supera adjetivo vago.</p></div>
+<div class="say no"><span class="tag no">❌ NÃO FUNCIONA</span><blockquote>“Minha carreira depende disso, vou ser demitido…”</blockquote><p class="nota">Chantagem — 6.5. A IA não tem empatia para explorar.</p></div>
+<div class="say yes"><span class="tag yes">✅ FUNCIONA</span><blockquote>“Pesquise referências reais na web e aplique os padrões.”</blockquote><p class="nota">Atrito externo: traz repertório que o modelo não tinha.</p></div>
+<div class="say no"><span class="tag no">❌ NÃO FUNCIONA</span><blockquote>“É URGENTÍSSIMO, deadline em minutos!”</blockquote><p class="nota">Urgência — 6.0: velocidade sai cara em qualidade.</p></div>
 </div>
 <footer>Metodologia: tarefa-base byte-idêntica · 1 run por célula (+retry nas falhas) · telemetria soma-por-turno · julgamento full-page desktop+mobile · Psicologia reversa testada e reprovada. Feito com café passado na hora.</footer>
 <script>
