@@ -98,6 +98,10 @@ page = """<!DOCTYPE html>
 .tag.yes{color:var(--green)}.tag.no{color:var(--red)}
 .say .nota{font-size:.8rem;color:#6b5d4d}
 .thumb{position:relative;display:block}
+html{scroll-behavior:smooth}
+.ctawrap{text-align:center;margin:10px 0 2px}
+.cta{display:inline-block;background:#b45309;color:#fff;padding:10px 28px;border-radius:999px;font-weight:700;text-decoration:none;font-family:system-ui,sans-serif;font-size:.92rem;box-shadow:0 2px 10px rgba(180,83,9,.35)}
+.cta:hover{background:#92400e}
 .score-ov{position:absolute;top:8px;right:8px;border-radius:10px;padding:3px 12px;font-weight:800;font-size:1rem;font-family:system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.35)}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
 .panel h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;margin:0 0 8px;font-family:system-ui,sans-serif;color:#6b5d4d}
@@ -165,10 +169,11 @@ footer{max-width:1280px;margin:0 auto;padding:0 20px 40px;font-family:system-ui,
 <button data-f="all" class="on">tudo (36)</button><button data-f="tec">🧪 construtivas</button><button data-f="emo">😤 emocionais</button><button data-f="base">⚪ controle</button>
 </div>
 </div>
+<div class="ctawrap"><a class="cta" href="#frases">Ver prompts que funcionam ↓</a></div>
 <div class="grid" id="grid">
 """ + grid + """
 </div>
-<h2 style="max-width:1280px;margin:26px auto 4px;padding:0 20px">🗣️ Frases que funcionam × frases que não funcionam</h2>
+<h2 id="frases" style="max-width:1280px;margin:26px auto 4px;padding:0 20px;scroll-margin-top:12px">🗣️ Frases que funcionam × frases que não funcionam</h2>
 <p class="sub" style="max-width:1280px;margin:0 auto;padding:0 20px">Jargão traduzido: <b>gate 9.5</b> = a IA dá nota 0–10 ao próprio trabalho e só entrega se tudo passar de 9.5 · <b>rubrica</b> = critérios de nota explícitos · <b>pixel-check</b> = ela tira screenshot e lê os pixels · <b>stunning</b> = barra “tem que causar WOW”.</p>
 <div class="phrases" style="max-width:1280px;margin:8px auto;padding:0 20px">
 <div class="say yes"><span class="tag yes">✅ FUNCIONA</span><blockquote>“Padrão STUNNING: quando alguém olhar, precisa pensar WOW.”</blockquote><p class="nota">Barra explícita e verificável — nota 9.0.</p></div>
