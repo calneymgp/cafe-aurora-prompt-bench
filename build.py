@@ -80,13 +80,13 @@ page = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Café Aurora Prompt Bench — 36 páginas ranqueadas: o que faz IA caprichar?</title>
+<title>Benchmark de prompts: Cafeteria Aurora — 36 páginas, 4 modelos, 2 agentes (harness)</title>
 <style>
 :root{--ink:#2b2118;--paper:#faf6ef;--card:#fffdf8;--line:#e5d9c5;--amber:#b45309;--green:#166534;--greenbg:#dcfce7;--red:#991b1b;--redbg:#fee2e2;--gray:#57534e;--graybg:#e7e5e4}
 *{box-sizing:border-box}body{font-family:Georgia,'Times New Roman',serif;margin:0;background:var(--paper);color:var(--ink)}
 .top{max-width:1280px;margin:0 auto;padding:28px 20px 8px}
 .top h1{font-size:clamp(1.5rem,3.4vw,2.4rem);margin:0 0 4px;letter-spacing:-.01em}
-.top h1 em{color:var(--amber);font-style:normal}
+.top h1 small{font-size:.62em;color:var(--amber);font-weight:400}
 .sub{margin:0 0 14px;color:#6b5d4d;font-family:system-ui,sans-serif;font-size:.95rem}
 .cols{display:grid;grid-template-columns:1.7fr 1fr;gap:12px;margin-bottom:12px}
 .duo{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -136,7 +136,7 @@ footer{max-width:1280px;margin:0 auto;padding:0 20px 40px;font-family:system-ui,
 </head>
 <body>
 <div class="top">
-<h1>☕ Café Aurora Prompt Bench — <em>36 páginas, 4 modelos, 1 pergunta:</em> o que faz a IA caprichar?</h1>
+<h1>☕ Benchmark de prompts: Cafeteria Aurora<br><small>36 páginas, 4 modelos, 2 agentes (harness)</small></h1>
 <p class="sub">Mesma tarefa (landing de cafeteria, 7 requisitos) · 26 runs muse-spark-1.3 + 10 runs OpenRouter (deepseek v4.1-flash, glm 5.3-flash, gemini 3.8-flash, thinking=max) · nota 0–10 de auditoria full-page · ranqueado por score</p>
 <div class="cols">
 <div class="panel"><div class="duo">
